@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DUTA Auto Garage – Cara Reservasi Servis</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ===== CSS Variables ===== */
+    :root {
+      --font-montserrat: 'Montserrat', sans-serif;
+      --font-inter: 'Inter', sans-serif;
+      --gold: rgba(255, 200, 135, 1);
+      --gold2: rgba(255, 203, 138, 1);
+      --cream: rgba(217, 195, 173, 1);
+      --light-blue: rgba(212, 228, 250, 1);
+      --warm-text: rgba(215, 195, 174, 1);
+      --dark-brown: rgba(42, 24, 0, 1);
+      --mid-brown: rgba(70, 43, 0, 1);
+      --navy: rgba(5, 18, 46, 1);
+      --navy2: rgba(4, 18, 46, 1);
+      --card-bg: rgba(18, 31, 59, 1);
+      --card-bg-trans: rgba(18, 31, 59, 0.7);
+      --border-brown: rgba(82, 68, 52, 1);
+      --border-dark: rgba(40, 52, 81, 1);
+      --whatsapp-green: rgba(37, 211, 102, 1);
+      --step-bg: rgba(10, 22, 53, 1);
+    }
+
+    /* ===== Reset ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background-color: var(--navy);
+      color: var(--light-blue);
+      font-family: var(--font-inter);
+      width: 100%;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    p { margin: 0; }
+
+    /* ===== PAGE WRAPPER ===== */
+    .page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      background-color: var(--navy);
+    }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      width: 100%;
+      background-color: var(--navy);
+      border-bottom: 1px solid rgba(0,0,0,0.58);
+      box-shadow: 0 4px 4px rgba(0,0,0,0.25);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .navbar-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 48px;
+    }
+    .brand {
+      font-family: var(--font-montserrat);
+      font-weight: 400;
+      font-size: 24px;
+      letter-spacing: -1.2px;
+      line-height: 32px;
+      color: var(--gold);
+    }
+    .nav-links {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-links a {
+      font-family: var(--font-inter);
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+      color: var(--cream);
+      text-decoration: none;
+      padding: 8px 16px;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      width: 100%;
+      padding: 80px 64px;
+    }
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 48px;
+    }
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      flex: 1;
+    }
+    .hero-title {
+      font-family: var(--font-montserrat);
+      font-weight: 700;
+      font-size: 48px;
+      letter-spacing: -0.8px;
+      line-height: 56px;
+      color: var(--light-blue);
+    }
+    .hero-title span { color: var(--gold2); }
+    .hero-subtitle {
+      font-family: var(--font-inter);
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 28px;
+      color: var(--warm-text);
+      max-width: 420px;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: rgba(249, 168, 38, 1);
+      border-radius: 8px;
+      padding: 16px 32px;
+      font-family: var(--font-montserrat);
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 24px;
+      color: var(--dark-brown);
+      cursor: pointer;
+      text-decoration: none;
+      border: none;
+      width: fit-content;
+    }
+    .btn-primary svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+    .hero-image-wrap {
+      flex: 0 0 auto;
+      width: 360px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border-brown);
+      backdrop-filter: blur(12px);
+      background-color: rgba(18, 33, 49, 0.7);
+    }
+    .hero-img-placeholder {
+      width: 100%;
+      height: 280px;
+      background: linear-gradient(135deg, #1a2a3a 0%, #2a3a4a 50%, #1a2a3a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Car engine illustration */
+    .hero-img-placeholder svg {
+      width: 80%;
+      height: auto;
+      opacity: 0.7;
+    }
+
+    /* ===== KEUNGGULAN SECTION ===== */
+    .keunggulan-section {
+      width: 100%;
+      padding: 80px 64px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .section-label {
+      font-family: var(--font-montserrat);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 1.4px;
+      line-height: 20px;
+      text-transform: uppercase;
+      color: var(--gold2);
+      text-align: center;
+    }
+    .section-title {
+      font-family: var(--font-montserrat);
+      font-weight: 700;
+      font-size: 32px;
+      letter-spacing: -0.32px;
+      line-height: 40px;
+      color: var(--light-blue);
+      text-align: center;
+      margin-top: 8px;
+    }
+    .cards-row {
+      display: flex;
+      flex-direction: row;
+      gap: 24px;
+      margin-top: 64px;
+      width: 100%;
+      max-width: 1200px;
+    }
+    .card {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 32px;
+      background-color: var(--card-bg);
+      border-top: 1px solid var(--gold);
+      border-radius: 16px;
+      backdrop-filter: blur(12px);
+    }
+    .card-icon-wrap {
+      width: 52px;
+      height: 52px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-brown);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-icon-wrap svg { width: 28px; height: 28px; color: var(--gold2); }
+    .card-title {
+      font-family: var(--font-montserrat);
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 28px;
+      color: var(--light-blue);
+    }
+    .card-desc {
+      font-family: var(--font-inter);
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 24px;
+      color: var(--warm-text);
+    }
+
+    /* ===== LANGKAH SECTION ===== */
+    .langkah-section {
+      width: 100%;
+      padding: 57px 64px 67px;
+      background-color: rgba(8, 18, 46, 1);
+      border-top: 1px solid var(--border-dark);
+      border-bottom: 1px solid var(--border-dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .langkah-inner {
+      max-width: 1200px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 80px;
+    }
+    .langkah-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      text-align: center;
+    }
+    .langkah-title {
+      font-family: var(--font-montserrat);
+      font-weight: 700;
+      font-size: 32px;
+      letter-spacing: -0.32px;
+      line-height: 40px;
+      color: var(--light-blue);
+    }
+    .langkah-subtitle {
+      font-family: var(--font-inter);
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 28px;
+      color: var(--warm-text);
+      max-width: 672px;
+    }
+    .steps-row {
+      display: flex;
+      flex-direction: row;
+      gap: 24px;
+      width: 100%;
+    }
+    .step {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .step-number-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 32px;
+    }
+    .step-number {
+      width: 48px;
+      height: 48px;
+      background-color: var(--gold2);
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-montserrat);
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 32px;
+      color: var(--mid-brown);
+      flex-shrink: 0;
+      z-index: 1;
+    }
+    .step-line {
+      height: 2px;
+      flex: 1;
+      background-color: rgba(255, 203, 138, 0.3);
+      margin-left: 8px;
+    }
+    .step:last-child .step-line { display: none; }
+    .step-title {
+      font-family: var(--font-montserrat);
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 28px;
+      color: var(--light-blue);
+      margin-bottom: 16px;
+    }
+    .step-desc {
+      font-family: var(--font-inter);
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 24px;
+      color: var(--warm-text);
+    }
+
+    /* ===== CTA SECTION ===== */
+    .cta-section {
+      width: 100%;
+      padding: 80px 64px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .cta-card {
+      max-width: 768px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      padding: 48px;
+      background-color: rgba(18, 31, 59, 0.7);
+      border: 2px solid rgba(255, 203, 138, 0.2);
+      border-radius: 24px;
+      backdrop-filter: blur(12px);
+      text-align: center;
+    }
+    .cta-icon { color: var(--gold2); }
+    .cta-icon svg { width: 48px; height: 48px; }
+    .cta-title {
+      font-family: var(--font-montserrat);
+      font-weight: 700;
+      font-size: 32px;
+      letter-spacing: -0.32px;
+      line-height: 40px;
+      color: var(--light-blue);
+    }
+    .cta-subtitle {
+      font-family: var(--font-inter);
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 28px;
+      color: var(--warm-text);
+    }
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      background-color: var(--whatsapp-green);
+      border-radius: 9999px;
+      padding: 20px 40px;
+      font-family: var(--font-montserrat);
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 24px;
+      color: #ffffff;
+      cursor: pointer;
+      text-decoration: none;
+      border: none;
+      box-shadow: 0 8px 10px -6px rgba(0,0,0,0.5), 0 20px 25px -5px rgba(0,0,0,0.5);
+    }
+    .btn-whatsapp svg { width: 24px; height: 24px; flex-shrink: 0; }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      width: 100%;
+      background-color: var(--navy2);
+      border-top: 1px solid var(--border-dark);
+    }
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 48px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-brand { font-family: var(--font-montserrat); font-weight: 700; font-size: 24px; line-height: 32px; color: var(--gold); }
+    .footer-copy {
+      font-family: var(--font-inter);
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 24px;
+      color: var(--cream);
+      margin-top: 8px;
+    }
+    .footer-links {
+      display: flex;
+      flex-direction: row;
+      gap: 24px;
+    }
+    .footer-links a {
+      font-family: var(--font-inter);
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+      color: var(--cream);
+      text-decoration: none;
+      opacity: 0.8;
+      padding: 4px 8px;
+    }
+
+    /* ===== FLOATING WHATSAPP ===== */
+    .fab-whatsapp {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      width: 60px;
+      height: 60px;
+      background-color: var(--whatsapp-green);
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+      cursor: pointer;
+      z-index: 999;
+      text-decoration: none;
+    }
+    .fab-whatsapp svg { width: 32px; height: 32px; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .hero-inner { flex-direction: column; }
+      .hero-image-wrap { width: 100%; }
+      .cards-row { flex-direction: column; }
+      .steps-row { flex-direction: column; }
+      .step-line { display: none; }
+      .footer-inner { flex-direction: column; gap: 24px; align-items: flex-start; }
+      .navbar-inner, .hero, .keunggulan-section, .langkah-section, .cta-section { padding-left: 24px; padding-right: 24px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <span class="brand">DUTA Auto Garage</span>
+      <div class="nav-links">
+        <a href="#">Beranda</a>
+        <a href="#">Layanan</a>
+        <a href="#">Tentang Kami</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <h1 class="hero-title">Cara Reservasi <span>Servis</span></h1>
+        <p class="hero-subtitle">Nikmati kemudahan pemeliharaan kendaraan Anda. Proses reservasi yang cepat, transparan, dan aman.</p>
+        <div>
+          <a href="#" class="btn-primary">
+            Mulai Reservasi Sekarang
+            <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="rgba(42,24,0,1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="hero-image-wrap">
+        <!-- Car engine photo placeholder matching the design -->
+        <div class="hero-img-placeholder">
+          <svg viewBox="0 0 340 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Engine bay illustration -->
+            <rect x="20" y="20" width="300" height="220" rx="8" fill="#1a2d42"/>
+            <!-- Engine block -->
+            <rect x="40" y="60" width="260" height="120" rx="6" fill="#243548"/>
+            <rect x="50" y="70" width="80" height="50" rx="4" fill="#2d4258"/>
+            <rect x="140" y="70" width="80" height="50" rx="4" fill="#2d4258"/>
+            <rect x="220" y="70" width="70" height="50" rx="4" fill="#2d4258"/>
+            <!-- Coolant reservoir -->
+            <rect x="50" y="130" width="40" height="40" rx="3" fill="#1e3a5f"/>
+            <rect x="52" y="132" width="36" height="36" rx="2" fill="rgba(100,180,240,0.3)"/>
+            <!-- Hoses -->
+            <path d="M90 150 Q120 140 140 155" stroke="#8a7a6a" stroke-width="8" stroke-linecap="round" fill="none"/>
+            <path d="M220 95 Q240 80 270 90" stroke="#5a4a3a" stroke-width="6" stroke-linecap="round" fill="none"/>
+            <path d="M160 120 Q180 140 200 130" stroke="#8a7a6a" stroke-width="5" stroke-linecap="round" fill="none"/>
+            <!-- Oil cap -->
+            <circle cx="200" cy="90" r="14" fill="#3a2a1a"/>
+            <circle cx="200" cy="90" r="10" fill="#2a1a0a"/>
+            <!-- Battery -->
+            <rect x="230" y="130" width="60" height="40" rx="3" fill="#1a2a3a"/>
+            <rect x="240" y="125" width="8" height="10" rx="2" fill="#cc3333"/>
+            <rect x="272" y="125" width="8" height="10" rx="2" fill="#333333"/>
+            <!-- Air filter box -->
+            <rect x="100" y="140" width="120" height="30" rx="4" fill="#1e2e3e"/>
+            <!-- Labels / text effect -->
+            <text x="110" y="161" fill="rgba(255,200,135,0.3)" font-size="9" font-family="monospace">AIR FILTER</text>
+            <!-- Shine effect -->
+            <rect x="20" y="20" width="300" height="30" rx="8" fill="url(#shine)" opacity="0.15"/>
+            <defs>
+              <linearGradient id="shine" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="white"/>
+                <stop offset="100%" stop-color="transparent"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEUNGGULAN KAMI -->
+  <section class="keunggulan-section">
+    <p class="section-label">KEUNGGULAN KAMI</p>
+    <h2 class="section-title">Mengapa Memilih DUTA Auto Garage?</h2>
+    <div class="cards-row">
+      <!-- Card 1 -->
+      <div class="card">
+        <div class="card-icon-wrap">
+          <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="8" r="4" stroke="rgba(255,203,138,1)" stroke-width="1.8"/>
+            <path d="M4 22c0-3.866 3.134-7 7-7h1" stroke="rgba(255,203,138,1)" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M18 14l1.5 1.5M18 20l1.5-1.5M22 17h-6" stroke="rgba(255,203,138,1)" stroke-width="1.8" stroke-linecap="round"/>
+            <circle cx="19" cy="17" r="4" stroke="rgba(255,203,138,1)" stroke-width="1.8"/>
+          </svg>
+        </div>
+        <h3 class="card-title">Teknisi Berpengalaman</h3>
+        <p class="card-desc">Dikerjakan oleh teknisi bersertifikasi yang ahli dalam menangani berbagai brand kendaraan premium.</p>
+      </div>
+      <!-- Card 2 -->
+      <div class="card">
+        <div class="card-icon-wrap">
+          <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="14" cy="14" r="9" stroke="rgba(255,203,138,1)" stroke-width="1.8"/>
+            <path d="M14 9v5l3 3" stroke="rgba(255,203,138,1)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M10 5.5l1.5 1.5M18 5.5L16.5 7M5.5 18l1.5-1.5M22.5 18L21 16.5" stroke="rgba(255,203,138,1)" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="card-title">Suku Cadang Asli</h3>
+        <p class="card-desc">Kami hanya menggunakan suku cadang original dengan garansi resmi untuk menjamin performa maksimal kendaraan Anda.</p>
+      </div>
+      <!-- Card 3 -->
+      <div class="card">
+        <div class="card-icon-wrap">
+          <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="5" y="6" width="18" height="16" rx="2" stroke="rgba(255,203,138,1)" stroke-width="1.8"/>
+            <path d="M5 11h18" stroke="rgba(255,203,138,1)" stroke-width="1.8"/>
+            <path d="M9 6V4M19 6V4" stroke="rgba(255,203,138,1)" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M9 15h6M9 19h4" stroke="rgba(255,203,138,1)" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="card-title">Harga Transparan</h3>
+        <p class="card-desc">Estimasi biaya diberikan secara rinci di awal tanpa biaya tersembunyi. Kepercayaan Anda adalah prioritas kami.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LANGKAH RESERVASI -->
+  <section class="langkah-section">
+    <div class="langkah-inner">
+      <div class="langkah-header">
+        <h2 class="langkah-title">Langkah Mudah Reservasi</h2>
+        <p class="langkah-subtitle">Tiga langkah sederhana untuk mengembalikan performa terbaik kendaraan Anda.</p>
+      </div>
+      <div class="steps-row">
+        <!-- Step 1 -->
+        <div class="step">
+          <div class="step-number-wrap">
+            <div class="step-number">1</div>
+            <div class="step-line"></div>
+          </div>
+          <h3 class="step-title">Pilih Layanan</h3>
+          <p class="step-desc">Telusuri berbagai paket servis kami, mulai dari perawatan rutin hingga diagnosa teknis mendalam sesuai kebutuhan kendaraan.</p>
+        </div>
+        <!-- Step 2 -->
+        <div class="step">
+          <div class="step-number-wrap">
+            <div class="step-number">2</div>
+            <div class="step-line"></div>
+          </div>
+          <h3 class="step-title">Konsultasi via WhatsApp</h3>
+          <p class="step-desc">Klik tombol reservasi untuk terhubung dengan Service Advisor kami yang siap menjawab segala pertanyaan teknis Anda.</p>
+        </div>
+        <!-- Step 3 -->
+        <div class="step">
+          <div class="step-number-wrap">
+            <div class="step-number">3</div>
+          </div>
+          <h3 class="step-title">Atur Jadwal &amp; Konfirmasi</h3>
+          <p class="step-desc">Pilih waktu kedatangan yang paling nyaman bagi Anda. Kami akan mengirimkan konfirmasi instan setelah jadwal disepakati.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="cta-section">
+    <div class="cta-card">
+      <div class="cta-icon">
+        <!-- Calendar icon -->
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="10" width="36" height="32" rx="4" stroke="rgba(255,203,138,1)" stroke-width="2.5"/>
+          <path d="M6 20h36" stroke="rgba(255,203,138,1)" stroke-width="2.5"/>
+          <path d="M16 6v8M32 6v8" stroke="rgba(255,203,138,1)" stroke-width="2.5" stroke-linecap="round"/>
+          <rect x="13" y="27" width="6" height="6" rx="1" fill="rgba(255,203,138,1)"/>
+          <rect x="21" y="27" width="6" height="6" rx="1" fill="rgba(255,203,138,0.5)"/>
+          <rect x="29" y="27" width="6" height="6" rx="1" fill="rgba(255,203,138,0.5)"/>
+        </svg>
+      </div>
+      <h2 class="cta-title">Siap Memberikan yang Terbaik untuk Kendaraan Anda?</h2>
+      <p class="cta-subtitle">Tim kami stand-by 24/7 untuk membantu Anda mengatur jadwal servis paling efisien.</p>
+      <a href="https://wa.me/" class="btn-whatsapp">
+        <!-- WhatsApp icon -->
+        <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        Booking via WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">DUTA Auto Garage</div>
+        <p class="footer-copy">© 2026 DUTA Auto Garage.<br>Bengkel Tepercaya, Layanan Prima</p>
+      </div>
+      <div class="footer-links">
+        <a href="#">Ketentuan Layanan</a>
+        <a href="#">Kebijakan Privasi</a>
+        <a href="#">Emergency</a>
+      </div>
+    </div>
+  </footer>
+
+</div><!-- end .page -->
+
+<!-- FLOATING WHATSAPP BUTTON -->
+<a href="https://wa.me/" class="fab-whatsapp" title="Hubungi Admin">
+  <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+</body>
+</html>
