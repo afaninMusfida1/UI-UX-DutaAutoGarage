@@ -18,7 +18,6 @@
       --navy-card2: #162035;
       --navy-border: #283451;
       --navy-btn: #2C3956;
-      --navy-icon-bg: rgba(252,163,17,0.10);
       --btn-text: #663F00;
       --font-heading: 'Montserrat', sans-serif;
       --font-body: 'Inter', sans-serif;
@@ -46,696 +45,125 @@
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--navy-border);
     }
-    .nav-logo {
-      font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 18px;
-      color: var(--gold);
-      letter-spacing: 0.5px;
-    }
-    .nav-links {
-      display: flex;
-      gap: 32px;
-      list-style: none;
-    }
-    .nav-links a {
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--blue-muted);
-      transition: color 0.2s;
-    }
-    .nav-links a.active, .nav-links a:hover { color: var(--gold); }
-    .btn-gold {
-      background: var(--gold);
-      color: var(--btn-text);
-      font-family: var(--font-body);
-      font-weight: 700;
-      font-size: 14px;
-      padding: 10px 22px;
-      border-radius: 9999px;
-      border: none;
-      cursor: pointer;
-      transition: opacity 0.2s;
-    }
+    .nav-logo { font-family: var(--font-heading); font-weight: 700; font-size: 18px; color: var(--gold); letter-spacing: 0.5px; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { text-decoration: none; font-size: 14px; font-weight: 500; color: var(--blue-muted); transition: color 0.2s; padding-bottom: 4px; border-bottom: 2px solid transparent; }
+    .nav-links a.active, .nav-links a:hover { color: var(--gold); border-bottom-color: var(--gold); }
+    .btn-gold { background: var(--gold); color: var(--btn-text); font-family: var(--font-body); font-weight: 700; font-size: 14px; padding: 10px 22px; border-radius: 9999px; border: none; cursor: pointer; transition: opacity 0.2s; text-decoration: none; }
     .btn-gold:hover { opacity: 0.88; }
 
     /* ===== HERO ===== */
-    .hero {
-      position: relative;
-      width: 100%;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-    }
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background: url('images/node-4.png') center/cover no-repeat;
-      filter: brightness(0.45);
-    }
-    .hero-gradient {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to right, rgba(11,17,32,0.92) 45%, transparent 100%);
-    }
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      padding: 120px 48px 80px;
-      max-width: 700px;
-    }
-    .hero-content h1 {
-      font-family: var(--font-heading);
-      font-weight: 800;
-      font-size: 52px;
-      line-height: 1.1;
-      letter-spacing: -1.5px;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-    .hero-content p {
-      font-size: 17px;
-      line-height: 28px;
-      color: var(--blue-light);
-      max-width: 560px;
-      margin-bottom: 28px;
-    }
-    .badge-location {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 16px;
-      background: rgba(18,31,59,0.9);
-      border: 1px solid var(--navy-border);
-      border-radius: 9999px;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--blue-light);
-    }
+    .hero { position: relative; width: 100%; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; background: url('../images/node-4.png') center/cover no-repeat; filter: brightness(0.45); }
+    .hero-gradient { position: absolute; inset: 0; background: linear-gradient(to right, rgba(11,17,32,0.95) 45%, transparent 100%); }
+    .hero-content { position: relative; z-index: 2; padding: 120px 48px 80px; max-width: 700px; }
+    .hero-content h1 { font-family: var(--font-heading); font-weight: 800; font-size: 52px; line-height: 1.1; letter-spacing: -1.5px; color: var(--gold); text-transform: uppercase; margin-bottom: 20px; }
+    .hero-content p { font-size: 17px; line-height: 28px; color: var(--blue-light); max-width: 560px; margin-bottom: 28px; }
+    .badge-location { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(18,31,59,0.9); border: 1px solid var(--navy-border); border-radius: 9999px; font-size: 13px; font-weight: 700; color: var(--blue-light); }
     .badge-location svg { color: var(--gold); }
 
     /* ===== SECTION TITLES ===== */
-    .section-title-wrap {
-      text-align: center;
-      margin-bottom: 48px;
-    }
-    .section-title-wrap h2 {
-      font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 36px;
-      color: var(--blue-light);
-      margin-bottom: 12px;
-    }
-    .title-underline {
-      width: 56px;
-      height: 3px;
-      background: var(--gold);
-      margin: 0 auto;
-      border-radius: 2px;
-    }
+    .section-title-wrap { text-align: center; margin-bottom: 48px; }
+    .section-title-wrap h2 { font-family: var(--font-heading); font-weight: 700; font-size: 36px; color: #fff; margin-bottom: 12px; }
+    .title-underline { width: 56px; height: 3px; background: var(--gold); margin: 0 auto; border-radius: 2px; }
 
     /* ===== KOMITMEN ===== */
-    .komitmen {
-      padding: 96px 48px;
-      display: flex;
-      align-items: center;
-      gap: 64px;
-      max-width: 1280px;
-      margin: 0 auto;
-    }
-    .komitmen-image {
-      position: relative;
-      flex: 0 0 420px;
-    }
-    .komitmen-image img {
-      width: 100%;
-      border-radius: 12px;
-      object-fit: cover;
-    }
-    .stat-badge {
-      position: absolute;
-      bottom: -20px;
-      right: -20px;
-      background: var(--navy-card);
-      border: 1px solid var(--navy-border);
-      border-radius: 12px;
-      padding: 20px 28px;
-      text-align: center;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-    }
-    .stat-badge .num {
-      font-family: var(--font-heading);
-      font-weight: 800;
-      font-size: 42px;
-      color: var(--gold);
-      line-height: 1;
-    }
-    .stat-badge .label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--blue-muted);
-      margin-top: 4px;
-    }
-    .komitmen-text h2 {
-      font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 36px;
-      line-height: 1.25;
-      color: var(--blue-light);
-      margin-bottom: 36px;
-    }
-    .komitmen-item {
-      display: flex;
-      gap: 16px;
-      margin-bottom: 28px;
-    }
-    .komitmen-icon {
-      flex-shrink: 0;
-      width: 40px;
-      height: 40px;
-      background: rgba(255,200,135,0.12);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .komitmen-icon svg { color: var(--gold); }
-    .komitmen-item h4 {
-      font-family: var(--font-heading);
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--blue-light);
-      margin-bottom: 6px;
-    }
-    .komitmen-item p {
-      font-size: 14px;
-      line-height: 22px;
-      color: var(--blue-muted);
-    }
+    .komitmen { padding: 96px 48px; display: flex; align-items: center; gap: 64px; max-width: 1280px; margin: 0 auto; }
+    .komitmen-image { position: relative; flex: 0 0 420px; }
+    .komitmen-image img { width: 100%; border-radius: 12px; object-fit: cover; }
+    .stat-badge { position: absolute; bottom: -20px; right: -20px; background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 12px; padding: 20px 28px; text-align: center; box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+    .stat-badge .num { font-family: var(--font-heading); font-weight: 800; font-size: 42px; color: var(--gold); line-height: 1; }
+    .stat-badge .label { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--blue-muted); margin-top: 4px; }
+    .komitmen-text h2 { font-family: var(--font-heading); font-weight: 700; font-size: 36px; line-height: 1.25; color: #fff; margin-bottom: 36px; }
+    .komitmen-item { display: flex; gap: 16px; margin-bottom: 28px; }
+    .komitmen-icon { flex-shrink: 0; width: 40px; height: 40px; background: rgba(255,200,135,0.12); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 18px; font-weight: bold; }
+    .komitmen-item h4 { font-family: var(--font-heading); font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .komitmen-item p { font-size: 14px; line-height: 22px; color: var(--blue-muted); }
 
     /* ===== LAYANAN ===== */
-    .layanan-section {
-      padding: 96px 48px;
-      background: var(--navy-mid);
-    }
+    .layanan-section { padding: 96px 48px; background: var(--navy-mid); }
     .layanan-section .inner { max-width: 1280px; margin: 0 auto; }
-    .layanan-grid-top {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      margin-bottom: 20px;
-    }
-    .layanan-card {
-      background: var(--navy-card);
-      border: 1px solid var(--navy-border);
-      border-radius: 12px;
-      padding: 24px;
-    }
-    .layanan-card .icon-wrap {
-      width: 44px;
-      height: 44px;
-      background: rgba(255,200,135,0.10);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 16px;
-    }
-    .layanan-card .icon-wrap svg { color: var(--gold); }
-    .layanan-card h3 {
-      font-family: var(--font-heading);
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--blue-light);
-      margin-bottom: 10px;
-    }
-    .layanan-card p {
-      font-size: 13px;
-      line-height: 20px;
-      color: var(--blue-muted);
-      margin-bottom: 16px;
-    }
-    .price-tag {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--gold);
-      border-top: 1px solid var(--navy-border);
-      padding-top: 14px;
-      margin-top: auto;
-    }
+    .layanan-grid-top { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 20px; }
+    .layanan-card { background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 12px; padding: 24px; display: flex; flex-direction: column; }
+    .layanan-card .icon-wrap { width: 44px; height: 44px; background: rgba(255,200,135,0.10); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; color: var(--gold); }
+    .layanan-card h3 { font-family: var(--font-heading); font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+    .layanan-card p { font-size: 13px; line-height: 20px; color: var(--blue-muted); margin-bottom: 16px; flex-grow: 1; }
+    .price-tag { font-size: 14px; font-weight: 700; color: var(--gold); border-top: 1px solid var(--navy-border); padding-top: 14px; }
 
-    /* Featured layanan row */
-    .layanan-featured {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 20px;
-      margin-bottom: 20px;
-    }
-    .card-engine {
-      position: relative;
-      border-radius: 12px;
-      overflow: hidden;
-      min-height: 280px;
-    }
-    .card-engine img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      position: absolute;
-      inset: 0;
-      filter: brightness(0.5);
-    }
-    .card-engine-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(11,17,32,0.92) 30%, transparent 70%);
-    }
-    .card-engine-content {
-      position: relative;
-      z-index: 2;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 24px;
-    }
-    .card-engine-content .label-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-family: var(--font-heading);
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--blue-light);
-      margin-bottom: 10px;
-    }
-    .card-engine-content p {
-      font-size: 13px;
-      line-height: 20px;
-      color: var(--blue-muted);
-      margin-bottom: 14px;
-    }
-    .link-gold {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: var(--gold);
-      font-size: 14px;
-      font-weight: 700;
-      text-decoration: none;
-    }
+    /* Featured layanan grid */
+    .layanan-featured-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px; margin-bottom: 20px; }
+    .layanan-featured-grid-alt { display: grid; grid-template-columns: 1fr 1.5fr; gap: 20px; }
+    
+    .card-img-featured { position: relative; border-radius: 12px; overflow: hidden; min-height: 280px; border: 1px solid var(--navy-border); }
+    .card-img-featured img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; filter: brightness(0.5); }
+    .card-img-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(11,17,32,0.9) 10%, transparent 80%); }
+    .card-img-content { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding: 28px; }
+    .card-img-content h3 { font-family: var(--font-heading); font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+    .card-img-content p { font-size: 14px; line-height: 22px; color: var(--blue-muted); margin-bottom: 16px; }
+    
+    .card-dark-featured { background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 12px; padding: 28px; display: flex; flex-direction: column; justify-content: center; }
+    .card-dark-featured .icon-wrap { width: 44px; height: 44px; background: rgba(252,163,17,0.10); border-radius: 9999px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; color: var(--gold-dark); font-size: 18px; }
+    .card-dark-featured h3 { font-family: var(--font-heading); font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 12px; }
+    .card-dark-featured p { font-size: 14px; line-height: 22px; color: var(--blue-muted); margin-bottom: 20px; }
+    .price-bottom { border-top: 1px solid var(--navy-border); padding-top: 16px; font-size: 16px; font-weight: 700; color: var(--gold); }
+    
+    .btn-outline-gold { display: inline-block; padding: 8px 24px; border: 1.5px solid var(--gold-dark); border-radius: 8px; font-size: 14px; font-weight: 700; color: var(--gold-dark); text-decoration: none; cursor: pointer; background: transparent; width: fit-content; }
+    .link-gold { display: inline-flex; align-items: center; gap: 6px; color: var(--gold); font-size: 14px; font-weight: 700; text-decoration: none; }
     .link-gold:hover { text-decoration: underline; }
 
-    .card-oil {
-      background: var(--navy-card);
-      border: 1px solid var(--navy-border);
-      border-radius: 12px;
-      padding: 28px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .card-oil .icon-wrap {
-      width: 44px;
-      height: 44px;
-      background: rgba(252,163,17,0.10);
-      border-radius: 9999px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 16px;
-    }
-    .card-oil .icon-wrap svg { color: var(--gold-dark); }
-    .card-oil h3 {
-      font-family: var(--font-heading);
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--blue-light);
-      margin-bottom: 12px;
-    }
-    .card-oil p {
-      font-size: 14px;
-      line-height: 22px;
-      color: var(--blue-muted);
-    }
-    .card-oil .price-bottom {
-      border-top: 1px solid var(--navy-border);
-      padding-top: 16px;
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--gold);
-    }
-
-    /* Brake system row */
-    .layanan-bottom {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-    .card-brake {
-      display: flex;
-      border: 1px solid var(--navy-border);
-      border-radius: 12px;
-      overflow: hidden;
-    }
-    .card-brake img {
-      width: 50%;
-      object-fit: cover;
-    }
-    .card-brake-content {
-      padding: 28px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .card-brake-content h3 {
-      font-family: var(--font-heading);
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--blue-light);
-      margin-bottom: 12px;
-    }
-    .card-brake-content p {
-      font-size: 14px;
-      line-height: 22px;
-      color: var(--blue-muted);
-      margin-bottom: 20px;
-    }
-    .btn-outline {
-      display: inline-block;
-      padding: 8px 24px;
-      background: var(--navy-btn);
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--blue-light);
-      text-decoration: none;
-      cursor: pointer;
-      border: none;
-      width: fit-content;
-    }
-    .card-electrical {
-      background: var(--navy-card);
-      border: 1px solid var(--navy-border);
-      border-radius: 12px;
-      padding: 28px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .card-electrical .icon-wrap {
-      width: 44px;
-      height: 44px;
-      background: rgba(252,163,17,0.10);
-      border-radius: 9999px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 16px;
-    }
-    .card-electrical h3 {
-      font-family: var(--font-heading);
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--blue-light);
-      margin-bottom: 12px;
-    }
-    .card-electrical p {
-      font-size: 14px;
-      line-height: 22px;
-      color: var(--blue-muted);
-      margin-bottom: 20px;
-    }
-    .btn-outline-gold {
-      display: inline-block;
-      padding: 8px 24px;
-      border: 1.5px solid var(--gold-dark);
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--gold-dark);
-      text-decoration: none;
-      cursor: pointer;
-      background: transparent;
-      width: fit-content;
-    }
-
-    /* Layanan grid - additional services */
-    .layanan-more {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      margin-top: 20px;
-    }
-
     /* ===== LOKASI & JAM ===== */
-    .lokasi-section {
-      padding: 96px 48px;
-      max-width: 1280px;
-      margin: 0 auto;
-    }
-    .lokasi-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-      align-items: start;
-    }
-    .map-placeholder {
-      background: var(--navy-card);
-      border: 1px solid var(--navy-border);
-      border-radius: 12px;
-      height: 280px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-    .map-placeholder img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 12px;
-    }
-    .jam-card {
-      background: var(--navy-card);
-      border: 1px solid var(--navy-border);
-      border-radius: 12px;
-      padding: 32px;
-    }
-    .jam-card h3 {
-      font-family: var(--font-heading);
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--gold);
-      margin-bottom: 24px;
-    }
-    .jam-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-bottom: 16px;
-      margin-bottom: 16px;
-      border-bottom: 1px solid var(--navy-border);
-    }
-    .jam-row:last-of-type { border-bottom: none; }
+    .lokasi-section { padding: 96px 48px; max-width: 1280px; margin: 0 auto; }
+    .lokasi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
+    .map-placeholder { background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 12px; height: 280px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .map-placeholder img { width: 100%; height: 100%; object-fit: cover; }
+    .jam-card { background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 12px; padding: 32px; }
+    .jam-card h3 { font-family: var(--font-heading); font-size: 22px; font-weight: 700; color: var(--gold); margin-bottom: 24px; }
+    .jam-row { display: flex; justify-content: space-between; align-items: center; padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid var(--navy-border); }
+    .jam-row:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
     .jam-row .day { font-size: 15px; color: var(--blue-light); }
     .jam-row .time { font-size: 14px; font-weight: 700; color: var(--gold); }
     .jam-row .closed { color: var(--red-soft); font-weight: 700; letter-spacing: 1px; font-size: 13px; text-transform: uppercase; }
-    .hotline-box {
-      margin-top: 20px;
-      background: rgba(40,52,81,0.5);
-      border-radius: 8px;
-      padding: 14px 18px;
-    }
+    .hotline-box { margin-top: 24px; background: rgba(40,52,81,0.5); border-radius: 8px; padding: 16px 20px; }
     .hotline-box .label { font-size: 12px; color: var(--blue-muted); margin-bottom: 4px; }
     .hotline-box .number { font-family: var(--font-heading); font-weight: 700; font-size: 18px; color: var(--gold); }
 
     /* ===== TESTIMONI ===== */
-    .testimoni-section {
-      padding: 96px 48px;
-      background: var(--navy-mid);
-    }
-    .testimoni-section .inner { max-width: 1280px; margin: 0 auto; }
-    .testimoni-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-    .testi-card {
-      background: var(--navy-card);
-      border: 1px solid var(--navy-border);
-      border-radius: 12px;
-      padding: 28px;
-    }
-    .stars {
-      color: var(--gold-dark);
-      font-size: 16px;
-      letter-spacing: 2px;
-      margin-bottom: 16px;
-    }
-    .testi-card blockquote {
-      font-size: 14px;
-      line-height: 22px;
-      color: var(--blue-light);
-      margin-bottom: 24px;
-      font-style: italic;
-    }
-    .testi-author {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .avatar {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: var(--navy-btn);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-heading);
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--blue-light);
-      flex-shrink: 0;
-    }
-    .testi-name { font-size: 14px; font-weight: 700; color: var(--blue-light); }
+    .testimoni-section { padding: 0 48px 96px; max-width: 1280px; margin: 0 auto; }
+    .testimoni-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .testi-card { background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 12px; padding: 28px; }
+    .stars { color: var(--gold-dark); font-size: 16px; letter-spacing: 2px; margin-bottom: 16px; }
+    .testi-card blockquote { font-size: 14px; line-height: 22px; color: var(--blue-light); margin-bottom: 24px; font-style: italic; }
+    .testi-author { display: flex; align-items: center; gap: 12px; }
+    .avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--navy-btn); display: flex; align-items: center; justify-content: center; font-family: var(--font-heading); font-size: 13px; font-weight: 700; color: #fff; }
+    .testi-name { font-size: 14px; font-weight: 700; color: #fff; }
 
-    /* ===== CTA ===== */
-    .cta-section {
-      padding: 80px 48px;
-      background: var(--navy-card2);
-      border-top: 1px solid var(--navy-border);
-      border-bottom: 1px solid var(--navy-border);
-    }
-    .cta-inner {
-      max-width: 1280px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 48px;
-    }
-    .cta-text h2 {
-      font-family: var(--font-heading);
-      font-size: 36px;
-      font-weight: 700;
-      line-height: 1.25;
-      color: var(--blue-light);
-      max-width: 520px;
-      margin-bottom: 16px;
-    }
-    .cta-text p {
-      font-size: 15px;
-      line-height: 24px;
-      color: var(--blue-muted);
-      max-width: 520px;
-    }
-    .cta-actions {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      flex-shrink: 0;
-      flex-wrap: wrap;
-    }
-    .btn-gold-lg {
-      background: var(--gold);
-      color: var(--btn-text);
-      font-weight: 700;
-      font-size: 15px;
-      padding: 14px 28px;
-      border-radius: 9999px;
-      border: none;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-    .phone-link {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--blue-light);
-      font-size: 14px;
-      font-weight: 500;
-      text-decoration: none;
-      white-space: nowrap;
-    }
-    .phone-link svg { color: var(--gold); }
+    /* ===== CTA BOX (WITH GEAR) ===== */
+    .cta-box-wrapper { padding: 0 48px 96px; max-width: 1280px; margin: 0 auto; }
+    .cta-box { position: relative; background: var(--navy-card2); border: 1px solid var(--navy-border); border-radius: 16px; padding: 48px; overflow: hidden; display: flex; justify-content: space-between; align-items: center; gap: 48px; }
+    .cta-box-bg-icon { position: absolute; right: -20px; top: 50%; transform: translateY(-50%); opacity: 0.05; font-size: 250px; color: #fff; pointer-events: none; }
+    .cta-text { position: relative; z-index: 2; flex: 1; }
+    .cta-text h2 { font-family: var(--font-heading); font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 12px; }
+    .cta-text p { font-size: 15px; line-height: 24px; color: var(--blue-muted); max-width: 520px; }
+    .cta-actions { position: relative; z-index: 2; display: flex; align-items: center; gap: 20px; flex-shrink: 0; }
+    .btn-gold-lg { background: var(--gold); color: var(--btn-text); font-weight: 700; font-size: 15px; padding: 14px 28px; border-radius: 8px; border: none; cursor: pointer; text-decoration: none; }
+    .phone-link { display: flex; align-items: center; gap: 8px; color: #fff; font-size: 14px; font-weight: 600; text-decoration: none; }
 
     /* ===== FAQ ===== */
-    .faq-section {
-      padding: 96px 48px;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    .faq-item {
-      border-bottom: 1px solid var(--navy-border);
-    }
-    .faq-item summary {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 0;
-      cursor: pointer;
-      list-style: none;
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--blue-light);
-    }
+    .faq-section { padding: 0 48px 96px; max-width: 900px; margin: 0 auto; }
+    .faq-item { border: 1px solid var(--navy-border); border-radius: 8px; margin-bottom: 12px; background: var(--navy-card); }
+    .faq-item summary { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; cursor: pointer; list-style: none; font-size: 15px; font-weight: 600; color: #fff; }
     .faq-item summary::-webkit-details-marker { display: none; }
-    .faq-icon {
-      font-size: 20px;
-      color: var(--gold);
-      font-weight: 300;
-      transition: transform 0.2s;
-    }
-    details[open] .faq-icon { transform: rotate(45deg); }
-    .faq-item .faq-answer {
-      padding: 0 0 20px;
-      font-size: 14px;
-      line-height: 22px;
-      color: var(--blue-muted);
-    }
+    .faq-icon { font-size: 18px; color: var(--blue-muted); transition: transform 0.2s; }
+    details[open] .faq-icon { transform: rotate(180deg); }
+    .faq-item .faq-answer { padding: 0 24px 20px; font-size: 14px; line-height: 22px; color: var(--blue-muted); border-top: 1px solid var(--navy-border); margin-top: 4px; padding-top: 16px; }
 
     /* ===== FOOTER ===== */
-    footer {
-      background: var(--navy-mid);
-      border-top: 1px solid var(--navy-border);
-      padding: 40px 48px;
-    }
-    .footer-inner {
-      max-width: 1280px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .footer-brand .name {
-      font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 16px;
-      color: var(--gold);
-      margin-bottom: 6px;
-    }
-    .footer-brand .copy {
-      font-size: 12px;
-      color: var(--blue-muted);
-      line-height: 1.6;
-    }
-    .footer-links {
-      display: flex;
-      gap: 28px;
-    }
-    .footer-links a {
-      font-size: 13px;
-      color: var(--blue-muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
+    footer { background: var(--navy-mid); border-top: 1px solid var(--navy-border); padding: 40px 48px; }
+    .footer-inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .footer-brand .name { font-family: var(--font-heading); font-weight: 700; font-size: 16px; color: var(--gold); margin-bottom: 6px; }
+    .footer-brand .copy { font-size: 12px; color: var(--blue-muted); line-height: 1.6; }
+    .footer-links { display: flex; gap: 28px; }
+    .footer-links a { font-size: 13px; color: var(--blue-muted); text-decoration: none; transition: color 0.2s; }
     .footer-links a:hover { color: var(--gold); }
   </style>
 </head>
@@ -745,11 +173,11 @@
   <nav>
     <div class="nav-logo">DUTA Auto Garage</div>
     <ul class="nav-links">
-      <li><a href="#" class="active">Beranda</a></li>
-      <li><a href="#layanan">Layanan</a></li>
-      <li><a href="#tentang">Tentang Kami</a></li>
+      <li><a href="landing-page.html" class="active">Beranda</a></li>
+      <li><a href="layanan.html">Layanan</a></li>
+      <li><a href="tentang-kami.html">Tentang Kami</a></li>
     </ul>
-    <button class="btn-gold">Booking Sekarang</button>
+    <a href="reservasi.html" class="btn-gold">Booking Sekarang</a>
   </nav>
 
   <!-- HERO -->
@@ -760,68 +188,49 @@
       <h1>DUTA AUTO GARAGE</h1>
       <p>Solusi terpercaya untuk perawatan dan perbaikan mobil Anda. Ditangani langsung oleh mekanik berpengalaman dengan pelayanan yang jujur, cepat, dan harga terjangkau. Kami siap memastikan kondisi mobil Anda kembali prima.</p>
       <div class="badge-location">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-          <path d="M8 0a5 5 0 0 0-5 5c0 3.5 5 11 5 11s5-7.5 5-11a5 5 0 0 0-5-5zm0 7.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/>
-        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0a5 5 0 0 0-5 5c0 3.5 5 11 5 11s5-7.5 5-11a5 5 0 0 0-5-5zm0 7.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
         Lokasi Strategis
       </div>
     </div>
   </section>
 
   <!-- KOMITMEN -->
-  <section id="tentang" style="background: var(--navy-deep); padding: 0 0 0 0;">
-    <div class="komitmen">
-      <div class="komitmen-image">
-        <img src="images/node-215.png" alt="Mekanik bekerja" style="min-height: 320px; background: var(--navy-card);" />
-        <div class="stat-badge">
-          <div class="num">15+</div>
-          <div class="label">Lebih<br>Unggul</div>
+  <section class="komitmen">
+    <div class="komitmen-image">
+      <img src="../images/node-215.png" alt="Mekanik bekerja" style="min-height: 320px; background: var(--navy-card);" />
+      <div class="stat-badge">
+        <div class="num">15+</div>
+        <div class="label">Tahun<br>Pengalaman</div>
+      </div>
+    </div>
+    <div class="komitmen-text">
+      <h2>Komitmen Kami<br>untuk Kendaraan Anda!</h2>
+      <div class="komitmen-item">
+        <div class="komitmen-icon">🛡️</div>
+        <div>
+          <h4>Mekanik Berpengalaman</h4>
+          <p>Teknisi kami memiliki keahlian mendalam dalam menangani berbagai tipe dan merk mobil harian Anda dengan standar pelayanan terbaik.</p>
         </div>
       </div>
-      <div class="komitmen-text">
-        <h2>Komitmen Kami<br>untuk Kendaraan Anda!</h2>
-
-        <div class="komitmen-item">
-          <div class="komitmen-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-              <path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm0 1a6 6 0 1 1 0 12A6 6 0 0 1 8 2zm0 3a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-.5 3h1v4h-1V8z"/>
-            </svg>
-          </div>
-          <div>
-            <h4>Mekanik Berpengalaman</h4>
-            <p>Teknisi kami memiliki keahlian mendalam dalam menangani berbagai tipe dan merk mobil harian Anda dengan standar pelayanan terbaik.</p>
-          </div>
+      <div class="komitmen-item">
+        <div class="komitmen-icon">🔍</div>
+        <div>
+          <h4>Pengecekan Akurat &amp; Menyeluruh</h4>
+          <p>Kami melakukan pemeriksaan secara teliti untuk mendeteksi setiap kendala pada mobil Anda, guna mencegah risiko mogok mendadak di perjalanan.</p>
         </div>
-
-        <div class="komitmen-item">
-          <div class="komitmen-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-              <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
-            </svg>
-          </div>
-          <div>
-            <h4>Pengecekan Akurat &amp; Menyeluruh</h4>
-            <p>Kami melakukan pemeriksaan secara teliti untuk mendeteksi setiap kendala pada mobil Anda, guna mencegah risiko mogok mendadak di perjalanan.</p>
-          </div>
-        </div>
-
-        <div class="komitmen-item">
-          <div class="komitmen-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-              <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zM3.5 0A1.5 1.5 0 0 0 2 1.5V2h-.5A1.5 1.5 0 0 0 0 3.5v8A1.5 1.5 0 0 0 1.5 13H2v.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V13h.5a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 14.5 2H14v-.5A1.5 1.5 0 0 0 12.5 0h-9z"/>
-            </svg>
-          </div>
-          <div>
-            <h4>Kemudahan Penjadwalan Servis</h4>
-            <p>Hindari waktu antre yang lama dengan menjadwalkan kedatangan mobil Anda secara online guna mendapatkan pelayanan yang lebih efisien.</p>
-          </div>
+      </div>
+      <div class="komitmen-item">
+        <div class="komitmen-icon">📅</div>
+        <div>
+          <h4>Kemudahan Penjadwalan Servis</h4>
+          <p>Hindari waktu antre yang lama dengan menjadwalkan kedatangan mobil Anda secara online guna mendapatkan pelayanan yang lebih efisien.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- LAYANAN -->
-  <section id="layanan" class="layanan-section">
+  <section class="layanan-section">
     <div class="inner">
       <div class="section-title-wrap">
         <h2>Layanan Kami</h2>
@@ -831,134 +240,64 @@
       <!-- Top 4 basic services -->
       <div class="layanan-grid-top">
         <div class="layanan-card">
-          <div class="icon-wrap">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-              <path d="M8 1a2 2 0 0 1 2 2v2H6V3a2 2 0 0 1 2-2zm3 4V3a3 3 0 0 0-6 0v2H1v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V5h-4z"/>
-            </svg>
-          </div>
+          <div class="icon-wrap">⚙️</div>
           <h3>Servis Berkala</h3>
           <p>Perawatan rutin kendaraan untuk menjaga performa mesin tetap optimal, aman, dan hemat bahan bakar.</p>
           <div class="price-tag">From Rp 350K</div>
         </div>
-
         <div class="layanan-card">
-          <div class="icon-wrap">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-              <path d="M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5v7a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 11.5v-7zm1.5-.5a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.5-.5h-13z"/>
-            </svg>
-          </div>
+          <div class="icon-wrap">🛑</div>
           <h3>Servis Rem</h3>
           <p>Pengecekan, pembersihan, dan perbaikan komponen rem untuk meningkatkan keamanan serta kenyamanan.</p>
           <div class="price-tag">From Rp 1.500K</div>
         </div>
-
         <div class="layanan-card">
-          <div class="icon-wrap">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-              <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
-            </svg>
-          </div>
+          <div class="icon-wrap">🔧</div>
           <h3>Mesin</h3>
-          <p>Solusi menyeluruh untuk masalah mesin Anda, mulai dari tune-up hingga overhaul dengan penanganan yang teliti.</p>
+          <p>Solusi menyeluruh untuk masalah mesin Anda, mulai dari tune-up hingga overhaul dengan penanganan teliti.</p>
           <div class="price-tag">From Rp 1.500k</div>
         </div>
-
         <div class="layanan-card">
-          <div class="icon-wrap">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-              <path d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
-              <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
-            </svg>
-          </div>
+          <div class="icon-wrap">❄️</div>
           <h3>Perawatan AC</h3>
           <p>Layanan perawatan AC mulai dari isi freon, pembersihan filter, hingga pengecekan sistem pendingin.</p>
           <div class="price-tag">From Rp 280k</div>
         </div>
       </div>
 
-      <!-- Engine tuning + Oil change + Electrical -->
-      <div class="layanan-featured">
-        <!-- Engine Tuning - card with dark image bg -->
-        <div class="card-engine" style="grid-column: span 1;">
-          <img src="images/node-362.png" alt="Engine Tuning" />
-          <div class="card-engine-overlay"></div>
-          <div class="card-engine-content">
-            <div>
-              <div class="label-tag">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
-                  <path d="M8.5 2a.5.5 0 0 1 .5.5v1.793l1.354-1.353a.5.5 0 0 1 .707.707L9.707 5H11.5a.5.5 0 0 1 0 1H9.707l1.354 1.354a.5.5 0 0 1-.707.707L9 6.707V8.5a.5.5 0 0 1-1 0V6.707L6.646 8.061a.5.5 0 1 1-.707-.707L7.293 6H5.5a.5.5 0 0 1 0-1h1.793L5.94 3.646a.5.5 0 0 1 .707-.707L8 4.293V2.5a.5.5 0 0 1 .5-.5z"/>
-                </svg>
-                Engine Tuning
-              </div>
-              <p>Pengaturan ulang ECU dan optimalisasi komponen mekanis untuk mengembalikan tenaga maksimal serta efisiensi bahan bakar mobil yang didukung peralatan uji performa yang akurat.</p>
-              <a href="#" class="link-gold">Learn more &#8594;</a>
-            </div>
+      <!-- Featured Services 2x2 Grid -->
+      <div class="layanan-featured-grid">
+        <div class="card-img-featured">
+          <img src="../images/node-362.png" alt="Engine Tuning" />
+          <div class="card-img-overlay"></div>
+          <div class="card-img-content">
+            <h3>Engine Tuning</h3>
+            <p>Pengaturan ulang ECU dan optimalisasi komponen mekanis untuk mengembalikan tenaga maksimal serta efisiensi bahan bakar mobil yang didukung peralatan uji performa yang akurat.</p>
+            <a href="layanan.html" class="link-gold">Learn more &#8594;</a>
           </div>
         </div>
-
-        <!-- Oil Change -->
-        <div class="card-oil">
-          <div>
-            <div class="icon-wrap" style="background:rgba(252,163,17,0.10); border-radius:9999px; width:44px; height:44px; display:flex; align-items:center; justify-content:center; margin-bottom:16px;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#FCA311" viewBox="0 0 16 16">
-                <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm0 1a7 7 0 1 1 0 14A7 7 0 0 1 8 1z"/>
-              </svg>
-            </div>
-            <h3>Paket Ganti Oli Eksklusif</h3>
-            <p>Layanan ini mencakup pemeriksaan menyeluruh pada cairan kendaraan Anda menggunakan pilihan pelumas sintetis terbaik dan filter oli berkualitas tinggi demi menjaga keawetan mesin.</p>
-          </div>
+        <div class="card-dark-featured">
+          <div class="icon-wrap">🛢️</div>
+          <h3>Paket Ganti Oli Eksklusif</h3>
+          <p>Layanan ini mencakup pemeriksaan menyeluruh pada cairan kendaraan Anda menggunakan pilihan pelumas sintetis terbaik.</p>
           <div class="price-bottom">Mulai dari Rp 1.500k</div>
-        </div>
-
-        <!-- Electrical -->
-        <div class="card-electrical">
-          <div>
-            <div class="icon-wrap" style="background:rgba(252,163,17,0.10); border-radius:9999px; width:44px; height:44px; display:flex; align-items:center; justify-content:center; margin-bottom:16px;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#FCA311" viewBox="0 0 16 16">
-                <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/>
-              </svg>
-            </div>
-            <h3>Servis Electrical Systems</h3>
-            <p>Pengecekan dan perbaikan jalur kabel, sensor, serta sistem (scanner) untuk memastikan seluruh komponen kelistrikan dan fitur elektronik mobil berfungsi dengan normal dan aman.</p>
-          </div>
-          <button class="btn-outline-gold">Detail</button>
         </div>
       </div>
 
-      <!-- Brake system -->
-      <div class="layanan-bottom" style="margin-top: 20px;">
-        <div class="card-brake">
-          <img src="images/node-398.png" alt="Sistem Rem" />
-          <div class="card-brake-content">
-            <div>
-              <h3>Servis &amp; Perawatan Sistem Rem</h3>
-              <p>Perbaikan menyeluruh pada sistem pengereman, mulai dari penggantian kampas rem, pengurasan minyak rem, hingga penyetelan komponen hidrolik.</p>
-            </div>
-            <button class="btn-outline">Configure</button>
-          </div>
+      <div class="layanan-featured-grid-alt">
+        <div class="card-dark-featured">
+          <div class="icon-wrap">⚡</div>
+          <h3>Servis Electrical Systems</h3>
+          <p>Pengecekan dan perbaikan jalur kabel, sensor, serta sistem (scanner) untuk memastikan kelistrikan mobil berfungsi normal.</p>
+          <a href="layanan.html" class="btn-outline-gold" style="margin-top: 8px;">Detail</a>
         </div>
-
-        <!-- Additional services grid 2x2 -->
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-          <div class="layanan-card">
-            <h3>Ban</h3>
-            <p>Perawatan dan penggantian ban termasuk balancing, spooring, dan tambal ban.</p>
-            <div class="price-tag">From Rp 1800k</div>
-          </div>
-          <div class="layanan-card">
-            <h3>Kelistrikan</h3>
-            <p>Perbaikan sistem kelistrikan kendaraan seperti aki, lampu, starter, dan sensor mobil.</p>
-            <div class="price-tag">From Rp 300k</div>
-          </div>
-          <div class="layanan-card">
-            <h3>Transmisi</h3>
-            <p>Service transmisi manual maupun otomatis untuk menjaga perpindahan gigi tetap halus.</p>
-            <div class="price-tag">From Rp 700k</div>
-          </div>
-          <div class="layanan-card">
-            <h3>Body &amp; Cat</h3>
-            <p>Perbaikan body kendaraan, pengecatan ulang, dan restorasi tampilan mobil.</p>
-            <div class="price-tag">From Rp 700k</div>
+        <div class="card-img-featured">
+          <img src="../images/node-398.png" alt="Sistem Rem" />
+          <div class="card-img-overlay"></div>
+          <div class="card-img-content">
+            <h3>Servis &amp; Perawatan Sistem Rem</h3>
+            <p>Perbaikan menyeluruh pada sistem pengereman, mulai dari penggantian kampas rem, pengurasan minyak rem, hingga penyetelan komponen hidrolik.</p>
+            <a href="layanan.html" class="btn-outline-gold" style="margin-top: 8px; color: #fff; border-color: #fff;">Configure</a>
           </div>
         </div>
       </div>
@@ -966,34 +305,32 @@
   </section>
 
   <!-- LOKASI & JAM -->
-  <section style="background: var(--navy-deep); padding: 96px 48px;">
-    <div style="max-width: 1280px; margin: 0 auto;">
-      <div class="section-title-wrap">
-        <h2>Informasi Lokasi &amp; Jam Operasional</h2>
-        <div class="title-underline"></div>
+  <section class="lokasi-section">
+    <div class="section-title-wrap">
+      <h2>Informasi Lokasi &amp; Jam Operasional</h2>
+      <div class="title-underline"></div>
+    </div>
+    <div class="lokasi-grid">
+      <div class="map-placeholder">
+        <img src="../images/image-1-42.png" alt="Peta Lokasi" />
       </div>
-      <div class="lokasi-grid">
-        <div class="map-placeholder">
-          <img src="images/image-1-42.png" alt="Peta Lokasi" />
+      <div class="jam-card">
+        <h3>Jam Operasional</h3>
+        <div class="jam-row">
+          <span class="day">Senin - Jumat</span>
+          <span class="time">PUKUL 08:00 - 19:00</span>
         </div>
-        <div class="jam-card">
-          <h3>Jam Operasional</h3>
-          <div class="jam-row">
-            <span class="day">Senin - Jumat</span>
-            <span class="time">PUKUL 08:00 - 19:00</span>
-          </div>
-          <div class="jam-row">
-            <span class="day">Sabtu</span>
-            <span class="time">PUKUL 08:00 - 17:00</span>
-          </div>
-          <div class="jam-row">
-            <span class="day">Minggu</span>
-            <span class="closed">TUTUP</span>
-          </div>
-          <div class="hotline-box">
-            <div class="label">Emergency Roadside Assistance</div>
-            <div class="number">24/7 Hotline: 1500-GP</div>
-          </div>
+        <div class="jam-row">
+          <span class="day">Sabtu</span>
+          <span class="time">PUKUL 08:00 - 17:00</span>
+        </div>
+        <div class="jam-row">
+          <span class="day">Minggu</span>
+          <span class="closed">TUTUP</span>
+        </div>
+        <div class="hotline-box">
+          <div class="label">Emergency Roadside Assistance</div>
+          <div class="number">24/7 Hotline: 1500-GP</div>
         </div>
       </div>
     </div>
@@ -1001,88 +338,80 @@
 
   <!-- TESTIMONI -->
   <section class="testimoni-section">
-    <div class="inner">
-      <div class="section-title-wrap">
-        <h2>Testimoni</h2>
-        <div class="title-underline"></div>
+    <div class="section-title-wrap">
+      <h2>Testimoni</h2>
+      <div class="title-underline"></div>
+    </div>
+    <div class="testimoni-grid">
+      <div class="testi-card">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote>"Paket Performance mengubah sedan 2018 saya. Respons akselerasinya lebih responsif, dan laporan diagnostik yang detail memberi saya ketenangan pikiran sepenuhnya."</blockquote>
+        <div class="testi-author">
+          <div class="avatar">BK</div>
+          <div class="testi-name">Budi Kusuma</div>
+        </div>
       </div>
-      <div class="testimoni-grid">
-        <div class="testi-card">
-          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <blockquote>"Paket Performance mengubah sedan 2018 saya. Respons akselerasinya lebih responsif, dan laporan diagnostik yang detail memberi saya ketenangan pikiran sepenuhnya untuk perjalanan jauh saya."</blockquote>
-          <div class="testi-author">
-            <div class="avatar">BK</div>
-            <div class="testi-name">Budi Kusuma</div>
-          </div>
+      <div class="testi-card">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote>"Cepat, bersih, dan profesional. Paket Servis Berkala sangat cocok untuk kendaraan harian saya. Mantap Duta Auto Garage!"</blockquote>
+        <div class="testi-author">
+          <div class="avatar">SR</div>
+          <div class="testi-name">Santi Rahayu</div>
         </div>
-        <div class="testi-card">
-          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <blockquote>"Cepat, bersih, dan profesional. Paket Servis Berkala sangat cocok untuk kendaraan harian saya."</blockquote>
-          <div class="testi-author">
-            <div class="avatar">SR</div>
-            <div class="testi-name">Santi Rahayu</div>
-          </div>
-        </div>
-        <div class="testi-card">
-          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <blockquote>"Layanan service ini benar-benar sepadan."</blockquote>
-          <div class="testi-author">
-            <div class="avatar">HT</div>
-            <div class="testi-name">Hendrik T.</div>
-          </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote>"Layanan service ini benar-benar sepadan. Harga transparan di awal, tidak ada biaya siluman."</blockquote>
+        <div class="testi-author">
+          <div class="avatar">HT</div>
+          <div class="testi-name">Hendrik T.</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="cta-section">
-    <div class="cta-inner">
+  <!-- CTA BOX -->
+  <section class="cta-box-wrapper">
+    <div class="cta-box">
+      <div class="cta-box-bg-icon">⚙️</div>
       <div class="cta-text">
         <h2>Ingin performa berkendara yang lebih maksimal?</h2>
-        <p>Percayakan perawatan dan perbaikan mobil Anda kepada tim Duta Auto Garage. Hubungi kami sekarang untuk menjadwalkan kunjungan, dan nikmati gratis pemeriksaan lengkap pada komponen penting kendaraan Anda.</p>
+        <p>Percayakan perawatan dan perbaikan mobil Anda kepada tim Duta Auto Garage. Hubungi kami sekarang untuk menjadwalkan kunjungan, dan nikmati gratis pemeriksaan lengkap.</p>
       </div>
       <div class="cta-actions">
-        <button class="btn-gold-lg">Booking Servis Sekarang</button>
-        <a href="tel:+6285713004631" class="phone-link">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-            <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328z"/>
-          </svg>
-          Hubungi Kami: +62 857 1300 4631
-        </a>
+        <a href="reservasi.html" class="btn-gold-lg">Booking Servis Sekarang</a>
+        <a href="tel:+6285713004631" class="phone-link">📞 Hubungi: +62 857 1300 4631</a>
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section style="background: var(--navy-deep); padding: 96px 48px;">
-    <div style="max-width: 900px; margin: 0 auto;">
-      <div class="section-title-wrap">
-        <h2>Pertanyaan yang Sering Diajukan</h2>
-        <div class="title-underline"></div>
-      </div>
-      <details class="faq-item">
-        <summary>
-          <span>Merek oli apa yang anda gunakan?</span>
-          <span class="faq-icon">+</span>
-        </summary>
-        <div class="faq-answer">Kami menggunakan oli bermerek terpercaya seperti Shell, Castrol, dan Motul sesuai dengan rekomendasi pabrikan kendaraan Anda.</div>
-      </details>
-      <details class="faq-item">
-        <summary>
-          <span>Apakah saya perlu membuat janji temu?</span>
-          <span class="faq-icon">+</span>
-        </summary>
-        <div class="faq-answer">Tidak wajib, namun sangat disarankan agar kami bisa menyiapkan mekanik dan suku cadang yang dibutuhkan sehingga kendaraan Anda selesai lebih cepat.</div>
-      </details>
-      <details class="faq-item">
-        <summary>
-          <span>Apakah ada garansi untuk perbaikan?</span>
-          <span class="faq-icon">+</span>
-        </summary>
-        <div class="faq-answer">Ya, kami memberikan garansi servis selama 30 hari atau 1.000 km (mana yang lebih dahulu) untuk setiap pekerjaan perbaikan yang dilakukan di bengkel kami.</div>
-      </details>
+  <section class="faq-section">
+    <div class="section-title-wrap">
+      <h2>Pertanyaan yang Sering Diajukan</h2>
+      <div class="title-underline"></div>
     </div>
+    <details class="faq-item">
+      <summary>
+        <span>Merek oli apa yang anda gunakan?</span>
+        <span class="faq-icon">▼</span>
+      </summary>
+      <div class="faq-answer">Kami menggunakan oli bermerek terpercaya seperti Shell, Castrol, dan Motul sesuai dengan rekomendasi pabrikan kendaraan Anda.</div>
+    </details>
+    <details class="faq-item">
+      <summary>
+        <span>Apakah saya perlu membuat janji temu?</span>
+        <span class="faq-icon">▼</span>
+      </summary>
+      <div class="faq-answer">Tidak wajib, namun sangat disarankan agar kami bisa menyiapkan mekanik dan suku cadang yang dibutuhkan sehingga kendaraan Anda selesai lebih cepat.</div>
+    </details>
+    <details class="faq-item">
+      <summary>
+        <span>Apakah ada garansi untuk perbaikan?</span>
+        <span class="faq-icon">▼</span>
+      </summary>
+      <div class="faq-answer">Ya, kami memberikan garansi servis selama 30 hari atau 1.000 km (mana yang lebih dahulu) untuk setiap pekerjaan perbaikan yang dilakukan di bengkel kami.</div>
+    </details>
   </section>
 
   <!-- FOOTER -->
