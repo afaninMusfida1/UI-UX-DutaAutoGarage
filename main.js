@@ -167,145 +167,169 @@ function initTentangKamiPage() {
   }
 }
 
-// ===================== LIST SERVICE PAGE =====================
-function initListServicePage() {
-  const tambahBtn = document.querySelector('.button-17');
-  if (tambahBtn) {
-    tambahBtn.style.cursor = 'pointer';
-    tambahBtn.onclick = () => navigateTo('tambah-service.html');
+// ============================================================
+// "DATABASE" LOKAL PAKAI localStorage
+// ============================================================
+const SERVICES_KEY = 'duta_garage_services';
+
+function getServices() {
+  const data = localStorage.getItem(SERVICES_KEY);
+  if (data) return JSON.parse(data);
+  const seed = [
+    { id: 1, name: 'Service Berkala', category: 'Pemeliharaan', price: 1250000, desc: 'Pemeriksaan menyeluruh dan sistematis, termasuk penggantian oli, penggantian filter, dan diagnostik keselamatan multi-titik.', status: 'ACTIVE' },
+    { id: 2, name: 'Engine Tuning', category: 'Tuning', price: 3500000, desc: 'Remapping ECU profesional dan kalibrasi mesin untuk performa maksimal.', status: 'ACTIVE' },
+    { id: 3, name: 'Servis Rem', category: 'Perbaikan', price: 850000, desc: 'Penggantian kampas rem, cairan hidrolik, dan pemeriksaan sistem pengereman.', status: 'INACTIVE' },
+    { id: 4, name: 'Pemindaian Diagnostik', category: 'Pemeliharaan', price: 450000, desc: 'Diagnosis komputer menyeluruh menggunakan alat scan terbaru.', status: 'ACTIVE' },
+    { id: 5, name: 'Perawatan AC', category: 'Pemeliharaan', price: 600000, desc: 'Pengisian ulang freon, pembersihan evaporator, dan filter kabin.', status: 'ACTIVE' },
+    { id: 6, name: 'Penyelarasan Roda', category: 'Perbaikan', price: 550000, desc: 'Spooring Laser 3D dan Balancing untuk memastikan presisi kendaraan.', status: 'ACTIVE' }
+  ];
+  localStorage.setItem(SERVICES_KEY, JSON.stringify(seed));
+  return seed;
+}
+
+function saveServices(services) {
+  localStorage.setItem(SERVICES_KEY, JSON.stringify(services));
+}
+
+function formatRupiah(num) {
+  return 'Rp ' + Number(num).toLocaleString('id-ID');
+}
+
+function addService(service) {
+  const services = getServices();
+  const newId = services.length ? Math.max(...services.map(s => s.id)) + 1 : 1;
+  service.id = newId;
+  services.push(service);
+  saveServices(services);
+}
+
+function updateService(id, updated) {
+  const services = getServices();
+  const idx = services.findIndex(s => s.id === Number(id));
+  if (idx !== -1) {
+    services[idx] = { ...services[idx], ...updated };
+    saveServices(services);
   }
-  const editBtns = document.querySelectorAll('.button-84, .button-109, .button-134, .button-159, .button-184, .button-209');
-  editBtns.forEach(btn => {
+}
+
+function deleteServiceById(id) {
+  const services = getServices().filter(s => s.id !== Number(id));
+  saveServices(services);
+}
+
+function getServiceById(id) {
+  return getServices().find(s => s.id === Number(id));
+}
+
+function renderServiceCards() {
+  const container = document.getElementById('serviceCardsContainer');
+  if (!container) return;
+  const services = getServices();
+  const wrenchIcon = "data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTE0LjcgNi4zYTQgNCAwIDAwLTUuNCA0LjlMNCAxNi41VjIwaDMuNWw1LjMtNS4zYTQgNCAwIDAwNC45LTUuNGwtMi42IDIuNi0yLTIgMi42LTIuNnoiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+Cg==";
+  const editIcon = "data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAgMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEzLjUgMy41bDMgM0w3IDE2SDR2LTNsOS41LTkuNXoiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+Cg==";
+  const deleteIcon = "data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAgMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTQgNmgxMk04IDZWNC41QTEuNSAxLjUgMCAwMTkuNSAzaDFBMS41IDEuNSAwIDAxMTIgNC41VjZNNiA2bC43IDkuNEExLjUgMS41IDAgMDA4LjIgMTdoMy42YTEuNSAxLjUgMCAwMDEuNS0xLjZMMTQgNiIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L3N2Zz4K";
+
+  container.innerHTML = services.map(s => {
+    const isActive = s.status === 'ACTIVE';
+    return `
+      <div class="service-card-1-65">
+        <div class="margin-66">
+          <div class="container-67">
+            <div class="overlay-border-68"><div class="container-69"><img src="${wrenchIcon}" class="icon-70" alt="icon" /></div></div>
+            <div class="${isActive ? 'overlay-border-71' : 'background-border-121'}">
+              <p class="text-72"><span class="${isActive ? 'text-rgb-16-185-129' : 'text-rgb-215-195-174'}">${s.status}</span></p>
+            </div>
+          </div>
+        </div>
+        <div class="heading-3-margin-73"><div class="heading-3-74"><p class="text-75"><span class="text-rgb-212-228-250">${s.name}</span></p></div></div>
+        <div class="margin-76"><div class="container-77"><p class="text-78"><span class="text-rgb-215-195-174">${s.desc}</span></p></div></div>
+        <div class="horizontalborder-79">
+          <div class="container-80"><div class="container-81"><p class="text-82"><span class="text-rgb-255-203-138">${formatRupiah(s.price)}</span></p></div></div>
+          <div class="container-83">
+            <div class="button-84" data-id="${s.id}"><div class="container-85"><img src="${editIcon}" class="icon-86" alt="icon" /></div></div>
+            <div class="button-87" data-id="${s.id}"><div class="container-88"><img src="${deleteIcon}" class="icon-89" alt="icon" /></div></div>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+
+  container.querySelectorAll('.button-84').forEach(btn => {
     btn.style.cursor = 'pointer';
-    btn.onclick = () => navigateTo('edit-service.html');
+    btn.onclick = () => navigateTo('edit-service.html?id=' + btn.dataset.id);
   });
-  const deleteBtns = document.querySelectorAll('.button-87, .button-112, .button-137, .button-162, .button-187, .button-212');
-  deleteBtns.forEach(btn => {
+  container.querySelectorAll('.button-87').forEach(btn => {
     btn.style.cursor = 'pointer';
     btn.onclick = () => {
-      showModal(
-        'Hapus Layanan',
-        'Apakah Anda yakin ingin menghapus layanan ini? Tindakan ini tidak dapat dibatalkan.',
-        () => showToast('Layanan berhasil dihapus.', 'success'),
-        'Hapus',
-        'Batal'
-      );
+      const id = btn.dataset.id;
+      showModal('Hapus Layanan', 'Apakah Anda yakin ingin menghapus layanan ini? Tindakan ini tidak dapat dibatalkan.',
+        () => { deleteServiceById(id); renderServiceCards(); showToast('Layanan berhasil dihapus.', 'success'); },
+        'Hapus', 'Batal');
     };
   });
+}
+
+// ===================== LIST SERVICE PAGE =====================
+function initListServicePage() {
+  renderServiceCards();
+  const tambahBtn = document.querySelector('.button-17');
+  if (tambahBtn) { tambahBtn.style.cursor = 'pointer'; tambahBtn.onclick = () => navigateTo('tambah-service.html'); }
   const loadMoreBtn = document.querySelector('.button-216');
-  if (loadMoreBtn) {
-    loadMoreBtn.style.cursor = 'pointer';
-    loadMoreBtn.onclick = () => showToast('Semua layanan telah dimuat.', 'info');
-  }
+  if (loadMoreBtn) { loadMoreBtn.style.cursor = 'pointer'; loadMoreBtn.onclick = () => showToast('Semua layanan telah dimuat.', 'info'); }
   const kelolaLayananLink = document.querySelector('.link-227');
-  if (kelolaLayananLink) {
-    kelolaLayananLink.style.cursor = 'pointer';
-    kelolaLayananLink.onclick = () => navigateTo('list-service.html');
-  }
+  if (kelolaLayananLink) { kelolaLayananLink.style.cursor = 'pointer'; kelolaLayananLink.onclick = () => navigateTo('list-service.html'); }
   const kelolaPromoLink = document.querySelector('.link-234');
-  if (kelolaPromoLink) {
-    kelolaPromoLink.style.cursor = 'pointer';
-    kelolaPromoLink.onclick = () => navigateTo('tambah-promo.html');
-  }
+  if (kelolaPromoLink) { kelolaPromoLink.style.cursor = 'pointer'; kelolaPromoLink.onclick = () => navigateTo('tambah-promo.html'); }
   const logoutBtn = document.querySelector('.node-240');
-  if (logoutBtn) {
-    logoutBtn.style.cursor = 'pointer';
-    logoutBtn.onclick = () => {
-      showModal('Logout', 'Apakah Anda yakin ingin keluar?', () => navigateTo('login.html'), 'Logout', 'Batal');
-    };
-  }
-  const searchInput = document.querySelector('.input-49');
-  if (searchInput) {
-    searchInput.style.cursor = 'text';
-    searchInput.onclick = () => {
-      const placeholder = searchInput.querySelector('p');
-      if (placeholder) placeholder.style.opacity = '0.3';
-    };
-  }
+  if (logoutBtn) { logoutBtn.style.cursor = 'pointer'; logoutBtn.onclick = () => showModal('Logout', 'Apakah Anda yakin ingin keluar?', () => navigateTo('login.html'), 'Logout', 'Batal'); }
 }
 
 // ===================== EDIT SERVICE PAGE =====================
 function initEditServicePage() {
-  const simpanBtn = document.querySelector('.button-76');
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
+  const service = id ? getServiceById(id) : null;
+
+  if (service) {
+    document.getElementById('serviceName').value = service.name;
+    document.getElementById('serviceCategory').value = service.category;
+    document.getElementById('servicePrice').value = service.price;
+    document.getElementById('serviceDesc').value = service.desc;
+  }
+
+  const simpanBtn = document.getElementById('btnSimpanPerubahan');
   if (simpanBtn) {
-    simpanBtn.style.cursor = 'pointer';
     simpanBtn.onclick = () => {
+      updateService(id, {
+        name: document.getElementById('serviceName').value.trim(),
+        category: document.getElementById('serviceCategory').value,
+        price: Number(document.getElementById('servicePrice').value.replace(/[^0-9]/g, '')),
+        desc: document.getElementById('serviceDesc').value.trim()
+      });
       showToast('Perubahan layanan berhasil disimpan!', 'success');
-      setTimeout(() => navigateTo('list-service.html'), 1500);
+      setTimeout(() => navigateTo('list-service.html'), 1200);
     };
   }
-  const batalBtn = document.querySelector('.button-79');
-  if (batalBtn) {
-    batalBtn.style.cursor = 'pointer';
-    batalBtn.onclick = () => {
-      showModal('Batalkan Perubahan', 'Perubahan yang belum disimpan akan hilang. Lanjutkan?',
-        () => navigateTo('list-service.html'), 'Ya, Batalkan', 'Kembali');
-    };
-  }
-  const uploadArea = document.querySelector('.border-91');
-  if (uploadArea) {
-    uploadArea.style.cursor = 'pointer';
-    uploadArea.onclick = () => showToast('Pilih file gambar untuk diunggah.', 'info');
-  }
-  const kelolaLayananLink = document.querySelector('.link-109');
-  if (kelolaLayananLink) {
-    kelolaLayananLink.style.cursor = 'pointer';
-    kelolaLayananLink.onclick = () => navigateTo('list-service.html');
-  }
-  const kelolaPromoLink = document.querySelector('.link-116');
-  if (kelolaPromoLink) {
-    kelolaPromoLink.style.cursor = 'pointer';
-    kelolaPromoLink.onclick = () => navigateTo('tambah-promo.html');
-  }
-  const logoutBtn = document.querySelector('.node-122');
-  if (logoutBtn) {
-    logoutBtn.style.cursor = 'pointer';
-    logoutBtn.onclick = () => {
-      showModal('Logout', 'Apakah Anda yakin ingin keluar?', () => navigateTo('login.html'), 'Logout', 'Batal');
-    };
-  }
+  const batalBtn = document.getElementById('btnBatalkanEdit');
+  if (batalBtn) batalBtn.onclick = () => showModal('Batalkan Perubahan', 'Perubahan yang belum disimpan akan hilang. Lanjutkan?', () => navigateTo('list-service.html'), 'Ya, Batalkan', 'Kembali');
 }
 
 // ===================== TAMBAH SERVICE PAGE =====================
 function initTambahServicePage() {
-  const publikasiBtn = document.querySelector('.button-85');
+  const publikasiBtn = document.getElementById('btnSimpanLayanan');
   if (publikasiBtn) {
-    publikasiBtn.style.cursor = 'pointer';
     publikasiBtn.onclick = () => {
-      showToast('Layanan baru berhasil dipublikasikan!', 'success');
-      setTimeout(() => navigateTo('list-service.html'), 1500);
+      const name = document.getElementById('serviceName').value.trim();
+      const category = document.getElementById('serviceCategory').value;
+      const price = document.getElementById('servicePrice').value.replace(/[^0-9]/g, '');
+      const desc = document.getElementById('serviceDesc').value.trim();
+      if (!name || !price) { showToast('Nama layanan dan harga wajib diisi.', 'error'); return; }
+      addService({ name, category, price: Number(price), desc, status: 'ACTIVE' });
+      showToast('Layanan baru berhasil ditambahkan!', 'success');
+      setTimeout(() => navigateTo('list-service.html'), 1200);
     };
   }
-  const batalBtn = document.querySelector('.button-87');
-  if (batalBtn) {
-    batalBtn.style.cursor = 'pointer';
-    batalBtn.onclick = () => {
-      showModal('Batalkan', 'Data yang sudah diisi akan hilang. Lanjutkan?',
-        () => navigateTo('list-service.html'), 'Ya, Batal', 'Kembali');
-    };
-  }
-  const uploadArea = document.querySelector('.overlay-border-47');
-  if (uploadArea) {
-    uploadArea.style.cursor = 'pointer';
-    uploadArea.onclick = () => showToast('Pilih file gambar untuk diunggah (PNG, JPG, maks. 10MB).', 'info');
-  }
-  const kelolaLayananLink = document.querySelector('.link-115');
-  if (kelolaLayananLink) {
-    kelolaLayananLink.style.cursor = 'pointer';
-    kelolaLayananLink.onclick = () => navigateTo('list-service.html');
-  }
-  const kelolaPromoLink = document.querySelector('.link-122');
-  if (kelolaPromoLink) {
-    kelolaPromoLink.style.cursor = 'pointer';
-    kelolaPromoLink.onclick = () => navigateTo('tambah-promo.html');
-  }
-  const logoutBtn = document.querySelector('.node-128');
-  if (logoutBtn) {
-    logoutBtn.style.cursor = 'pointer';
-    logoutBtn.onclick = () => {
-      showModal('Logout', 'Apakah Anda yakin ingin keluar?', () => navigateTo('login.html'), 'Logout', 'Batal');
-    };
-  }
+  const batalBtn = document.getElementById('btnBatalkanLayanan');
+  if (batalBtn) batalBtn.onclick = () => navigateTo('list-service.html');
 }
 
 // ===================== TAMBAH PROMO PAGE =====================

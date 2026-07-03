@@ -443,11 +443,12 @@
     </div>
 
     <nav class="nav-section">
-      <a class="nav-link">
+      <a class="nav-link" onclick="window.location.href='list-service.html'" style="cursor: pointer;">
         <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.7 6.3a4 4 0 0 1-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 1 5.4-5.4l-2.6 2.6-2-2 2.6-2.6z"/></svg>
         Kelola Layanan
       </a>
       <div class="nav-divider"></div>
+      
       <a class="nav-link active">
         <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
         Kelola Promo
@@ -455,7 +456,7 @@
     </nav>
 
     <div class="sidebar-footer">
-      <div class="logout-link">
+      <div class="logout-link" onclick="window.location.href='login.html'">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
         LOGOUT
       </div>
@@ -584,8 +585,8 @@
       </section>
 
       <div class="form-actions">
-        <button type="button" class="btn btn-ghost">Batalkan Perubahan</button>
-        <button type="submit" class="btn btn-primary">Publikasikan</button>
+        <button type="button" class="btn btn-ghost" onclick="window.location.href='list-service.html'">Batalkan Perubahan</button>
+        <button type="button" class="btn btn-primary" onclick="window.location.href='list-service.html'">Simpann</button>
       </div>
 
     </form>
