@@ -1,238 +1,600 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Exported from Figma">
-  <title>Exported Figma Design</title>
-  <link href="https://fonts.googleapis.com/css?family=Montserrat|Inter&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tambah Layanan Baru — Duta Auto Garage</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-app: #0b0f1e;
+    --bg-sidebar: #0a0e1b;
+    --bg-card: #10162a;
+    --bg-input: #0c1122;
+    --border-soft: rgba(255,255,255,0.08);
+    --border-softer: rgba(255,255,255,0.06);
+    --text-heading: #e6e6e6;
+    --text-tan: #d7c3ae;
+    --text-muted: #6b7280;
+    --text-blue: #c5d1f9;
+    --accent-orange: #ffb648;
+    --accent-orange-2: #f5a623;
+    --accent-green: #4ade80;
+    --accent-peach: #ffc887;
+    --sidebar-w: 240px;
+  }
 
-  <link rel="stylesheet" href="styles.css">
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  body{
+    font-family:'Inter', sans-serif;
+    background: var(--bg-app);
+    color: var(--text-heading);
+    min-height:100vh;
+  }
+
+  .app{
+    display:flex;
+    min-height:100vh;
+  }
+
+  /* ---------- SIDEBAR ---------- */
+  .sidebar{
+    width: var(--sidebar-w);
+    flex-shrink:0;
+    background: var(--bg-sidebar);
+    border-right:1px solid var(--border-soft);
+    display:flex;
+    flex-direction:column;
+    padding: 22px 16px;
+    position: sticky;
+    top:0;
+    height:100vh;
+  }
+
+  .sidebar-top{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding: 4px 8px 22px 8px;
+  }
+
+  .sidebar-top .admin-tag{
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.04em;
+    color: var(--accent-orange);
+  }
+
+  .logo-wrap{
+    display:flex;
+    align-items:center;
+    padding-bottom: 20px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--border-softer);
+  }
+
+  .logo-wrap img{
+    height: 40px;
+    width:auto;
+    display:block;
+  }
+
+  .nav-section-label{
+    font-size:10px;
+    letter-spacing:.08em;
+    color: var(--text-muted);
+    font-weight:700;
+    padding: 8px 10px 8px;
+    text-transform:uppercase;
+  }
+
+  .nav-link{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:11px 12px;
+    border-radius:8px;
+    font-size:13.5px;
+    font-weight:600;
+    color: var(--text-tan);
+    text-decoration:none;
+    cursor:pointer;
+    margin-bottom:4px;
+    transition: background .15s ease;
+  }
+
+  .nav-link:hover{
+    background: rgba(255,255,255,0.04);
+  }
+
+  .nav-link.active{
+    background: linear-gradient(90deg, rgba(255,182,72,0.16), rgba(255,182,72,0.05));
+    color: var(--text-heading);
+    box-shadow: inset 3px 0 0 var(--accent-orange);
+  }
+
+  .nav-link .ico{
+    width:16px;
+    height:16px;
+    flex-shrink:0;
+    opacity:.9;
+  }
+
+  .sidebar-spacer{ flex:1; }
+
+  .logout-link{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:11px 12px;
+    border-radius:10px;
+    font-size:11.5px;
+    font-weight:700;
+    letter-spacing:.08em;
+    color: var(--text-blue);
+    text-decoration:none;
+    border:1px solid var(--border-soft);
+    background: rgba(197,209,249,0.04);
+    margin-top:8px;
+    cursor:pointer;
+    transition: background .15s ease, border-color .15s ease;
+  }
+
+  .logout-link:hover{
+    background: rgba(197,209,249,0.08);
+    border-color: rgba(197,209,249,0.3);
+  }
+
+  .logout-link .ico{
+    width:15px;
+    height:15px;
+    flex-shrink:0;
+  }
+
+  /* ---------- MAIN ---------- */
+  .main{
+    flex:1;
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+  }
+
+  .topbar{
+    padding: 18px 32px 16px;
+    border-bottom:1px solid var(--border-soft);
+    background: linear-gradient(180deg, rgba(255,255,255,0.015), transparent);
+  }
+
+  .breadcrumb{
+    font-size:11.5px;
+    color: var(--text-muted);
+    margin-bottom:8px;
+    letter-spacing:.02em;
+  }
+
+  .breadcrumb span.current{
+    color: var(--text-tan);
+  }
+
+  .page-title{
+    font-family:'Montserrat', sans-serif;
+    font-size:22px;
+    font-weight:700;
+    color: var(--text-heading);
+  }
+
+  .content{
+    padding: 26px 32px 48px;
+    display:grid;
+    grid-template-columns: 1.55fr 1fr;
+    gap: 22px;
+    align-items:start;
+  }
+
+  .stack{
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+    min-width:0;
+  }
+
+  /* ---------- CARD ---------- */
+  .card{
+    background: var(--bg-card);
+    border:1px solid var(--border-soft);
+    border-radius:14px;
+    padding: 22px 22px 26px;
+  }
+
+  .card-heading{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    margin-bottom:20px;
+  }
+
+  .card-heading .ico-box{
+    width:22px;
+    height:22px;
+    border-radius:6px;
+    background: rgba(197,209,249,0.12);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color: var(--text-blue);
+    font-size:12px;
+  }
+
+  .card-heading .title{
+    font-size:13.5px;
+    font-weight:700;
+    letter-spacing:.02em;
+    color: var(--text-heading);
+  }
+
+  .field-row{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:16px;
+    margin-bottom:18px;
+  }
+
+  .field{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+
+  .field label{
+    font-size:10.5px;
+    font-weight:700;
+    letter-spacing:.08em;
+    color: var(--text-tan);
+    text-transform:uppercase;
+  }
+
+  .field input[type="text"],
+  .field textarea,
+  .field .select{
+    background: var(--bg-input);
+    border:1px solid var(--border-soft);
+    border-radius:9px;
+    padding: 11px 13px;
+    font-size:13px;
+    color: var(--text-heading);
+    font-family: inherit;
+    outline:none;
+    width:100%;
+    transition: border-color .15s ease;
+  }
+
+  .field input[type="text"]::placeholder,
+  .field textarea::placeholder{
+    color: var(--text-muted);
+  }
+
+  .field input[type="text"]:focus,
+  .field textarea:focus{
+    border-color: var(--accent-orange);
+  }
+
+  .field textarea{
+    resize:vertical;
+    min-height:96px;
+    line-height:1.5;
+  }
+
+  .select{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    color: var(--text-heading);
+    cursor:pointer;
+  }
+
+  .select svg{
+    width:12px;
+    height:12px;
+    color: var(--text-muted);
+    flex-shrink:0;
+  }
+
+  /* upload area */
+  .upload-box{
+    border: 1.5px dashed var(--border-soft);
+    border-radius:12px;
+    padding: 34px 20px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    gap:10px;
+    cursor:pointer;
+    transition: border-color .15s ease, background .15s ease;
+  }
+
+  .upload-box:hover{
+    border-color: var(--accent-orange);
+    background: rgba(255,182,72,0.03);
+  }
+
+  .upload-box .upload-ico{
+    width:34px;
+    height:34px;
+    color: var(--accent-peach);
+    opacity:.85;
+  }
+
+  .upload-box .upload-title{
+    font-size:13px;
+    font-weight:600;
+    color: var(--text-heading);
+  }
+
+  .upload-box .upload-sub{
+    font-size:10.5px;
+    color: var(--text-tan);
+    letter-spacing:.02em;
+  }
+
+  /* ---------- PREVIEW COLUMN ---------- */
+  .preview-label{
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.1em;
+    color: var(--text-blue);
+    margin-bottom:14px;
+  }
+
+  .preview-card{
+    background: var(--bg-card);
+    border:1px solid var(--border-soft);
+    border-radius:16px;
+    padding:16px;
+    box-shadow: 0 20px 40px -20px rgba(0,0,0,0.6);
+  }
+
+  .preview-thumb{
+    position:relative;
+    height:120px;
+    border-radius:11px;
+    background:
+      linear-gradient(135deg, rgba(255,182,72,0.14), rgba(197,209,249,0.06));
+    border:1px solid var(--border-soft);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:16px;
+    overflow:hidden;
+  }
+
+  .preview-thumb .car-ico{
+    width:38px;
+    height:38px;
+    color: var(--accent-peach);
+    opacity:.55;
+  }
+
+  .status-pill{
+    position:absolute;
+    top:10px;
+    right:10px;
+    background: rgba(74,222,128,0.14);
+    color: var(--accent-green);
+    font-size:9.5px;
+    font-weight:800;
+    letter-spacing:.08em;
+    padding:4px 10px;
+    border-radius:20px;
+    border:1px solid rgba(74,222,128,0.35);
+  }
+
+  .preview-title{
+    font-family:'Montserrat', sans-serif;
+    font-size:16px;
+    font-weight:700;
+    color: var(--text-blue);
+    margin-bottom:8px;
+  }
+
+  .preview-desc{
+    font-size:12px;
+    line-height:1.55;
+    color: var(--text-tan);
+    margin-bottom:16px;
+  }
+
+  .preview-footer{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding-top:14px;
+    border-top:1px solid var(--border-softer);
+    margin-bottom:20px;
+  }
+
+  .preview-price{
+    font-size:14px;
+    font-weight:700;
+    color: var(--accent-peach);
+  }
+
+  .preview-duration{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-size:12px;
+    color: var(--text-tan);
+  }
+
+  .preview-duration svg{
+    width:13px;
+    height:13px;
+    opacity:.8;
+  }
+
+  .btn{
+    width:100%;
+    padding:12px;
+    border-radius:9px;
+    font-size:12.5px;
+    font-weight:700;
+    letter-spacing:.05em;
+    text-align:center;
+    border:none;
+    cursor:pointer;
+    font-family:inherit;
+    text-transform:uppercase;
+    transition: filter .15s ease, transform .05s ease;
+  }
+
+  .btn:active{ transform: translateY(1px); }
+
+  .btn-primary{
+    background: linear-gradient(180deg, #ffc574, var(--accent-orange-2));
+    color:#14161b;
+    margin-bottom:10px;
+  }
+
+  .btn-primary:hover{ filter:brightness(1.06); }
+
+  .btn-secondary{
+    background: transparent;
+    border:1px solid var(--border-soft);
+    color: var(--text-heading);
+  }
+
+  .btn-secondary:hover{
+    border-color: rgba(255,255,255,0.25);
+  }
+
+  @media (max-width: 900px){
+    .content{ grid-template-columns: 1fr; }
+    .field-row{ grid-template-columns: 1fr; }
+    .app{ flex-direction:column; }
+    .sidebar{ width:100%; height:auto; position:relative; flex-direction:row; overflow-x:auto; }
+    .sidebar-spacer{ display:none; }
+  }
+</style>
 </head>
 <body>
-<div class="tambah-service-1">
-<div class="node-2">
-<div class="overlay-blur-3"></div>
-<div class="overlay-blur-4"></div>
-</div>
-<div class="container-5">
-<div class="main-content-area-6">
-<div class="scrollable-content-7">
-<div class="node-8">
-<div class="node-9">
-<div class="node-10">
-<div class="heading-3-11">
-<div class="container-12">
-<img src="images/icon-13.svg" class="icon-13" alt="icon" />
-</div>
-<p class="text-14"><span class="text-rgb-226-226-226">Informasi</span></p>
-</div>
-<div class="container-15">
-<div class="container-16">
-<div class="label-17">
-<p class="text-18"><span class="text-rgb-215-195-174">NAMA LAYANAN</span></p>
-</div>
-<div class="input-19">
-<div class="container-20">
-<p class="text-21"><span class="text-rgb-107-114-128">Ganti Oli</span></p>
-</div>
-</div>
-</div>
-<div class="container-22">
-<div class="label-23">
-<p class="text-24"><span class="text-rgb-215-195-174">KATEGORI</span></p>
-</div>
-<div class="options-25">
-<div class="image-clip-26">
-<div class="image-27">
-<img src="images/vector-28.svg" class="vector-28" alt="vector" />
-</div>
-</div>
-<div class="container-29">
-<p class="text-30"><span class="text-rgb-226-226-226">Performance Tuning</span></p>
-</div>
-</div>
-</div>
-</div>
-<div class="label-31">
-<p class="text-32"><span class="text-rgb-215-195-174">HARGA (idr)</span></p>
-<div class="input-33">
-<div class="container-34">
-<p class="text-35"><span class="text-rgb-107-114-128">Rp 500.000</span></p>
-</div>
-</div>
-</div>
-<div class="container-36">
-<div class="label-37">
-<p class="text-38"><span class="text-rgb-215-195-174">DESKRIPSI</span></p>
-</div>
-<div class="textarea-39">
-<div class="container-40">
-<p class="text-41"><span class="text-rgb-107-114-128">Jelaskan aspek teknis layanan dan manfaatnya bagi 
-kendaraan berkinerja tinggi...</span></p>
-</div>
-</div>
-</div>
-</div>
-<div class="image-upload-area-42">
-<div class="heading-3-43">
-<div class="container-44">
-<img src="images/icon-45.svg" class="icon-45" alt="icon" />
-</div>
-<p class="text-46"><span class="text-rgb-226-226-226">Media Layanan</span></p>
-</div>
-<div class="overlay-border-47">
-<div class="container-48">
-<div class="margin-49">
-<img src="images/icon-50.svg" class="icon-50" alt="icon" />
-</div>
-<div class="container-51">
-<p class="text-52"><span class="text-rgb-226-226-226">Klik untuk mengunggah gambar</span></p>
-</div>
-<div class="margin-53">
-<p class="text-54"><span class="text-rgb-215-195-174">PNG, JPG Resolusi Tinggi (Disarankan rasio 16:9)</span></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="node-55">
-<div class="heading-3-56">
-<p class="text-57"><span class="text-rgb-197-209-249">CUSTOMER VIEW PREVIEW</span></p>
-</div>
-<div class="background-border-58">
-<div class="overlay-shadow-59"></div>
-<div class="container-60">
-<div class="overlay-border-61">
-<div class="container-62">
-<div class="node-63">
-<img src="images/vector-64.svg" class="vector-64" alt="vector" />
-<img src="images/vector-65.svg" class="vector-65" alt="vector" />
-<img src="images/vector-66.svg" class="vector-66" alt="vector" />
-<img src="images/vector-67.svg" class="vector-67" alt="vector" />
-<img src="images/vector-68.svg" class="vector-68" alt="vector" />
-</div>
-</div>
-</div>
-<div class="overlay-border-69">
-<p class="text-70"><span class="text-rgb-74-222-128">ACTIVE</span></p>
-</div>
-</div>
-<div class="container-71">
-<div class="heading-4-72">
-<p class="text-73"><span class="text-rgb-217-226-255">Servis Berkala</span></p>
-</div>
-<div class="container-74">
-<p class="text-75"><span class="text-rgb-217-195-173">Perawatan rutin kendaraan untuk menjaga performa mesin tetap optimal, aman, dan hemat bahan bakar.</span></p>
-</div>
-</div>
-<div class="horizontalborder-76">
-<div class="container-77">
-<p class="text-78"><span class="text-rgb-255-200-135">From Rp 350K</span></p>
-</div>
-<div class="container-79">
-<div class="container-80">
-<img src="images/icon-81.svg" class="icon-81" alt="icon" />
-</div>
-<div class="container-82">
-<p class="text-83"><span class="text-rgb-215-195-174">2.5h</span></p>
-</div>
-</div>
-</div>
-</div>
-<div class="node-84">
-<div class="button-85">
-<p class="text-86"><span class="text-rgb-18-20-20">Publikasikan</span></p>
-</div>
-<div class="button-87">
-<p class="text-88"><span class="text-rgb-226-226-226">Batal</span></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="header-top-app-bar-89">
-<div class="container-90">
-<div class="container-91">
-<div class="nav-92">
-<div class="container-93">
-<p class="text-94"><span class="text-rgb-215-195-174">Admin</span></p>
-</div>
-<div class="container-95">
-<img src="images/icon-96.svg" class="icon-96" alt="icon" />
-</div>
-<div class="container-97">
-<p class="text-98"><span class="text-rgb-215-195-174">Kelola Layanan</span></p>
-</div>
-<div class="container-99">
-<img src="images/icon-100.svg" class="icon-100" alt="icon" />
-</div>
-<div class="container-101">
-<p class="text-102"><span class="text-rgb-255-203-138">Layanan Baru</span></p>
-</div>
-</div>
-</div>
-<div class="heading-1-103">
-<p class="text-104"><span class="text-rgb-226-226-226">Tambah Layanan Baru</span></p>
-</div>
-</div>
-</div>
-<div class="node-105"></div>
-<div class="node-106">
-<div class="header-profile-107">
-<div class="container-108">
-<div class="container-109">
-<div class="heading-2-110">
-<p class="text-111"><span class="text-rgb-255-203-138">Admin Duta Auto Garage</span></p>
-</div>
-</div>
-</div>
-<div class="margin-112">
-<div class="container-113"></div>
-</div>
-</div>
-<div class="node-114">
-<div class="link-115">
-<div class="container-116">
-<img src="images/icon-117.svg" class="icon-117" alt="icon" />
-</div>
-<div class="container-118">
-<p class="text-119"><span class="text-rgb-168-185-221">Kelola Layanan</span></p>
-</div>
-</div>
-<div class="margin-120">
-<div class="horizontalborder-121">
-<div class="link-122">
-<div class="node-123">
-<img src="images/vector-124.svg" class="vector-124" alt="vector" />
-</div>
-<div class="container-125">
-<p class="text-126"><span class="text-rgb-215-195-174">Kelola Promo</span></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="container-127">
-<div class="node-128">
-<div class="container-129">
-<div class="node-130">
-<img src="images/vector-131.svg" class="vector-131" alt="vector" />
-</div>
-</div>
-<div class="container-132">
-<div class="container-133">
-<p class="text-134"><span class="text-rgb-212-228-250">LOGOUT</span></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+<div class="app">
 
-<script src="main.js"></script>
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="sidebar">
+    <div class="logo-wrap">
+      <img src="images/logo.png" alt="Duta Auto Garage logo">
+    </div>
+
+    <div class="nav-section-label">Admin</div>
+
+    <a class="nav-link active">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"/><path d="M9 9h1"/><path d="M9 13h6"/><path d="M9 17h6"/></svg>
+      Kelola Layanan
+    </a>
+    <a class="nav-link">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41 12 22l-9-9V4a1 1 0 0 1 1-1h9l9 9a1 1 0 0 1 0 1.41Z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>
+      Kelola Promo
+    </a>
+
+    <div class="sidebar-spacer"></div>
+
+    <a class="logout-link">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      LOGOUT
+    </a>
+  </aside>
+
+  <!-- ================= MAIN ================= -->
+  <div class="main">
+    <div class="topbar">
+      <div class="breadcrumb">Admin &nbsp;›&nbsp; Kelola Layanan &nbsp;›&nbsp; <span class="current">Layanan Baru</span></div>
+      <div class="page-title">Tambah Layanan Baru</div>
+    </div>
+
+    <div class="content">
+      <!-- LEFT COLUMN -->
+      <div class="stack">
+        <section class="card">
+          <div class="card-heading">
+            <div class="ico-box">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            </div>
+            <span class="title">Informasi</span>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label>Nama Layanan</label>
+              <input type="text" placeholder="Ganti Oli">
+            </div>
+            <div class="field">
+              <label>Kategori</label>
+              <div class="select">
+                <span>Performance Tuning</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="field" style="margin-bottom:18px;">
+            <label>Harga (idr)</label>
+            <input type="text" placeholder="Rp 500.000">
+          </div>
+
+          <div class="field">
+            <label>Deskripsi</label>
+            <textarea placeholder="Jelaskan aspek teknis layanan dan manfaatnya bagi kendaraan berkinerja tinggi..."></textarea>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-heading">
+            <div class="ico-box">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            </div>
+            <span class="title">Media Layanan</span>
+          </div>
+
+          <div class="upload-box">
+            <svg class="upload-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M12 12v9"/><path d="m16 16-4-4-4 4"/></svg>
+            <div class="upload-title">Klik untuk mengunggah gambar</div>
+            <div class="upload-sub">PNG, JPG Resolusi Tinggi (Disarankan rasio 16:9)</div>
+          </div>
+        </section>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="stack">
+        <div>
+          <div class="preview-label">CUSTOMER VIEW PREVIEW</div>
+          <div class="preview-card">
+            <div class="preview-thumb">
+              <svg class="car-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14M5 17a2 2 0 0 1-2-2v-2.5a1 1 0 0 1 .3-.71L5 10l1.6-4A2 2 0 0 1 8.5 5h7a2 2 0 0 1 1.9 1.37L19 10l1.7 1.8a1 1 0 0 1 .3.7V15a2 2 0 0 1-2 2M5 17a2 2 0 1 0 4 0m10 0a2 2 0 1 1-4 0m4 0H9"/></svg>
+              <span class="status-pill">ACTIVE</span>
+            </div>
+
+            <div class="preview-title">Servis Berkala</div>
+            <div class="preview-desc">Perawatan rutin kendaraan untuk menjaga performa mesin tetap optimal, aman, dan hemat bahan bakar.</div>
+
+            <div class="preview-footer">
+              <span class="preview-price">From Rp 350K</span>
+              <span class="preview-duration">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                2.5h
+              </span>
+            </div>
+
+            <button class="btn btn-primary">Publikasikan</button>
+            <button class="btn btn-secondary">Batalkan</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
