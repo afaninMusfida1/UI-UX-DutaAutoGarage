@@ -3,6 +3,54 @@
     {
       "source": "/",
       "destination": "/compro/landing-page.html"
+    },
+    {
+      "source": "/admin",
+      "destination": "/admin/auth/login.html"
+    },
+    {
+      "source": "/layanan.html",
+      "destination": "/compro/layanan.html"
+    },
+    {
+      "source": "/reservasi.html",
+      "destination": "/compro/reservasi.html"
+    },
+    {
+      "source": "/tentang-kami.html",
+      "destination": "/compro/tentang-kami.html"
+    },
+    {
+      "source": "/login.html",
+      "destination": "/admin/auth/login.html"
+    },
+    {
+      "source": "/register.html",
+      "destination": "/admin/auth/register.html"
+    },
+    {
+      "source": "/reset-password.html",
+      "destination": "/admin/auth/reset-password.html"
+    },
+    {
+      "source": "/edit-promo.html",
+      "destination": "/admin/edit-promo.html"
+    },
+    {
+      "source": "/edit-service.html",
+      "destination": "/admin/edit-service.html"
+    },
+    {
+      "source": "/list-service.html",
+      "destination": "/admin/list-service.html"
+    },
+    {
+      "source": "/tambah-promo.html",
+      "destination": "/admin/tambah-promo.html"
+    },
+    {
+      "source": "/tambah-service.html",
+      "destination": "/admin/tambah-service.html"
     }
   ]
 }
