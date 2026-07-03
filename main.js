@@ -278,7 +278,7 @@ function initListServicePage() {
   const kelolaLayananLink = document.querySelector('.link-227');
   if (kelolaLayananLink) { kelolaLayananLink.style.cursor = 'pointer'; kelolaLayananLink.onclick = () => navigateTo('list-service.html'); }
   const kelolaPromoLink = document.querySelector('.link-234');
-  if (kelolaPromoLink) { kelolaPromoLink.style.cursor = 'pointer'; kelolaPromoLink.onclick = () => navigateTo('tambah-promo.html'); }
+  if (kelolaPromoLink) { kelolaPromoLink.style.cursor = 'pointer'; kelolaPromoLink.onclick = () => navigateTo('list-promo.html'); }
   const logoutBtn = document.querySelector('.node-240');
   if (logoutBtn) { logoutBtn.style.cursor = 'pointer'; logoutBtn.onclick = () => showModal('Logout', 'Apakah Anda yakin ingin keluar?', () => navigateTo('login.html'), 'Logout', 'Batal'); }
 }
@@ -408,7 +408,7 @@ function initTambahPromoPage() {
   const kelolaPromoLink = document.querySelector('.link-160');
   if (kelolaPromoLink) {
     kelolaPromoLink.style.cursor = 'pointer';
-    kelolaPromoLink.onclick = () => navigateTo('tambah-promo.html');
+    kelolaPromoLink.onclick = () => navigateTo('list-promo.html');
   }
   const logoutBtn = document.querySelector('.node-166');
   if (logoutBtn) {
@@ -502,7 +502,7 @@ function initEditPromoPage() {
   const kelolaPromoLink = document.querySelector('.link-160');
   if (kelolaPromoLink) {
     kelolaPromoLink.style.cursor = 'pointer';
-    kelolaPromoLink.onclick = () => navigateTo('tambah-promo.html');
+    kelolaPromoLink.onclick = () => navigateTo('list-promo.html');
   }
   const logoutBtn = document.querySelector('.node-166');
   if (logoutBtn) {
