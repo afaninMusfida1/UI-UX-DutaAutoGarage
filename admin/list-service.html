@@ -68,11 +68,9 @@ p {
 
 .list-service-1 {
   display: flex;
-  min-height: 100vh;
+  height: 100vh; /* Gunakan height, bukan min-height */
+  overflow: hidden; /* Mencegah scroll pada level root */
   background: var(--bg-app);
-  background-image:
-    radial-gradient(circle at 15% 0%, rgba(255, 203, 138, 0.05), transparent 40%),
-    radial-gradient(circle at 90% 10%, rgba(96, 130, 210, 0.06), transparent 45%);
 }
 
 /* Flip source order: sidebar (.node-218) visually first, content (.main-content-area-2) second */
@@ -81,6 +79,8 @@ p {
   flex: 1;
   min-width: 0;
   padding: 28px 32px 60px;
+  height: 100%;
+  overflow-y: auto; /* Konten yang panjang akan scroll di area ini saja */
 }
 
 .node-218 {
@@ -93,7 +93,8 @@ p {
   flex-direction: column;
   padding: 22px 16px;
   gap: 22px;
-  min-height: 100vh;
+  height: 100%; /* Mengikuti tinggi list-service-1 */
+  overflow-y: auto; /* Jika isi menu banyak, scroll hanya di dalam sidebar */
 }
 
 .canvas-3 {
