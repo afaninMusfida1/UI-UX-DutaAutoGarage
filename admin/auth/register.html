@@ -1,150 +1,405 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Exported from Figma">
-  <title>Exported Figma Design</title>
-  <link href="https://fonts.googleapis.com/css?family=Montserrat|Inter&display=swap" rel="stylesheet">
+  <title>Register - DUTA Auto Garage</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-navy: #060B14;
+      --bg-input: #15171C;
+      --border-input: #262932;
+      --gold-primary: #F7B045;
+      --gold-light: #FFC880;
+      --text-white: #E2E2E2;
+      --text-gray: #9F8E7A;
+      --text-dark: #3A2303;
+      
+      --font-heading: 'Montserrat', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
 
-  <link rel="stylesheet" href="styles.css">
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-navy);
+      color: var(--text-white);
+      min-height: 100vh;
+      display: flex;
+      overflow-x: hidden;
+    }
+
+    /* ===== Layout Utama ===== */
+    .split-layout {
+      display: flex;
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    /* ===== Bagian Kiri (Informasi & Gambar) ===== */
+    .left-pane {
+      position: relative;
+      flex: 1.1;
+      background-color: #111;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 60px;
+      overflow: hidden;
+    }
+
+    .bg-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    /* Overlay gelap untuk gambar */
+    .left-pane::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(6, 11, 20, 0.7) 0%, rgba(6, 11, 20, 0.95) 100%);
+      z-index: 1;
+    }
+
+    .left-content-top,
+    .left-content-bottom {
+      position: relative;
+      z-index: 2;
+    }
+
+    .brand-title {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 26px;
+      color: var(--gold-light);
+      margin-bottom: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    .brand-subtitle {
+      font-size: 11px;
+      font-weight: 600;
+      color: #D7C3AE;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .prima-title {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 24px;
+      color: #FFFFFF;
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+    }
+
+    .prima-desc {
+      font-size: 14px;
+      color: #D7C3AE;
+      line-height: 1.6;
+      max-width: 400px;
+      margin-bottom: 30px;
+    }
+
+    .since-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .since-divider .line {
+      height: 1px;
+      width: 40px;
+      background-color: var(--gold-light);
+    }
+
+    .since-divider .text {
+      font-family: var(--font-heading);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gold-light);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    /* ===== Bagian Kanan (Form Register) ===== */
+    .right-pane {
+      flex: 1;
+      background-color: var(--bg-navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .register-container {
+      width: 100%;
+      max-width: 440px;
+    }
+
+    /* Header Form */
+    .register-header {
+      margin-bottom: 36px;
+    }
+
+    .register-header h1 {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 12px;
+    }
+
+    .register-header p {
+      font-size: 14px;
+      color: #D7C3AE;
+      line-height: 1.5;
+    }
+
+    /* Form Styles */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-gray);
+      margin-bottom: 8px;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 16px;
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: var(--text-gray);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      pointer-events: none;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="password"] {
+      width: 100%;
+      background-color: var(--bg-input);
+      border: 1px solid var(--border-input);
+      color: #FFFFFF;
+      font-family: var(--font-body);
+      font-size: 14px;
+      padding: 14px 16px 14px 44px; /* Padding kiri lebih besar untuk ikon */
+      border-radius: 6px;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    input:focus {
+      border-color: var(--text-gray);
+      background-color: #1A1C23;
+    }
+
+    input::placeholder {
+      color: #55585E;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 16px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-gray);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+    
+    .toggle-password svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    /* Tombol Register */
+    .btn-register {
+      width: 100%;
+      background-color: var(--gold-primary);
+      color: var(--text-dark);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+      margin-top: 12px;
+      margin-bottom: 24px;
+    }
+
+    .btn-register:hover {
+      background-color: #f8bd63;
+    }
+
+    .btn-register:active {
+      transform: scale(0.98);
+    }
+
+    /* Footer / Login Link */
+    .login-link {
+      text-align: center;
+      font-size: 13px;
+      color: #D7C3AE;
+    }
+
+    .login-link a {
+      color: var(--gold-light);
+      text-decoration: none;
+      font-weight: 600;
+      margin-left: 4px;
+    }
+
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+
+    /* ===== Responsif ===== */
+    @media (max-width: 900px) {
+      .split-layout {
+        flex-direction: column;
+      }
+      .left-pane {
+        padding: 40px;
+        min-height: 350px;
+        flex: none;
+      }
+      .right-pane {
+        padding: 40px 20px;
+      }
+      .prima-desc {
+        margin-bottom: 20px;
+      }
+    }
+  </style>
 </head>
 <body>
-<div class="node-1">
-<div class="node-2">
-<div class="node-3">
-<div class="node-4">
-<img src="images/image-5.png" class="image-5" alt="image" />
-<div class="gradient-6"></div>
-</div>
-<div class="header-content-7">
-<div class="heading-1-8">
-<p class="text-9"><span class="text-rgb-255-200-128">DUTA AUTO GARAGE</span></p>
-</div>
-<div class="container-10">
-<p class="text-11"><span class="text-rgb-215-195-174">BENGKEL TEPERCAYA, LAYANAN PRIMA</span></p>
-</div>
-</div>
-<div class="node-12">
-<div class="heading-2-13">
-<p class="text-14"><span class="text-rgb-226-226-226">P.R.I.M.A</span></p>
-</div>
-<div class="container-15">
-<p class="text-16"><span class="text-rgb-215-195-174">Solusi servis kendaraan lengkap dengan teknisi berpengalaman, peralatan modern, dan pelayanan yang mengutamakan kualitas.</span></p>
-</div>
-<div class="container-17">
-<div class="horizontal-divider-18"></div>
-<div class="container-19">
-<p class="text-20"><span class="text-rgb-255-200-128">Sejak 2015</span></p>
-</div>
-</div>
-</div>
-</div>
-<div class="node-21">
-<div class="container-22">
-<div class="header-23">
-<div class="heading-2-24">
-<p class="text-25"><span class="text-rgb-226-226-226">Buat Akun</span></p>
-</div>
-<div class="container-26">
-<p class="text-27"><span class="text-rgb-215-195-174">Masukkan detail teknis Anda untuk mendaftarkan profil kendaraan Anda.</span></p>
-</div>
-</div>
-<div class="form-28">
-<div class="full-name-field-29">
-<div class="label-30">
-<p class="text-31"><span class="text-rgb-159-142-122">Nama Lengkap</span></p>
-</div>
-<div class="node-32">
-<div class="container-33">
-<img src="images/icon-34.svg" class="icon-34" alt="icon" />
-</div>
-<div class="input-35">
-<div class="container-36">
-<p class="text-37"><span class="text-rgb-51-53-53">admin</span></p>
-</div>
-</div>
-</div>
-</div>
-<div class="email-field-38">
-<div class="label-39">
-<p class="text-40"><span class="text-rgb-159-142-122">Alamat Email</span></p>
-</div>
-<div class="node-41">
-<div class="container-42">
-<img src="images/icon-43.svg" class="icon-43" alt="icon" />
-</div>
-<div class="input-44">
-<div class="container-45">
-<p class="text-46"><span class="text-rgb-51-53-53">admin@duta.com</span></p>
-</div>
-</div>
-</div>
-</div>
-<div class="phone-number-field-47">
-<div class="label-48">
-<p class="text-49"><span class="text-rgb-159-142-122">Nomor Telp.</span></p>
-</div>
-<div class="node-50">
-<div class="container-51">
-<img src="images/icon-52.svg" class="icon-52" alt="icon" />
-</div>
-<div class="input-53">
-<div class="container-54">
-<p class="text-55"><span class="text-rgb-51-53-53">(+62)000- 000-000</span></p>
-</div>
-</div>
-</div>
-</div>
-<div class="password-field-56">
-<div class="label-57">
-<p class="text-58"><span class="text-rgb-159-142-122">Password</span></p>
-</div>
-<div class="node-59">
-<div class="container-60">
-<img src="images/icon-61.svg" class="icon-61" alt="icon" />
-</div>
-<div class="input-62">
-<div class="container-63">
-<p class="text-64"><span class="text-rgb-51-53-53">••••••••</span></p>
-</div>
-</div>
-<div class="button-65">
-<div class="container-66">
-<img src="images/icon-67.svg" class="icon-67" alt="icon" />
-</div>
-</div>
-</div>
-</div>
-<div class="node-68">
-<div class="label-69">
-<p class="text-70"><span class="text-rgb-159-142-122">Konfirmasi Password</span></p>
-</div>
-<div class="node-71">
-<div class="container-72">
-<img src="images/icon-73.svg" class="icon-73" alt="icon" />
-</div>
-<div class="input-74">
-<div class="container-75">
-<p class="text-76"><span class="text-rgb-51-53-53">••••••••</span></p>
-</div>
-</div>
-</div>
-</div>
-<div class="primary-cta-button-77">
-<div class="button-shadow-78"></div>
-<p class="text-79"><span class="text-rgb-100-64-0">Buat akun</span></p>
-</div>
-<div class="footer-bottom-links-80">
-<p class="text-81"><span class="text-rgb-215-195-174">Sudah punya akun? </span><span class="text-rgb-255-200-128">Login</span></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
 
-<script src="main.js"></script>
+  <div class="split-layout">
+    
+    <div class="left-pane">
+      <img src="images/image-5.png" alt="Bengkel Duta Auto Garage" class="bg-image">
+      
+      <div class="left-content-top">
+        <h1 class="brand-title">DUTA AUTO GARAGE</h1>
+        <p class="brand-subtitle">BENGKEL TEPERCAYA, LAYANAN PRIMA</p>
+      </div>
+
+      <div class="left-content-bottom">
+        <h2 class="prima-title">P.R.I.M.A</h2>
+        <p class="prima-desc">Solusi servis kendaraan lengkap dengan teknisi berpengalaman, peralatan modern, dan pelayanan yang mengutamakan kualitas.</p>
+        <div class="since-divider">
+          <span class="line"></span>
+          <span class="text">SEJAK 2015</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-pane">
+      <div class="register-container">
+        
+        <div class="register-header">
+          <h1>Buat Akun</h1>
+          <p>Masukkan detail teknis Anda untuk mendaftarkan profil kendaraan Anda.</p>
+        </div>
+
+        <form action="#" method="POST">
+          
+          <div class="form-group">
+            <label for="fullname">Nama Lengkap</label>
+            <div class="input-wrapper">
+              <svg class="input-icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              <input type="text" id="fullname" placeholder="admin" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Alamat Email</label>
+            <div class="input-wrapper">
+              <svg class="input-icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              <input type="email" id="email" placeholder="admin@duta.com" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Nomor Telp.</label>
+            <div class="input-wrapper">
+              <svg class="input-icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              <input type="tel" id="phone" placeholder="(+62) 000-000-000" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="input-wrapper">
+              <svg class="input-icon" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              <input type="password" id="password" placeholder="••••••••" required>
+              <button type="button" class="toggle-password" aria-label="Toggle password visibility">
+                <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="confirm-password">Konfirmasi Password</label>
+            <div class="input-wrapper">
+              <svg class="input-icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+              <input type="password" id="confirm-password" placeholder="••••••••" required>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-register">Buat Akun</button>
+        </form>
+
+        <div class="login-link">
+          Sudah punya akun? <a href="#">Login</a>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
 </body>
 </html>
