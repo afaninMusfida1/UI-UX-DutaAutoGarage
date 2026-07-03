@@ -45,6 +45,10 @@
       "destination": "/admin/list-service.html"
     },
     {
+      "source": "/list-promo.html",
+      "destination": "/admin/list-promo.html"
+    },
+    {
       "source": "/tambah-promo.html",
       "destination": "/admin/tambah-promo.html"
     },
