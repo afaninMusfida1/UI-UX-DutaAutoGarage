@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
   <style>
-    /* ===<<<<<<< HEAD
     /* ===== CSS LENGKAP SEPERTI ASLI ===== */
     :root {
       --bg-navy: #050A14;
@@ -50,10 +49,9 @@
       position: relative;
       flex: 1.3;
       background-color: #111;
-      overflow: hidden; /* Mencegah gambar meluber */
+      overflow: hidden;
     }
 
-    /* Styling untuk tag <img> agar berfungsi layaknya background-cover */
     .bg-image {
       position: absolute;
       top: 0;
@@ -64,7 +62,6 @@
       z-index: 0;
     }
 
-    /* Gradient overlay agar menyatu dengan background kanan */
     .left-pane::after {
       content: '';
       position: absolute;
@@ -161,11 +158,12 @@
     }
 
     input[type="email"],
-    input[type="password"] {
+    input[type="password"],
+    input[type="text"] {
       width: 100%;
       background-color: var(--bg-input);
       border: 1px solid transparent;
-      color: var(--text-gray);
+      color: var(--text-white);
       font-family: var(--font-body);
       font-size: 14px;
       padding: 14px 16px;
@@ -174,9 +172,9 @@
       transition: border 0.3s ease;
     }
     input[type="email"]:focus,
-    input[type="password"]:focus {
+    input[type="password"]:focus,
+    input[type="text"]:focus {
       border-color: #374151;
-      color: var(--text-white);
     }
 
     input::placeholder {
@@ -271,7 +269,7 @@
     /* Responsif untuk layar kecil */
     @media (max-width: 900px) {
       .left-pane {
-        display: none; /* Sembunyikan gambar pada mobile */
+        display: none;
       }
       .right-pane {
         padding: 40px;
@@ -304,7 +302,8 @@
           <p>Masuk untuk mengakses akun bengkel Anda dan mengelola layanan kendaraan dengan mudah.</p>
         </div>
 
-        <form action="#" method="POST">
+        <!-- Tambahkan ID form-login di sini -->
+        <form id="form-login" action="#" method="POST">
           
           <div class="form-group">
             <div class="label-row">
@@ -317,11 +316,12 @@
           <div class="form-group">
             <div class="label-row">
               <label for="password">Password</label>
-              <a href="#" class="forgot-link">Lupa Password?</a>
+              <a href="reset-password.html" class="forgot-link">Lupa Password?</a>
             </div>
             <div class="input-wrapper">
+              <!-- Tambahkan ID pada field password -->
               <input type="password" id="password" placeholder="••••••••" required>
-              <button type="button" class="toggle-password" aria-label="Toggle password visibility">
+              <button type="button" id="btn-toggle-password" class="toggle-password" aria-label="Toggle password visibility">
                 <svg viewBox="0 0 24 24">
                   <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
                 </svg>
@@ -345,3 +345,30 @@
 
   </div>
 
+  <!-- Script untuk Navigasi & Toggle Password -->
+  <script>
+    // 1. Script untuk mengarahkan ke halaman list-service.html setelah login
+    document.getElementById('form-login').addEventListener('submit', function(event) {
+      event.preventDefault(); // Mencegah halaman reload bawaan form
+      
+      // Mengarahkan ke list-service berdasarkan konfigurasi vercel.json kita sebelumnya
+      // Jika kamu mengetes secara lokal di komputermu (bukan di vercel), 
+      // kamu mungkin perlu mengubahnya menjadi '../list-service.html'
+      window.location.href = '/list-service.html'; 
+    });
+
+    // 2. Script tambahan untuk memfungsikan icon mata (Show/Hide Password)
+    const togglePassword = document.getElementById('btn-toggle-password');
+    const passwordInput = document.getElementById('password');
+
+    togglePassword.addEventListener('click', function () {
+      // Cek tipe input saat ini
+      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+      
+      // Ubah warna icon sedikit saat diklik sebagai feedback visual
+      this.style.color = type === 'password' ? 'var(--text-gray)' : 'var(--text-white)';
+    });
+  </script>
+</body>
+</html>
