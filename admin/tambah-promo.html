@@ -29,31 +29,41 @@
 
   *{ box-sizing: border-box; margin:0; padding:0; }
 
-  body{
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text-bright);
-    font-size: 14px;
-    line-height: 1.4;
+  body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text-bright);
+      font-size: 14px;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center; /* Memastikan konten selalu di tengah secara horizontal */
+      align-items: center;     /* Memastikan konten di tengah secara vertikal */
   }
 
-  .app{
-    display: flex;
-    min-height: 100vh;
-    max-width: 1180px;
-    margin: 0 auto;
-    background: var(--bg);
+  .app {
+      display: flex;
+      width: 100vw;             /* Menggunakan 95% lebar layar */
+      max-width: 1440px;       /* Maksimal lebar agar tidak terlalu lebar */
+      height: 100vh;            /* Menggunakan 95% tinggi layar */
+      background: var(--bg);
+      border: 0px solid var(--card-border); /* Bingkai tipis agar terlihat seperti di image_f927a3.png */
+      border-radius: 0px;     /* Sedikit lengkungan di pojok */
+      overflow: hidden;        /* Penting agar isi tidak keluar dari border-radius */
+      margin: auto;
   }
 
   /* ---------------- SIDEBAR ---------------- */
-  .sidebar{
-    width: 240px;
-    flex-shrink: 0;
-    background: var(--panel);
-    border-right: 1px solid var(--card-border);
-    display: flex;
-    flex-direction: column;
-    padding: 22px 16px;
+  .sidebar {
+      width: 240px;
+      flex-shrink: 0;
+      background: var(--panel);
+      border-right: 1px solid var(--card-border);
+      display: flex;
+      flex-direction: column;
+      padding: 22px 16px;
+      height: 100vh; /* Buat sidebar setinggi layar */
   }
 
   .sidebar-logo{
@@ -144,10 +154,12 @@
   .logout-link svg{ width: 15px; height: 15px; }
 
   /* ---------------- MAIN CONTENT ---------------- */
-  .main{
-    flex: 1;
-    padding: 28px 36px 60px 36px;
-    min-width: 0;
+  .main {
+      flex: 1;
+      padding: 28px 36px 60px 36px;
+      overflow-y: auto; /* Jika konten panjang, hanya bagian ini yang scroll */
+      height: 100vh; /* Sesuaikan dengan tinggi layar */
+      min-width: 0;
   }
 
   .breadcrumb{
