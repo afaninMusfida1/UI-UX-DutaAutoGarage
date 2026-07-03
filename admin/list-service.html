@@ -113,9 +113,26 @@ p {
   border-bottom: 1px solid var(--border-subtle);
 }
 
+.sidebar-brand-row {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.sidebar-logo {
+  width: 78px;
+  height: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
 .container-220 {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
 }
 
@@ -126,33 +143,10 @@ p {
 
 .heading-2-222 .text-223 span {
   font-family: var(--font-heading);
-  font-weight: 700;
+  font-weight: 500;
   font-size: 15px;
   letter-spacing: 0.02em;
   color: var(--text-accent);
-}
-
-.header-profile-219 .container-220::before {
-  content: "";
-}
-
-.header-profile-219 {
-  position: relative;
-}
-
-.header-profile-219::before {
-  content: "DUTA";
-  display: block;
-  font-family: var(--font-heading);
-  font-weight: 800;
-  font-size: 20px;
-  letter-spacing: 0.06em;
-  color: #ffffff;
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 4px;
 }
 
 .margin-224 {
@@ -737,12 +731,7 @@ p {
 }
 
 /* ============================================================
-   Icon color inheritance (img uses currentColor via inline SVG,
-   but <img src> can't inherit color directly — use filter trick
-   as a practical fallback isn't reliable per-color, so we render
-   icons already colored per context using CSS custom property
-   is not possible on <img>. Instead icons are neutral and we
-   apply opacity/blend for contrast.)
+   Icon color inheritance
    ============================================================ */
 
 img[class^="icon-"], img[class^="vector-"] {
@@ -1197,15 +1186,15 @@ Balancing untuk memastikan presisi…</span></p>
 </div>
 <div class="node-218">
 <div class="header-profile-219">
+<div class="sidebar-brand-row">
+<img class="sidebar-logo" alt="Duta Auto Garage" src="../images/logo.png" />
 <div class="container-220">
 <div class="container-221">
 <div class="heading-2-222">
-<p class="text-223"><span class="text-rgb-255-203-138">Admin Duta Auto Garage</span></p>
+<p class="text-223"><span class="text-rgb-255-203-138">Admin</span></p>
 </div>
 </div>
 </div>
-<div class="margin-224">
-<div class="container-225"></div>
 </div>
 </div>
 <div class="node-226">

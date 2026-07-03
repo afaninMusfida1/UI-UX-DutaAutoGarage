@@ -1,22 +1,14 @@
-/**
- * DUTA AUTO GARAGE - Main JavaScript
- * Handles all interactive functionality across all pages
- */
+// ============================================================
+// DUTA AUTO GARAGE - Main JavaScript
+// ============================================================
 
-// ============================================================
-// NAVIGATION HELPERS
-// ============================================================
 function navigateTo(page) {
   window.location.href = page;
 }
 
-// ============================================================
-// TOAST / NOTIFICATION SYSTEM
-// ============================================================
 function showToast(message, type = 'success') {
   const existing = document.querySelector('.duta-toast');
   if (existing) existing.remove();
-
   const toast = document.createElement('div');
   toast.className = 'duta-toast';
   toast.style.cssText = `
@@ -33,13 +25,9 @@ function showToast(message, type = 'success') {
   setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 3000);
 }
 
-// ============================================================
-// MODAL SYSTEM
-// ============================================================
 function showModal(title, message, onConfirm, confirmText = 'Konfirmasi', cancelText = 'Batal') {
   const existing = document.querySelector('.duta-modal-overlay');
   if (existing) existing.remove();
-
   const overlay = document.createElement('div');
   overlay.className = 'duta-modal-overlay';
   overlay.style.cssText = `
@@ -64,25 +52,19 @@ function showModal(title, message, onConfirm, confirmText = 'Konfirmasi', cancel
     </div>
   `;
   document.body.appendChild(overlay);
-
   overlay.querySelector('#modal-cancel').onclick = () => overlay.remove();
   overlay.querySelector('#modal-confirm').onclick = () => { overlay.remove(); if (onConfirm) onConfirm(); };
   overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
 }
 
-// ============================================================
-// LANDING PAGE (landing-page.html)
-// ============================================================
+// ===================== LANDING PAGE =====================
 function initLandingPage() {
-  // Nav links
   const navLinks = document.querySelectorAll('.nav-63 .link-67, .nav-63 .link-69, .nav-63 .link-71');
   const pages = ['landing-page.html', 'layanan.html', 'tentang-kami.html'];
   navLinks.forEach((link, i) => {
     link.style.cursor = 'pointer';
     link.onclick = () => navigateTo(pages[i]);
   });
-
-  // Booking buttons
   document.querySelectorAll('.property-1-default').forEach(btn => {
     btn.style.cursor = 'pointer';
     btn.onclick = () => {
@@ -90,8 +72,6 @@ function initLandingPage() {
       setTimeout(() => window.open('https://wa.me/6285713004631?text=Halo%2C%20saya%20ingin%20booking%20servis%20di%20Duta%20Auto%20Garage', '_blank'), 1000);
     };
   });
-
-  // FAQ accordion
   document.querySelectorAll('.details-163, .details-169, .details-175').forEach(detail => {
     const summary = detail.querySelector('.slot-summary-164, .slot-summary-170, .slot-summary-176');
     if (!summary) return;
@@ -101,7 +81,6 @@ function initLandingPage() {
     summary.onclick = () => {
       open = !open;
       if (icon) icon.style.transform = open ? 'rotate(180deg)' : 'rotate(0deg)';
-      // Show/hide content answer
       let answer = detail.querySelector('.faq-answer');
       if (!answer && open) {
         answer = document.createElement('div');
@@ -120,8 +99,6 @@ function initLandingPage() {
       }
     };
   });
-
-  // WhatsApp links
   document.querySelectorAll('.link-57, .link-59, .link-61, .link-67, .link-69, .link-71').forEach(link => {
     if (link.querySelector && link.querySelector('.text-62')) {
       link.style.cursor = 'pointer';
@@ -130,11 +107,8 @@ function initLandingPage() {
   });
 }
 
-// ============================================================
-// LAYANAN PAGE (layanan.html)
-// ============================================================
+// ===================== LAYANAN PAGE =====================
 function initLayananPage() {
-  // Nav
   const nav3 = document.querySelector('.nav-3');
   if (nav3) {
     const links = nav3.querySelectorAll('.link-7, .link-9, .link-11');
@@ -144,8 +118,6 @@ function initLayananPage() {
       link.onclick = () => navigateTo(pages[i]);
     });
   }
-
-  // Booking button (nav)
   document.querySelectorAll('.property-1-default').forEach(btn => {
     btn.style.cursor = 'pointer';
     btn.onclick = () => {
@@ -153,15 +125,11 @@ function initLayananPage() {
       setTimeout(() => window.open('https://wa.me/6285713004631?text=Halo%2C%20saya%20ingin%20reservasi%20layanan', '_blank'), 1000);
     };
   });
-
-  // WhatsApp konsultasi
   const waLink = document.querySelector('.link-383');
   if (waLink) {
     waLink.style.cursor = 'pointer';
     waLink.onclick = () => window.open('https://wa.me/6285713004631?text=Halo%2C%20saya%20ingin%20konsultasi%20teknis', '_blank');
   }
-
-  // Lihat Layanan Kami
   const lihatLayanan = document.querySelector('.link-387');
   if (lihatLayanan) {
     lihatLayanan.style.cursor = 'pointer';
@@ -169,11 +137,8 @@ function initLayananPage() {
   }
 }
 
-// ============================================================
-// TENTANG KAMI PAGE (tentang-kami.html)
-// ============================================================
+// ===================== TENTANG KAMI PAGE =====================
 function initTentangKamiPage() {
-  // Nav
   const nav3 = document.querySelector('.nav-3');
   if (nav3) {
     const links = nav3.querySelectorAll('.link-7, .link-9, .link-11');
@@ -183,8 +148,6 @@ function initTentangKamiPage() {
       link.onclick = () => navigateTo(pages[i]);
     });
   }
-
-  // Booking button
   document.querySelectorAll('.property-1-default').forEach(btn => {
     btn.style.cursor = 'pointer';
     btn.onclick = () => {
@@ -192,15 +155,11 @@ function initTentangKamiPage() {
       setTimeout(() => window.open('https://wa.me/6285713004631', '_blank'), 1000);
     };
   });
-
-  // WhatsApp konsultasi
   const waLink = document.querySelector('.link-163');
   if (waLink) {
     waLink.style.cursor = 'pointer';
     waLink.onclick = () => window.open('https://wa.me/6285713004631', '_blank');
   }
-
-  // Lihat Layanan Kami
   const lihatLayanan = document.querySelector('.link-167');
   if (lihatLayanan) {
     lihatLayanan.style.cursor = 'pointer';
@@ -208,25 +167,18 @@ function initTentangKamiPage() {
   }
 }
 
-// ============================================================
-// LIST SERVICE PAGE (list-service.html)
-// ============================================================
+// ===================== LIST SERVICE PAGE =====================
 function initListServicePage() {
-  // Tambah Layanan Baru button
   const tambahBtn = document.querySelector('.button-17');
   if (tambahBtn) {
     tambahBtn.style.cursor = 'pointer';
     tambahBtn.onclick = () => navigateTo('tambah-service.html');
   }
-
-  // Edit buttons (icon pencil - button-84, 109, 134, 159, 184, 209)
   const editBtns = document.querySelectorAll('.button-84, .button-109, .button-134, .button-159, .button-184, .button-209');
   editBtns.forEach(btn => {
     btn.style.cursor = 'pointer';
     btn.onclick = () => navigateTo('edit-service.html');
   });
-
-  // Delete buttons (trash icon - button-87, 112, 137, 162, 187, 212)
   const deleteBtns = document.querySelectorAll('.button-87, .button-112, .button-137, .button-162, .button-187, .button-212');
   deleteBtns.forEach(btn => {
     btn.style.cursor = 'pointer';
@@ -240,15 +192,11 @@ function initListServicePage() {
       );
     };
   });
-
-  // Load more button
   const loadMoreBtn = document.querySelector('.button-216');
   if (loadMoreBtn) {
     loadMoreBtn.style.cursor = 'pointer';
     loadMoreBtn.onclick = () => showToast('Semua layanan telah dimuat.', 'info');
   }
-
-  // Sidebar navigation
   const kelolaLayananLink = document.querySelector('.link-227');
   if (kelolaLayananLink) {
     kelolaLayananLink.style.cursor = 'pointer';
@@ -259,8 +207,6 @@ function initListServicePage() {
     kelolaPromoLink.style.cursor = 'pointer';
     kelolaPromoLink.onclick = () => navigateTo('tambah-promo.html');
   }
-
-  // Logout
   const logoutBtn = document.querySelector('.node-240');
   if (logoutBtn) {
     logoutBtn.style.cursor = 'pointer';
@@ -268,8 +214,6 @@ function initListServicePage() {
       showModal('Logout', 'Apakah Anda yakin ingin keluar?', () => navigateTo('login.html'), 'Logout', 'Batal');
     };
   }
-
-  // Search input
   const searchInput = document.querySelector('.input-49');
   if (searchInput) {
     searchInput.style.cursor = 'text';
@@ -280,11 +224,8 @@ function initListServicePage() {
   }
 }
 
-// ============================================================
-// EDIT SERVICE PAGE (edit-service.html)
-// ============================================================
+// ===================== EDIT SERVICE PAGE =====================
 function initEditServicePage() {
-  // Simpan Perubahan button
   const simpanBtn = document.querySelector('.button-76');
   if (simpanBtn) {
     simpanBtn.style.cursor = 'pointer';
@@ -293,8 +234,6 @@ function initEditServicePage() {
       setTimeout(() => navigateTo('list-service.html'), 1500);
     };
   }
-
-  // Batalkan button
   const batalBtn = document.querySelector('.button-79');
   if (batalBtn) {
     batalBtn.style.cursor = 'pointer';
@@ -303,15 +242,11 @@ function initEditServicePage() {
         () => navigateTo('list-service.html'), 'Ya, Batalkan', 'Kembali');
     };
   }
-
-  // File upload area
   const uploadArea = document.querySelector('.border-91');
   if (uploadArea) {
     uploadArea.style.cursor = 'pointer';
     uploadArea.onclick = () => showToast('Pilih file gambar untuk diunggah.', 'info');
   }
-
-  // Sidebar
   const kelolaLayananLink = document.querySelector('.link-109');
   if (kelolaLayananLink) {
     kelolaLayananLink.style.cursor = 'pointer';
@@ -322,8 +257,6 @@ function initEditServicePage() {
     kelolaPromoLink.style.cursor = 'pointer';
     kelolaPromoLink.onclick = () => navigateTo('tambah-promo.html');
   }
-
-  // Logout
   const logoutBtn = document.querySelector('.node-122');
   if (logoutBtn) {
     logoutBtn.style.cursor = 'pointer';
@@ -333,11 +266,8 @@ function initEditServicePage() {
   }
 }
 
-// ============================================================
-// TAMBAH SERVICE PAGE (tambah-service.html)
-// ============================================================
+// ===================== TAMBAH SERVICE PAGE =====================
 function initTambahServicePage() {
-  // Publikasikan button
   const publikasiBtn = document.querySelector('.button-85');
   if (publikasiBtn) {
     publikasiBtn.style.cursor = 'pointer';
@@ -346,8 +276,6 @@ function initTambahServicePage() {
       setTimeout(() => navigateTo('list-service.html'), 1500);
     };
   }
-
-  // Batal button
   const batalBtn = document.querySelector('.button-87');
   if (batalBtn) {
     batalBtn.style.cursor = 'pointer';
@@ -356,15 +284,11 @@ function initTambahServicePage() {
         () => navigateTo('list-service.html'), 'Ya, Batal', 'Kembali');
     };
   }
-
-  // File upload area
   const uploadArea = document.querySelector('.overlay-border-47');
   if (uploadArea) {
     uploadArea.style.cursor = 'pointer';
     uploadArea.onclick = () => showToast('Pilih file gambar untuk diunggah (PNG, JPG, maks. 10MB).', 'info');
   }
-
-  // Sidebar
   const kelolaLayananLink = document.querySelector('.link-115');
   if (kelolaLayananLink) {
     kelolaLayananLink.style.cursor = 'pointer';
@@ -375,8 +299,6 @@ function initTambahServicePage() {
     kelolaPromoLink.style.cursor = 'pointer';
     kelolaPromoLink.onclick = () => navigateTo('tambah-promo.html');
   }
-
-  // Logout
   const logoutBtn = document.querySelector('.node-128');
   if (logoutBtn) {
     logoutBtn.style.cursor = 'pointer';
@@ -386,11 +308,8 @@ function initTambahServicePage() {
   }
 }
 
-// ============================================================
-// TAMBAH PROMO PAGE (tambah-promo.html)
-// ============================================================
+// ===================== TAMBAH PROMO PAGE =====================
 function initTambahPromoPage() {
-  // Add Another Feature button
   const addFeatureBtn = document.querySelector('.button-75');
   if (addFeatureBtn) {
     addFeatureBtn.style.cursor = 'pointer';
@@ -414,15 +333,11 @@ function initTambahPromoPage() {
       showToast('Field fitur baru ditambahkan.', 'success');
     };
   }
-
-  // Banner upload area
   const bannerUpload = document.querySelector('.background-border-85');
   if (bannerUpload) {
     bannerUpload.style.cursor = 'pointer';
     bannerUpload.onclick = () => showToast('Pilih file gambar banner (PNG/JPG, 1200x600px).', 'info');
   }
-
-  // Toggle Active Status
   const toggleActive = document.querySelector('.label-107');
   if (toggleActive) {
     toggleActive.style.cursor = 'pointer';
@@ -434,8 +349,6 @@ function initTambahPromoPage() {
       showToast(activeOn ? 'Status aktif: Visible to all users.' : 'Status dinonaktifkan.', 'info');
     };
   }
-
-  // Toggle Featured Promo
   const toggleFeatured = document.querySelector('.label-116');
   if (toggleFeatured) {
     toggleFeatured.style.cursor = 'pointer';
@@ -447,8 +360,6 @@ function initTambahPromoPage() {
       showToast(featuredOn ? 'Promo ditandai sebagai Featured.' : 'Featured promo dinonaktifkan.', 'info');
     };
   }
-
-  // Batalkan Perubahan button
   const batalBtn = document.querySelector('.button-138');
   if (batalBtn) {
     batalBtn.style.cursor = 'pointer';
@@ -457,8 +368,6 @@ function initTambahPromoPage() {
         () => { showToast('Form direset.', 'info'); }, 'Ya, Reset', 'Kembali');
     };
   }
-
-  // Simpan button
   const simpanBtn = document.querySelector('.button-140');
   if (simpanBtn) {
     simpanBtn.style.cursor = 'pointer';
@@ -467,8 +376,6 @@ function initTambahPromoPage() {
       setTimeout(() => navigateTo('list-service.html'), 1500);
     };
   }
-
-  // Sidebar navigation
   const kelolaLayananLink = document.querySelector('.link-153');
   if (kelolaLayananLink) {
     kelolaLayananLink.style.cursor = 'pointer';
@@ -479,8 +386,6 @@ function initTambahPromoPage() {
     kelolaPromoLink.style.cursor = 'pointer';
     kelolaPromoLink.onclick = () => navigateTo('tambah-promo.html');
   }
-
-  // Logout
   const logoutBtn = document.querySelector('.node-166');
   if (logoutBtn) {
     logoutBtn.style.cursor = 'pointer';
@@ -490,11 +395,8 @@ function initTambahPromoPage() {
   }
 }
 
-// ============================================================
-// EDIT PROMO PAGE (edit-promo.html)
-// ============================================================
+// ===================== EDIT PROMO PAGE =====================
 function initEditPromoPage() {
-  // Add Another Feature button
   const addFeatureBtn = document.querySelector('.button-75');
   if (addFeatureBtn) {
     addFeatureBtn.style.cursor = 'pointer';
@@ -518,8 +420,6 @@ function initEditPromoPage() {
       showToast('Field fitur baru ditambahkan.', 'success');
     };
   }
-
-  // Delete feature buttons
   document.querySelectorAll('.button-65, .button-72').forEach(btn => {
     btn.style.cursor = 'pointer';
     btn.onclick = () => {
@@ -527,15 +427,11 @@ function initEditPromoPage() {
       if (parent) { parent.remove(); showToast('Fitur dihapus.', 'info'); }
     };
   });
-
-  // Banner upload area
   const bannerUpload = document.querySelector('.background-border-85');
   if (bannerUpload) {
     bannerUpload.style.cursor = 'pointer';
     bannerUpload.onclick = () => showToast('Pilih file gambar banner (PNG/JPG, 1200x600px).', 'info');
   }
-
-  // Toggle Active Status
   const toggleActive = document.querySelector('.label-107');
   if (toggleActive) {
     toggleActive.style.cursor = 'pointer';
@@ -547,8 +443,6 @@ function initEditPromoPage() {
       showToast(activeOn ? 'Status aktif diaktifkan.' : 'Status dinonaktifkan.', 'info');
     };
   }
-
-  // Toggle Featured Promo
   const toggleFeatured = document.querySelector('.label-116');
   if (toggleFeatured) {
     toggleFeatured.style.cursor = 'pointer';
@@ -560,8 +454,6 @@ function initEditPromoPage() {
       showToast(featuredOn ? 'Promo ditandai sebagai Featured.' : 'Featured promo dinonaktifkan.', 'info');
     };
   }
-
-  // Batalkan Perubahan button
   const batalBtn = document.querySelector('.button-138');
   if (batalBtn) {
     batalBtn.style.cursor = 'pointer';
@@ -570,8 +462,6 @@ function initEditPromoPage() {
         () => navigateTo('list-service.html'), 'Ya, Batalkan', 'Kembali');
     };
   }
-
-  // Simpan Perubahan button
   const simpanBtn = document.querySelector('.button-140');
   if (simpanBtn) {
     simpanBtn.style.cursor = 'pointer';
@@ -580,8 +470,6 @@ function initEditPromoPage() {
       setTimeout(() => navigateTo('list-service.html'), 1500);
     };
   }
-
-  // Sidebar navigation
   const kelolaLayananLink = document.querySelector('.link-153');
   if (kelolaLayananLink) {
     kelolaLayananLink.style.cursor = 'pointer';
@@ -592,8 +480,6 @@ function initEditPromoPage() {
     kelolaPromoLink.style.cursor = 'pointer';
     kelolaPromoLink.onclick = () => navigateTo('tambah-promo.html');
   }
-
-  // Logout
   const logoutBtn = document.querySelector('.node-166');
   if (logoutBtn) {
     logoutBtn.style.cursor = 'pointer';
@@ -603,12 +489,9 @@ function initEditPromoPage() {
   }
 }
 
-// ============================================================
-// LOGIN PAGE (login.html)
-// ============================================================
+// ===================== LOGIN PAGE =====================
 function initLoginPage() {
-  // Login button
-  const loginBtn = document.querySelector('.login-button-42');
+  const loginBtn = document.querySelector('.btn-login');
   if (loginBtn) {
     loginBtn.style.cursor = 'pointer';
     loginBtn.onclick = () => {
@@ -619,55 +502,35 @@ function initLoginPage() {
       }, 1000);
     };
   }
-
-  // Toggle password visibility
-  const togglePwd = document.querySelector('.button-35');
+  const togglePwd = document.querySelector('.toggle-password');
   if (togglePwd) {
     togglePwd.style.cursor = 'pointer';
     let shown = false;
     togglePwd.onclick = () => {
       shown = !shown;
-      const pwdText = document.querySelector('.text-34 span');
-      if (pwdText) pwdText.textContent = shown ? 'password123' : '••••••••';
+      const pwdInput = document.getElementById('password');
+      if (pwdInput) pwdInput.type = shown ? 'text' : 'password';
     };
   }
-
-  // Forgot password link
-  const forgotLink = document.querySelector('.link-29');
+  const forgotLink = document.querySelector('.forgot-link');
   if (forgotLink) {
     forgotLink.style.cursor = 'pointer';
     forgotLink.onclick = () => navigateTo('reset-password.html');
   }
-
-  // Register link
-  const registerLink = document.querySelector('.link-47');
+  const registerLink = document.querySelector('.signup-link a');
   if (registerLink) {
     registerLink.style.cursor = 'pointer';
     registerLink.onclick = () => navigateTo('register.html');
   }
-
-  // Remember me checkbox
-  const rememberMe = document.querySelector('.remember-me-38');
+  const rememberMe = document.querySelector('.checkbox-group input[type="checkbox"]');
   if (rememberMe) {
     rememberMe.style.cursor = 'pointer';
-    let checked = false;
-    const checkbox = rememberMe.querySelector('.input-39');
-    rememberMe.onclick = () => {
-      checked = !checked;
-      if (checkbox) {
-        checkbox.style.background = checked ? '#ffc880' : '';
-        checkbox.style.border = checked ? '2px solid #ffc880' : '2px solid rgba(215,195,174,0.3)';
-      }
-    };
   }
 }
 
-// ============================================================
-// REGISTER PAGE (register.html)
-// ============================================================
+// ===================== REGISTER PAGE =====================
 function initRegisterPage() {
-  // Create account button
-  const createBtn = document.querySelector('.primary-cta-button-77');
+  const createBtn = document.querySelector('#registerBtn');
   if (createBtn) {
     createBtn.style.cursor = 'pointer';
     createBtn.onclick = () => {
@@ -678,55 +541,43 @@ function initRegisterPage() {
       }, 1200);
     };
   }
-
-  // Toggle password visibility
-  const togglePwd = document.querySelector('.button-65');
+  const togglePwd = document.querySelector('.eye');
   if (togglePwd) {
     togglePwd.style.cursor = 'pointer';
     let shown = false;
     togglePwd.onclick = () => {
       shown = !shown;
-      const pwdText = document.querySelector('.text-64 span');
-      if (pwdText) pwdText.textContent = shown ? 'password123' : '••••••••';
+      const pwdInput = document.getElementById('pwd');
+      if (pwdInput) pwdInput.type = shown ? 'text' : 'password';
     };
   }
-
-  // Login link
-  const loginLink = document.querySelector('.footer-bottom-links-80');
+  const loginLink = document.querySelector('.signin a');
   if (loginLink) {
-    const loginSpan = loginLink.querySelector('span');
-    if (loginSpan && loginSpan.textContent.trim() === 'Login') {
-      loginSpan.style.cursor = 'pointer';
-      loginSpan.onclick = () => navigateTo('login.html');
-    }
+    loginLink.style.cursor = 'pointer';
+    loginLink.onclick = () => navigateTo('login.html');
   }
 }
 
-// ============================================================
-// RESET PASSWORD PAGE (reset-password.html)
-// ============================================================
+// ===================== RESET PASSWORD PAGE (diperbaiki) =====================
 function initResetPasswordPage() {
-  // Kirim Tautan Reset button
-  const kirimBtn = document.querySelector('.button-26');
+  // PERBAIKAN: selector .button-26 diubah menjadi #resetBtn
+  const kirimBtn = document.querySelector('#resetBtn');
   if (kirimBtn) {
     kirimBtn.style.cursor = 'pointer';
     kirimBtn.onclick = () => {
-      showToast('Tautan reset password telah dikirim ke email Anda.', 'success');
+      const email = document.getElementById('email')?.value || '';
+      showToast(`Tautan reset password telah dikirim ke ${email || 'email Anda'}.`, 'success');
       setTimeout(() => navigateTo('login.html'), 2000);
     };
   }
-
-  // Kembali ke Login link
-  const backLink = document.querySelector('.link-33');
+  const backLink = document.querySelector('.back-link');
   if (backLink) {
     backLink.style.cursor = 'pointer';
     backLink.onclick = () => navigateTo('login.html');
   }
 }
 
-// ============================================================
-// AUTO-DETECT AND INITIALIZE
-// ============================================================
+// ===================== AUTO DETECT PAGE =====================
 document.addEventListener('DOMContentLoaded', () => {
   const path = window.location.pathname;
   const page = path.split('/').pop();

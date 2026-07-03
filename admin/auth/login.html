@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
   <style>
+    /* ===== CSS LENGKAP SEPERTI ASLI ===== */
     :root {
       --bg-navy: #050A14;
       --bg-input: #1C1F27;
@@ -16,17 +17,10 @@
       --text-white: #FFFFFF;
       --text-gray: #9CA3AF;
       --text-dark: #3A2303;
-      
       --font-heading: 'Montserrat', sans-serif;
       --font-body: 'Inter', sans-serif;
     }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: var(--font-body);
       background-color: var(--bg-navy);
@@ -35,23 +29,13 @@
       display: flex;
       overflow: hidden;
     }
-
-    /* Layout Utama */
-    .split-layout {
-      display: flex;
-      width: 100%;
-      height: 100vh;
-    }
-
-    /* Bagian Kiri (Gambar) */
+    .split-layout { display: flex; width: 100%; height: 100vh; }
     .left-pane {
       position: relative;
       flex: 1.3;
       background-color: #111;
-      overflow: hidden; /* Mencegah gambar meluber */
+      overflow: hidden;
     }
-
-    /* Styling untuk tag <img> agar berfungsi layaknya background-cover */
     .bg-image {
       position: absolute;
       top: 0;
@@ -61,16 +45,13 @@
       object-fit: cover;
       z-index: 0;
     }
-
-    /* Gradient overlay agar menyatu dengan background kanan */
     .left-pane::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to right, rgba(5, 10, 20, 0.2) 0%, rgba(5, 10, 20, 0.8) 60%, rgba(5, 10, 20, 1) 100%);
+      background: linear-gradient(to right, rgba(5,10,20,0.2) 0%, rgba(5,10,20,0.8) 60%, rgba(5,10,20,1) 100%);
       z-index: 1;
     }
-
     .brand-text {
       position: absolute;
       bottom: 50px;
@@ -83,8 +64,6 @@
       letter-spacing: 4px;
       text-transform: uppercase;
     }
-
-    /* Bagian Kanan (Form) */
     .right-pane {
       flex: 1;
       background-color: var(--bg-navy);
@@ -95,17 +74,8 @@
       position: relative;
       z-index: 2;
     }
-
-    .login-container {
-      width: 100%;
-      max-width: 420px;
-    }
-
-    /* Tipografi Header */
-    .login-header {
-      margin-bottom: 32px;
-    }
-
+    .login-container { width: 100%; max-width: 420px; }
+    .login-header { margin-bottom: 32px; }
     .login-header h1 {
       font-family: var(--font-heading);
       font-size: 28px;
@@ -113,55 +83,38 @@
       color: var(--gold-primary);
       margin-bottom: 8px;
     }
-
     .login-header h2 {
       font-size: 15px;
       font-weight: 400;
       color: #E5E7EB;
       margin-bottom: 12px;
     }
-
     .login-header p {
       font-size: 13px;
       color: var(--text-gray);
       line-height: 1.5;
     }
-
-    /* Styling Form */
-    .form-group {
-      margin-bottom: 24px;
-    }
-
+    .form-group { margin-bottom: 24px; }
     .label-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 8px;
     }
-
     label {
       font-size: 11px;
       color: var(--text-gray);
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
-
     .forgot-link {
       font-size: 12px;
       color: var(--gold-primary);
       text-decoration: none;
       transition: opacity 0.2s;
     }
-
-    .forgot-link:hover {
-      opacity: 0.8;
-    }
-
-    /* Input Field */
-    .input-wrapper {
-      position: relative;
-    }
-
+    .forgot-link:hover { opacity: 0.8; }
+    .input-wrapper { position: relative; }
     input[type="email"],
     input[type="password"] {
       width: 100%;
@@ -175,18 +128,12 @@
       outline: none;
       transition: border 0.3s ease;
     }
-
     input[type="email"]:focus,
     input[type="password"]:focus {
       border-color: #374151;
       color: var(--text-white);
     }
-
-    input::placeholder {
-      color: #6B7280;
-    }
-
-    /* Icon Mata (Password) */
+    input::placeholder { color: #6B7280; }
     .toggle-password {
       position: absolute;
       right: 16px;
@@ -200,21 +147,13 @@
       align-items: center;
       justify-content: center;
     }
-    
-    .toggle-password svg {
-      width: 18px;
-      height: 18px;
-      fill: currentColor;
-    }
-
-    /* Checkbox */
+    .toggle-password svg { width: 18px; height: 18px; fill: currentColor; }
     .checkbox-group {
       display: flex;
       align-items: center;
       gap: 10px;
       margin-bottom: 32px;
     }
-
     .checkbox-group input[type="checkbox"] {
       width: 16px;
       height: 16px;
@@ -223,7 +162,6 @@
       background-color: var(--bg-input);
       border: 1px solid #374151;
     }
-
     .checkbox-group label {
       font-size: 13px;
       color: #D1D5DB;
@@ -231,8 +169,6 @@
       letter-spacing: normal;
       cursor: pointer;
     }
-
-    /* Tombol Login */
     .btn-login {
       width: 100%;
       background-color: var(--gold-primary);
@@ -247,21 +183,12 @@
       transition: opacity 0.2s ease, transform 0.1s ease;
       margin-bottom: 24px;
     }
-
-    .btn-login:hover {
-      opacity: 0.9;
-    }
-
-    .btn-login:active {
-      transform: scale(0.98);
-    }
-
-    /* Footer / Register Link */
+    .btn-login:hover { opacity: 0.9; }
+    .btn-login:active { transform: scale(0.98); }
     .signup-link {
       font-size: 13px;
       color: var(--text-gray);
     }
-
     .signup-link a {
       color: var(--gold-primary);
       text-decoration: none;
@@ -269,21 +196,13 @@
       margin-left: 4px;
       transition: opacity 0.2s;
     }
-
     .signup-link a:hover {
       opacity: 0.8;
       text-decoration: underline;
     }
-
-    /* Responsif untuk layar kecil */
     @media (max-width: 900px) {
-      .left-pane {
-        display: none; /* Sembunyikan gambar pada mobile */
-      }
-      .right-pane {
-        padding: 40px;
-        justify-content: center;
-      }
+      .left-pane { display: none; }
+      .right-pane { padding: 40px; justify-content: center; }
       .brand-text {
         display: block;
         position: static;
@@ -294,25 +213,19 @@
   </style>
 </head>
 <body>
-
   <div class="split-layout">
-    
     <div class="left-pane">
       <img src="images/image-4.png" alt="Bengkel Duta Auto Garage" class="bg-image">
       <div class="brand-text">DUTA AUTO GARAGE</div>
     </div>
-
     <div class="right-pane">
       <div class="login-container">
-        
         <div class="login-header">
           <h1>DUTA Auto Garage</h1>
           <h2>Selamat Datang</h2>
           <p>Masuk untuk mengakses akun bengkel Anda dan mengelola layanan kendaraan dengan mudah.</p>
         </div>
-
         <form action="#" method="POST">
-          
           <div class="form-group">
             <div class="label-row">
               <label for="email">Alamat Email</label>
@@ -321,7 +234,6 @@
               <input type="email" id="email" placeholder="mechanic@duta-auto.com" required>
             </div>
           </div>
-
           <div class="form-group">
             <div class="label-row">
               <label for="password">Password</label>
@@ -336,23 +248,19 @@
               </button>
             </div>
           </div>
-
           <div class="form-group checkbox-group">
             <input type="checkbox" id="remember-me">
             <label for="remember-me">Ingat perangkat ini</label>
           </div>
-
           <button type="submit" class="btn-login">Login</button>
         </form>
-
         <div class="signup-link">
           Belum punya akun? <a href="register.html">Daftarkan akun Anda</a>
         </div>
-
       </div>
     </div>
-
   </div>
-
+  <!-- HANYA SCRIPT INI -->
+  <script src="/main.js"></script>
 </body>
 </html>
