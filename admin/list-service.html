@@ -1,14 +1,827 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Exported from Figma">
-  <title>Exported Figma Design</title>
-  <link href="https://fonts.googleapis.com/css?family=Inter|Montserrat&display=swap" rel="stylesheet">
+  <title>Kelola Layanan - Duta Auto Garage</title>
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,500,600,700|Montserrat:600,700,800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="styles.css">
+  <style>
+/* ============================================================
+   Kelola Layanan — Duta Auto Garage Admin Panel
+   ============================================================ */
+
+:root {
+  --bg-app: #0a1120;
+  --bg-sidebar: #0c1526;
+  --bg-card: #131f36;
+  --bg-card-soft: #101a2e;
+  --bg-input: #0e1830;
+  --border-subtle: #24314d;
+  --border-soft: #1c2843;
+
+  --text-heading: rgb(212, 228, 250);
+  --text-muted: rgb(215, 195, 174);
+  --text-accent: rgb(255, 203, 138);
+  --text-on-accent: rgb(103, 65, 0);
+  --text-success: rgb(16, 185, 129);
+  --text-placeholder: rgb(107, 114, 128);
+  --text-menu-active: rgb(168, 185, 221);
+
+  --accent-gradient: linear-gradient(135deg, #ffcb8a 0%, #f0a45a 100%);
+  --icon-chip-bg: rgba(255, 203, 138, 0.12);
+
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+
+  --font-heading: 'Montserrat', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-app);
+  color: var(--text-heading);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+p {
+  margin: 0;
+}
+
+/* ============================================================
+   Page shell
+   ============================================================ */
+
+.list-service-1 {
+  display: flex;
+  min-height: 100vh;
+  background: var(--bg-app);
+  background-image:
+    radial-gradient(circle at 15% 0%, rgba(255, 203, 138, 0.05), transparent 40%),
+    radial-gradient(circle at 90% 10%, rgba(96, 130, 210, 0.06), transparent 45%);
+}
+
+/* Flip source order: sidebar (.node-218) visually first, content (.main-content-area-2) second */
+.main-content-area-2 {
+  order: 2;
+  flex: 1;
+  min-width: 0;
+  padding: 28px 32px 60px;
+}
+
+.node-218 {
+  order: 1;
+  width: 232px;
+  flex-shrink: 0;
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  padding: 22px 16px;
+  gap: 22px;
+  min-height: 100vh;
+}
+
+.canvas-3 {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+/* ============================================================
+   Sidebar
+   ============================================================ */
+
+.header-profile-219 {
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.container-220 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.container-221::before {
+  content: "";
+  display: none;
+}
+
+.heading-2-222 .text-223 span {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  color: var(--text-accent);
+}
+
+.header-profile-219 .container-220::before {
+  content: "";
+}
+
+.header-profile-219 {
+  position: relative;
+}
+
+.header-profile-219::before {
+  content: "DUTA";
+  display: block;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: 0.06em;
+  color: #ffffff;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 4px;
+}
+
+.margin-224 {
+  display: none;
+}
+
+.node-226 {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.link-227 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 12px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, rgba(255,203,138,0.16), rgba(255,203,138,0.05));
+  border: 1px solid rgba(255, 203, 138, 0.25);
+}
+
+.link-227 .container-228 img {
+  width: 16px;
+  height: 16px;
+  color: var(--text-accent);
+}
+
+.link-227 .text-231 span {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-menu-active);
+}
+
+.margin-232 {
+  margin-top: 2px;
+}
+
+.link-234 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.link-234:hover {
+  background: var(--bg-card-soft);
+}
+
+.link-234 .node-235 img {
+  width: 16px;
+  height: 16px;
+  color: var(--text-muted);
+}
+
+.link-234 .text-238 span {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.container-239 {
+  padding-top: 14px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.node-240 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.node-240:hover {
+  background: rgba(239, 68, 68, 0.08);
+}
+
+.node-240 img {
+  width: 15px;
+  height: 15px;
+  color: #f87171;
+}
+
+.container-245 .text-246 span,
+.node-240 .container-244 span {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #f2a9a9;
+}
+
+/* icon coloring via mask-ish trick: SVGs use currentColor, so set color on wrapper */
+.container-228, .node-235, .node-242 {
+  color: inherit;
+}
+
+/* ============================================================
+   Page heading + actions
+   ============================================================ */
+
+.page-heading-actions-4 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.container-5 {
+  flex: 1 1 320px;
+  min-width: 0;
+}
+
+.button-17 {
+  flex-shrink: 0;
+}
+
+.nav-6 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.nav-6 .text-8 span {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.container-9 img {
+  width: 12px;
+  height: 12px;
+  color: var(--text-muted);
+  opacity: 0.7;
+}
+
+.nav-6 .text-12 span {
+  font-size: 12.5px;
+  color: var(--text-accent);
+  font-weight: 600;
+}
+
+.heading-2-13 .text-14 span {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text-heading);
+  letter-spacing: -0.01em;
+}
+
+.container-15 {
+  margin-top: 6px;
+  max-width: 480px;
+}
+
+.container-15 .text-16 span {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.button-17 {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: var(--radius-md);
+  background: var(--accent-gradient);
+  cursor: pointer;
+  white-space: nowrap;
+  margin-top: 4px;
+  border: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.button-17:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(240, 164, 90, 0.28);
+}
+
+.button-shadow-18 {
+  display: none;
+}
+
+.container-19 img {
+  width: 15px;
+  height: 15px;
+  color: var(--text-on-accent);
+}
+
+.button-17 .text-21 span {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text-on-accent);
+}
+
+/* ============================================================
+   Stats grid
+   ============================================================ */
+
+.dashboard-stats-grid-22 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.node-23, .node-31, .node-39 {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+}
+
+.container-24 .text-25 span,
+.container-32 .text-33 span,
+.container-40 .text-41 span {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  color: var(--text-muted);
+  opacity: 0.85;
+}
+
+.container-26, .container-34, .container-42 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.container-27 .text-28 span,
+.container-35 .text-36 span,
+.container-43 .text-44 span {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text-heading);
+}
+
+.container-29, .container-37, .container-45 {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  background: var(--icon-chip-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.container-29 img, .container-37 img, .container-45 img {
+  width: 19px;
+  height: 19px;
+  color: var(--text-accent);
+}
+
+/* ============================================================
+   Search + filters
+   ============================================================ */
+
+.search-filters-47 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.container-48 {
+  position: relative;
+  flex: 1;
+  min-width: 240px;
+}
+
+.input-49 {
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px 16px 12px 40px;
+}
+
+.input-49 .text-51 span {
+  font-size: 13px;
+  color: var(--text-placeholder);
+}
+
+.container-52 {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.container-52 img {
+  width: 16px;
+  height: 16px;
+  color: var(--text-placeholder);
+}
+
+.container-54 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.options-55 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 16px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+}
+
+.image-clip-56 img {
+  width: 14px;
+  height: 14px;
+  color: var(--text-heading);
+  opacity: 0.8;
+}
+
+.options-55 .text-60 span {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-heading);
+}
+
+.button-61 {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-md);
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.button-61 img {
+  width: 16px;
+  height: 16px;
+  color: var(--text-heading);
+  opacity: 0.85;
+}
+
+/* ============================================================
+   Service cards grid
+   ============================================================ */
+
+.node-64 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+[class^="service-card-"] {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+[class^="service-card-"]:hover {
+  border-color: rgba(255, 203, 138, 0.35);
+  transform: translateY(-2px);
+}
+
+[class*="container-6"][class*="7"],
+.service-card-1-65 .container-67,
+.service-card-2-90 .container-92,
+.service-card-3-115 .container-117,
+.service-card-4-140 .container-142,
+.service-card-5-165 .container-167,
+.service-card-6-190 .container-192 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+[class^="overlay-border-"]:nth-child(1),
+.service-card-1-65 .overlay-border-68,
+.service-card-2-90 .overlay-border-93,
+.service-card-3-115 .overlay-border-118,
+.service-card-4-140 .overlay-border-143,
+.service-card-5-165 .overlay-border-168,
+.service-card-6-190 .overlay-border-193 {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-sm);
+  background: var(--icon-chip-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay-border-68 img, .overlay-border-93 img, .overlay-border-118 img,
+.overlay-border-143 img, .overlay-border-168 img, .overlay-border-193 img {
+  width: 20px;
+  height: 20px;
+  color: var(--text-accent);
+}
+
+/* status badges */
+.overlay-border-71, .overlay-border-96, .overlay-border-146,
+.overlay-border-171, .overlay-border-196 {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.overlay-border-71 span, .overlay-border-96 span, .overlay-border-146 span,
+.overlay-border-171 span, .overlay-border-196 span {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--text-success);
+}
+
+.background-border-121 {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.12);
+  border: 1px solid rgba(148, 163, 184, 0.28);
+}
+
+.background-border-121 span {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #9aa5b8;
+}
+
+/* titles */
+[class^="heading-3-margin-"] {
+  margin-bottom: 6px;
+}
+
+[class^="heading-3-"] p span,
+.heading-3-74 span, .heading-3-99 span, .heading-3-124 span,
+.heading-3-149 span, .heading-3-174 span, .heading-3-199 span {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-heading);
+}
+
+/* description */
+[class^="margin-7"] .text-78 span,
+[class^="margin-1"] span {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.margin-76, .margin-101, .margin-126, .margin-151, .margin-176, .margin-201 {
+  margin-bottom: 16px;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.margin-76 p span, .margin-101 p span, .margin-126 p span,
+.margin-151 p span, .margin-176 p span, .margin-201 p span {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* price + actions row */
+[class^="horizontalborder-"] {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-soft);
+}
+
+[class^="container-8"] .text-82 span,
+.container-81 span, .container-106 span, .container-131 span,
+.container-156 span, .container-181 span, .container-206 span {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-accent);
+}
+
+.container-83, .container-108, .container-133, .container-158, .container-183, .container-208 {
+  display: flex;
+  gap: 8px;
+}
+
+.button-84, .button-87, .button-109, .button-112, .button-134, .button-137,
+.button-159, .button-162, .button-184, .button-187, .button-209, .button-212 {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-card-soft);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.button-84:hover, .button-109:hover, .button-134:hover,
+.button-159:hover, .button-184:hover, .button-209:hover {
+  border-color: rgba(255, 203, 138, 0.4);
+}
+
+.button-87:hover, .button-112:hover, .button-137:hover,
+.button-162:hover, .button-187:hover, .button-212:hover {
+  border-color: rgba(248, 113, 113, 0.45);
+  background: rgba(248, 113, 113, 0.08);
+}
+
+.button-84 img, .button-109 img, .button-134 img,
+.button-159 img, .button-184 img, .button-209 img {
+  width: 14px;
+  height: 14px;
+  color: var(--text-heading);
+  opacity: 0.85;
+}
+
+.button-87 img, .button-112 img, .button-137 img,
+.button-162 img, .button-187 img, .button-212 img {
+  width: 14px;
+  height: 14px;
+  color: #f87171;
+}
+
+/* ============================================================
+   Load more
+   ============================================================ */
+
+.pagination-load-more-215 {
+  display: flex;
+  justify-content: center;
+  margin-top: 6px;
+}
+
+.button-216 {
+  padding: 11px 28px;
+  border-radius: 999px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.button-216:hover {
+  border-color: rgba(255, 203, 138, 0.35);
+  background: var(--bg-card-soft);
+}
+
+.button-216 .text-217 span {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-heading);
+}
+
+/* ============================================================
+   Icon color inheritance (img uses currentColor via inline SVG,
+   but <img src> can't inherit color directly — use filter trick
+   as a practical fallback isn't reliable per-color, so we render
+   icons already colored per context using CSS custom property
+   is not possible on <img>. Instead icons are neutral and we
+   apply opacity/blend for contrast.)
+   ============================================================ */
+
+img[class^="icon-"], img[class^="vector-"] {
+  filter: brightness(0) saturate(100%) invert(88%) sepia(12%) saturate(500%) hue-rotate(180deg);
+  opacity: 0.9;
+}
+
+.container-19 img,
+.overlay-border-68 img, .overlay-border-93 img, .overlay-border-118 img,
+.overlay-border-143 img, .overlay-border-168 img, .overlay-border-193 img,
+.container-29 img, .container-37 img, .container-45 img {
+  filter: brightness(0) saturate(100%) invert(76%) sepia(44%) saturate(1000%) hue-rotate(320deg) brightness(1.05);
+  opacity: 1;
+}
+
+.container-19 img {
+  filter: brightness(0) saturate(100%) invert(21%) sepia(50%) saturate(1900%) hue-rotate(0deg) brightness(0.7);
+}
+
+.button-87 img, .button-112 img, .button-137 img,
+.button-162 img, .button-187 img, .button-212 img {
+  filter: brightness(0) saturate(100%) invert(56%) sepia(64%) saturate(1800%) hue-rotate(324deg) brightness(1.05);
+  opacity: 1;
+}
+
+.node-240 img {
+  filter: brightness(0) saturate(100%) invert(56%) sepia(64%) saturate(1800%) hue-rotate(324deg) brightness(1.05);
+}
+
+.link-227 .container-228 img {
+  filter: brightness(0) saturate(100%) invert(76%) sepia(44%) saturate(1000%) hue-rotate(320deg) brightness(1.05);
+  opacity: 1;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media (max-width: 960px) {
+  .list-service-1 {
+    flex-direction: column;
+  }
+
+  .node-218 {
+    width: 100%;
+    min-height: auto;
+    flex-direction: row;
+    align-items: center;
+    overflow-x: auto;
+  }
+
+  .header-profile-219, .container-239 {
+    display: none;
+  }
+
+  .node-226 {
+    flex-direction: row;
+  }
+
+  .dashboard-stats-grid-22, .node-64 {
+    grid-template-columns: 1fr;
+  }
+
+  .page-heading-actions-4 {
+    flex-direction: column;
+  }
+
+  .container-5 {
+    flex-basis: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .main-content-area-2 {
+    padding: 20px 16px 40px;
+  }
+}
+
+</style>
 </head>
 <body>
 <div class="list-service-1">
@@ -21,7 +834,7 @@
 <p class="text-8"><span class="text-rgb-215-195-174">Admin</span></p>
 </div>
 <div class="container-9">
-<img src="images/icon-10.svg" class="icon-10" alt="icon" />
+<img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTYgMTYiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTYgM0wxMCA4TDYgMTMiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjEuNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PC9zdmc+Cg==" class="icon-10" alt="icon" />
 </div>
 <div class="container-11">
 <p class="text-12"><span class="text-rgb-255-203-138">Kelola Layanan</span></p>
@@ -37,7 +850,7 @@
 <div class="button-17">
 <div class="button-shadow-18"></div>
 <div class="container-19">
-<img src="images/icon-20.svg" class="icon-20" alt="icon" />
+<img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAgMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEwIDRWMTZNNCAxMEgxNiIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PC9zdmc+Cg==" class="icon-20" alt="icon" />
 </div>
 <p class="text-21"><span class="text-rgb-103-65-0">Tambah Layanan Baru</span></p>
 </div>
@@ -52,7 +865,7 @@
 <p class="text-28"><span class="text-rgb-212-228-250">24</span></p>
 </div>
 <div class="container-29">
-<img src="images/icon-30.svg" class="icon-30" alt="icon" />
+<img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3QgeD0iNiIgeT0iNCIgd2lkdGg9IjEyIiBoZWlnaHQ9IjE2IiByeD0iMiIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMS42Ii8+PHBhdGggZD0iTTkgNFYzYTEgMSAwIDAxMS0xaDRhMSAxIDAgMDExIDF2MSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMS42Ii8+PHBhdGggZD0iTTkgMTBoNk05IDEzaDZNOSAxNmg0IiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIxLjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPgo=" class="icon-30" alt="icon" />
 </div>
 </div>
 </div>
@@ -65,7 +878,7 @@
 <p class="text-36"><span class="text-rgb-212-228-250">Rp 850k</span></p>
 </div>
 <div class="container-37">
-<img src="images/icon-38.svg" class="icon-38" alt="icon" />
+<img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3QgeD0iMyIgeT0iNyIgd2lkdGg9IjE4IiBoZWlnaHQ9IjEwIiByeD0iMiIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMS42Ii8+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMi4zIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cGF0aCBkPSJNNiAxMmguMDFNMTggMTJoLjAxIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L3N2Zz4K" class="icon-38" alt="icon" />
 </div>
 </div>
 </div>
@@ -78,7 +891,7 @@
 <p class="text-44"><span class="text-rgb-212-228-250">6</span></p>
 </div>
 <div class="container-45">
-<img src="images/icon-46.svg" class="icon-46" alt="icon" />
+<img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3QgeD0iMy41IiB5PSIzLjUiIHdpZHRoPSI3IiBoZWlnaHQ9IjciIHJ4PSIxLjQiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjEuNiIvPjxyZWN0IHg9IjEzLjUiIHk9IjMuNSIgd2lkdGg9IjciIGhlaWdodD0iNyIgcng9IjEuNCIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMS42Ii8+PHJlY3QgeD0iMy41IiB5PSIxMy41IiB3aWR0aD0iNyIgaGVpZ2h0PSI3IiByeD0iMS40IiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48cmVjdCB4PSIxMy41IiB5PSIxMy41IiB3aWR0aD0iNyIgaGVpZ2h0PSI3IiByeD0iMS40IiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48L3N2Zz4K" class="icon-46" alt="icon" />
 </div>
 </div>
 </div>
@@ -91,14 +904,14 @@
 </div>
 </div>
 <div class="container-52">
-<img src="images/icon-53.svg" class="icon-53" alt="icon" />
+<img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAgMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iOSIgY3k9IjkiIHI9IjYiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjEuNiIvPjxwYXRoIGQ9Ik0xNyAxN0wxMy40IDEzLjQiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjEuNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+Cg==" class="icon-53" alt="icon" />
 </div>
 </div>
 <div class="container-54">
 <div class="options-55">
 <div class="image-clip-56">
 <div class="image-57">
-<img src="images/vector-58.svg" class="vector-58" alt="vector" />
+<img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAgMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTQgNmgxMk02LjUgMTBoN005IDE0aDIiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjEuNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+Cg==" class="vector-58" alt="vector" />
 </div>
 </div>
 <div class="container-59">
@@ -107,7 +920,7 @@
 </div>
 <div class="button-61">
 <div class="container-62">
-<img src="images/icon-63.svg" class="icon-63" alt="icon" />
+<img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAgMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTUgOGw1IDUgNS01IiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPgo=" class="icon-63" alt="icon" />
 </div>
 </div>
 </div>
@@ -118,7 +931,7 @@
 <div class="container-67">
 <div class="overlay-border-68">
 <div class="container-69">
-<img src="images/icon-70.svg" class="icon-70" alt="icon" />
+<img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTE0LjcgNi4zYTQgNCAwIDAwLTUuNCA0LjlMNCAxNi41VjIwaDMuNWw1LjMtNS4zYTQgNCAwIDAwNC45LTUuNGwtMi42IDIuNi0yLTIgMi42LTIuNnoiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+Cg==" class="icon-70" alt="icon" />
 </div>
 </div>
 <div class="overlay-border-71">
@@ -146,12 +959,12 @@
 <div class="container-83">
 <div class="button-84">
 <div class="container-85">
-<img src="images/icon-86.svg" class="icon-86" alt="icon" />
+<img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAgMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEzLjUgMy41bDMgM0w3IDE2SDR2LTNsOS41LTkuNXoiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+Cg==" class="icon-86" alt="icon" />
 </div>
 </div>
 <div class="button-87">
 <div class="container-88">
-<img src="images/icon-89.svg" class="icon-89" alt="icon" />
+<img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAgMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTQgNmgxMk04IDZWNC41QTEuNSAxLjUgMCAwMTkuNSAzaDFBMS41IDEuNSAwIDAxMTIgNC41VjZNNiA2bC43IDkuNEExLjUgMS41IDAgMDA4LjIgMTdoMy42YTEuNSAxLjUgMCAwMDEuNS0xLjZMMTQgNiIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L3N2Zz4K" class="icon-89" alt="icon" />
 </div>
 </div>
 </div>
@@ -162,7 +975,7 @@
 <div class="container-92">
 <div class="overlay-border-93">
 <div class="container-94">
-<img src="images/icon-95.svg" class="icon-95" alt="icon" />
+<img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTE0LjcgNi4zYTQgNCAwIDAwLTUuNCA0LjlMNCAxNi41VjIwaDMuNWw1LjMtNS4zYTQgNCAwIDAwNC45LTUuNGwtMi42IDIuNi0yLTIgMi42LTIuNnoiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+Cg==" class="icon-95" alt="icon" />
 </div>
 </div>
 <div class="overlay-border-96">
@@ -190,12 +1003,12 @@ dan kalibrasi mesin untuk…</span></p>
 <div class="container-108">
 <div class="button-109">
 <div class="container-110">
-<img src="images/icon-111.svg" class="icon-111" alt="icon" />
+<img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAgMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEzLjUgMy41bDMgM0w3IDE2SDR2LTNsOS41LTkuNXoiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+Cg==" class="icon-111" alt="icon" />
 </div>
 </div>
 <div class="button-112">
 <div class="container-113">
-<img src="images/icon-114.svg" class="icon-114" alt="icon" />
+<img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAgMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTQgNmgxMk04IDZWNC41QTEuNSAxLjUgMCAwMTkuNSAzaDFBMS41IDEuNSAwIDAxMTIgNC41VjZNNiA2bC43IDkuNEExLjUgMS41IDAgMDA4LjIgMTdoMy42YTEuNSAxLjUgMCAwMDEuNS0xLjZMMTQgNiIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L3N2Zz4K" class="icon-114" alt="icon" />
 </div>
 </div>
 </div>
@@ -206,7 +1019,7 @@ dan kalibrasi mesin untuk…</span></p>
 <div class="container-117">
 <div class="overlay-border-118">
 <div class="container-119">
-<img src="images/icon-120.svg" class="icon-120" alt="icon" />
+<img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTE0LjcgNi4zYTQgNCAwIDAwLTUuNCA0LjlMNCAxNi41VjIwaDMuNWw1LjMtNS4zYTQgNCAwIDAwNC45LTUuNGwtMi42IDIuNi0yLTIgMi42LTIuNnoiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+Cg==" class="icon-120" alt="icon" />
 </div>
 </div>
 <div class="background-border-121">
@@ -233,12 +1046,12 @@ dan kalibrasi mesin untuk…</span></p>
 <div class="container-133">
 <div class="button-134">
 <div class="container-135">
-<img src="images/icon-136.svg" class="icon-136" alt="icon" />
+<img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAgMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEzLjUgMy41bDMgM0w3IDE2SDR2LTNsOS41LTkuNXoiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+Cg==" class="icon-136" alt="icon" />
 </div>
 </div>
 <div class="button-137">
 <div class="container-138">
-<img src="images/icon-139.svg" class="icon-139" alt="icon" />
+<img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAgMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTQgNmgxMk04IDZWNC41QTEuNSAxLjUgMCAwMTkuNSAzaDFBMS41IDEuNSAwIDAxMTIgNC41VjZNNiA2bC43IDkuNEExLjUgMS41IDAgMDA4LjIgMTdoMy42YTEuNSAxLjUgMCAwMDEuNS0xLjZMMTQgNiIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L3N2Zz4K" class="icon-139" alt="icon" />
 </div>
 </div>
 </div>
@@ -249,7 +1062,7 @@ dan kalibrasi mesin untuk…</span></p>
 <div class="container-142">
 <div class="overlay-border-143">
 <div class="container-144">
-<img src="images/icon-145.svg" class="icon-145" alt="icon" />
+<img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTE0LjcgNi4zYTQgNCAwIDAwLTUuNCA0LjlMNCAxNi41VjIwaDMuNWw1LjMtNS4zYTQgNCAwIDAwNC45LTUuNGwtMi42IDIuNi0yLTIgMi42LTIuNnoiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+Cg==" class="icon-145" alt="icon" />
 </div>
 </div>
 <div class="overlay-border-146">
@@ -276,12 +1089,12 @@ dan kalibrasi mesin untuk…</span></p>
 <div class="container-158">
 <div class="button-159">
 <div class="container-160">
-<img src="images/icon-161.svg" class="icon-161" alt="icon" />
+<img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAgMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEzLjUgMy41bDMgM0w3IDE2SDR2LTNsOS41LTkuNXoiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+Cg==" class="icon-161" alt="icon" />
 </div>
 </div>
 <div class="button-162">
 <div class="container-163">
-<img src="images/icon-164.svg" class="icon-164" alt="icon" />
+<img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAgMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTQgNmgxMk04IDZWNC41QTEuNSAxLjUgMCAwMTkuNSAzaDFBMS41IDEuNSAwIDAxMTIgNC41VjZNNiA2bC43IDkuNEExLjUgMS41IDAgMDA4LjIgMTdoMy42YTEuNSAxLjUgMCAwMDEuNS0xLjZMMTQgNiIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L3N2Zz4K" class="icon-164" alt="icon" />
 </div>
 </div>
 </div>
@@ -292,7 +1105,7 @@ dan kalibrasi mesin untuk…</span></p>
 <div class="container-167">
 <div class="overlay-border-168">
 <div class="container-169">
-<img src="images/icon-170.svg" class="icon-170" alt="icon" />
+<img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTE0LjcgNi4zYTQgNCAwIDAwLTUuNCA0LjlMNCAxNi41VjIwaDMuNWw1LjMtNS4zYTQgNCAwIDAwNC45LTUuNGwtMi42IDIuNi0yLTIgMi42LTIuNnoiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+Cg==" class="icon-170" alt="icon" />
 </div>
 </div>
 <div class="overlay-border-171">
@@ -319,12 +1132,12 @@ dan kalibrasi mesin untuk…</span></p>
 <div class="container-183">
 <div class="button-184">
 <div class="container-185">
-<img src="images/icon-186.svg" class="icon-186" alt="icon" />
+<img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAgMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEzLjUgMy41bDMgM0w3IDE2SDR2LTNsOS41LTkuNXoiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+Cg==" class="icon-186" alt="icon" />
 </div>
 </div>
 <div class="button-187">
 <div class="container-188">
-<img src="images/icon-189.svg" class="icon-189" alt="icon" />
+<img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAgMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTQgNmgxMk04IDZWNC41QTEuNSAxLjUgMCAwMTkuNSAzaDFBMS41IDEuNSAwIDAxMTIgNC41VjZNNiA2bC43IDkuNEExLjUgMS41IDAgMDA4LjIgMTdoMy42YTEuNSAxLjUgMCAwMDEuNS0xLjZMMTQgNiIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L3N2Zz4K" class="icon-189" alt="icon" />
 </div>
 </div>
 </div>
@@ -335,7 +1148,7 @@ dan kalibrasi mesin untuk…</span></p>
 <div class="container-192">
 <div class="overlay-border-193">
 <div class="container-194">
-<img src="images/icon-195.svg" class="icon-195" alt="icon" />
+<img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTE0LjcgNi4zYTQgNCAwIDAwLTUuNCA0LjlMNCAxNi41VjIwaDMuNWw1LjMtNS4zYTQgNCAwIDAwNC45LTUuNGwtMi42IDIuNi0yLTIgMi42LTIuNnoiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+Cg==" class="icon-195" alt="icon" />
 </div>
 </div>
 <div class="overlay-border-196">
@@ -363,12 +1176,12 @@ Balancing untuk memastikan presisi…</span></p>
 <div class="container-208">
 <div class="button-209">
 <div class="container-210">
-<img src="images/icon-211.svg" class="icon-211" alt="icon" />
+<img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAgMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEzLjUgMy41bDMgM0w3IDE2SDR2LTNsOS41LTkuNXoiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+Cg==" class="icon-211" alt="icon" />
 </div>
 </div>
 <div class="button-212">
 <div class="container-213">
-<img src="images/icon-214.svg" class="icon-214" alt="icon" />
+<img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAgMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTQgNmgxMk04IDZWNC41QTEuNSAxLjUgMCAwMTkuNSAzaDFBMS41IDEuNSAwIDAxMTIgNC41VjZNNiA2bC43IDkuNEExLjUgMS41IDAgMDA4LjIgMTdoMy42YTEuNSAxLjUgMCAwMDEuNS0xLjZMMTQgNiIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L3N2Zz4K" class="icon-214" alt="icon" />
 </div>
 </div>
 </div>
@@ -398,7 +1211,7 @@ Balancing untuk memastikan presisi…</span></p>
 <div class="node-226">
 <div class="link-227">
 <div class="container-228">
-<img src="images/icon-229.svg" class="icon-229" alt="icon" />
+<img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAgMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEyLjIgNS4yYTMuMyAzLjMgMCAwMC00LjUgNC4xTDQgMTN2M2gzbDMuNy0zLjdhMy4zIDMuMyAwIDAwNC4xLTQuNWwtMi4yIDIuMi0xLjctMS43IDIuMi0yLjJ6IiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIxLjQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPgo=" class="icon-229" alt="icon" />
 </div>
 <div class="container-230">
 <p class="text-231"><span class="text-rgb-168-185-221">Kelola Layanan</span></p>
@@ -408,7 +1221,7 @@ Balancing untuk memastikan presisi…</span></p>
 <div class="horizontalborder-233">
 <div class="link-234">
 <div class="node-235">
-<img src="images/vector-236.svg" class="vector-236" alt="vector" />
+<img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAgMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTYuNSAzLjVINGEuNS41IDAgMDAtLjUuNXYyLjVhMSAxIDAgMDAuMy43bDggOGExIDEgMCAwMDEuNCAwbDMtM2ExIDEgMCAwMDAtMS40bC04LThhMSAxIDAgMDAtLjctLjN6IiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIxLjQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48Y2lyY2xlIGN4PSI2LjQiIGN5PSI2LjQiIHI9IjEiIGZpbGw9ImN1cnJlbnRDb2xvciIvPjwvc3ZnPgo=" class="vector-236" alt="vector" />
 </div>
 <div class="container-237">
 <p class="text-238"><span class="text-rgb-215-195-174">Kelola Promo</span></p>
@@ -421,7 +1234,7 @@ Balancing untuk memastikan presisi…</span></p>
 <div class="node-240">
 <div class="container-241">
 <div class="node-242">
-<img src="images/vector-243.svg" class="vector-243" alt="vector" />
+<img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAgMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTggM0g0LjVBMS41IDEuNSAwIDAwMyA0LjV2MTFBMS41IDEuNSAwIDAwNC41IDE3SDgiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTEzIDEzLjVMMTcgMTBsLTQtMy41TTE3IDEwSDcuNSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L3N2Zz4K" class="vector-243" alt="vector" />
 </div>
 </div>
 <div class="container-244">
@@ -434,6 +1247,8 @@ Balancing untuk memastikan presisi…</span></p>
 </div>
 </div>
 
-<script src="main.js"></script>
+<script>
+  // Kelola Layanan — interactive behaviors can be added here
+</script>
 </body>
 </html>

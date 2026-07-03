@@ -40,12 +40,13 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 16px 48px;
+      padding: 10px 48px;
       background: rgba(11, 17, 32, 0.85);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--navy-border);
     }
-    .nav-logo { font-family: var(--font-heading); font-weight: 700; font-size: 18px; color: var(--gold); letter-spacing: 0.5px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; font-family: var(--font-heading); font-weight: 700; font-size: 18px; color: var(--gold); letter-spacing: 0.5px; text-decoration: none; }
+    .nav-logo img { height: 64px; width: auto; object-fit: contain; display: block; }
     .nav-links { display: flex; gap: 32px; list-style: none; }
     .nav-links a { text-decoration: none; font-size: 14px; font-weight: 500; color: var(--blue-muted); transition: color 0.2s; padding-bottom: 4px; border-bottom: 2px solid transparent; }
     .nav-links a.active, .nav-links a:hover { color: var(--gold); border-bottom-color: var(--gold); }
@@ -171,7 +172,9 @@
 
   <!-- NAV -->
   <nav>
-    <div class="nav-logo">DUTA Auto Garage</div>
+    <a href="landing-page.html" class="nav-logo">
+      <img src="../images/logo.png" alt="DUTA Auto Garage Logo" />
+    </a>
     <ul class="nav-links">
       <li><a href="landing-page.html" class="active">Beranda</a></li>
       <li><a href="layanan.html">Layanan</a></li>
