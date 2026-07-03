@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservasi - DUTA Auto Garage</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #FFC887;
+      --gold2: #FFCB8A;
+      --cream: #D9C3AD;
+      --light-blue: #D4E4FA;
+      --warm-text: #D7C3AE;
+      --dark-brown: #2A1800;
+      --mid-brown: #462B00;
+      --navy: #0B1120;
+      --navy2: #111827;
+      --card-bg: #1D2946;
+      --border-dark: #283451;
+      --whatsapp-green: #25D366;
+      --font-montserrat: 'Montserrat', sans-serif;
+      --font-inter: 'Inter', sans-serif;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background-color: var(--navy); color: var(--light-blue); font-family: var(--font-inter); overflow-x: hidden; }
+
+    /* ===== NAV ===== */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 16px 48px; background: rgba(11, 17, 32, 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-dark); }
+    .nav-logo { font-family: var(--font-montserrat); font-weight: 700; font-size: 18px; color: var(--gold); letter-spacing: 0.5px;}
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { text-decoration: none; font-size: 14px; font-weight: 500; color: var(--cream); transition: color 0.2s; padding-bottom: 4px; border-bottom: 2px solid transparent;}
+    .nav-links a:hover { color: var(--gold); }
+    .btn-gold { background: rgba(249, 168, 38, 1); color: var(--dark-brown); font-family: var(--font-inter); font-weight: 700; font-size: 14px; padding: 10px 22px; border-radius: 9999px; border: none; cursor: pointer; text-decoration: none; }
+
+    /* ===== HERO ===== */
+    .hero { padding: 120px 48px 80px; max-width: 1280px; margin: 0 auto; display: flex; align-items: center; gap: 64px; }
+    .hero-text { flex: 1; display: flex; flex-direction: column; gap: 24px; }
+    .hero-title { font-family: var(--font-montserrat); font-weight: 700; font-size: 48px; line-height: 1.1; color: var(--light-blue); }
+    .hero-title span { color: var(--gold2); }
+    .hero-subtitle { font-size: 18px; line-height: 28px; color: var(--warm-text); max-width: 460px; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background-color: rgba(249, 168, 38, 1); border-radius: 8px; padding: 14px 28px; font-family: var(--font-montserrat); font-weight: 700; font-size: 16px; color: var(--dark-brown); text-decoration: none; width: fit-content; }
+    .hero-img { flex: 0 0 460px; border-radius: 16px; overflow: hidden; border: 1px solid var(--border-dark); }
+    .hero-img img { width: 100%; height: 320px; object-fit: cover; display: block; }
+
+    /* ===== KEUNGGULAN ===== */
+    .keunggulan-section { padding: 0 48px 80px; max-width: 1280px; margin: 0 auto; text-align: center; }
+    .section-label { font-family: var(--font-montserrat); font-size: 13px; font-weight: 700; letter-spacing: 1.5px; color: var(--gold2); text-transform: uppercase; margin-bottom: 8px; }
+    .section-title { font-family: var(--font-montserrat); font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 48px; }
+    .cards-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; text-align: left; }
+    .card { background: var(--card-bg); border-top: 2px solid var(--gold2); border-radius: 16px; padding: 32px; display: flex; flex-direction: column; gap: 16px; }
+    .card-icon-wrap { width: 52px; height: 52px; background: rgba(11,17,32,0.5); border: 1px solid var(--border-dark); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: var(--gold2); }
+    .card-title { font-family: var(--font-montserrat); font-size: 20px; font-weight: 700; color: #fff; }
+    .card-desc { font-size: 15px; line-height: 24px; color: var(--warm-text); }
+
+    /* ===== LANGKAH ===== */
+    .langkah-section { padding: 80px 48px; background: var(--navy2); border-top: 1px solid var(--border-dark); border-bottom: 1px solid var(--border-dark); }
+    .langkah-inner { max-width: 1280px; margin: 0 auto; text-align: center; }
+    .langkah-title { font-family: var(--font-montserrat); font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 16px; }
+    .langkah-subtitle { font-size: 16px; color: var(--warm-text); margin-bottom: 64px; }
+    .steps-row { display: flex; gap: 24px; text-align: left; }
+    .step { flex: 1; display: flex; flex-direction: column; }
+    .step-num-wrap { display: flex; align-items: center; margin-bottom: 32px; }
+    .step-number { width: 48px; height: 48px; background: var(--gold2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-montserrat); font-weight: 700; font-size: 22px; color: var(--mid-brown); z-index: 1; }
+    .step-line { height: 2px; flex: 1; background: rgba(255,203,138,0.3); margin-left: 8px; }
+    .step:last-child .step-line { display: none; }
+    .step-title { font-family: var(--font-montserrat); font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 12px; }
+    .step-desc { font-size: 15px; line-height: 24px; color: var(--warm-text); }
+
+    /* ===== CTA WIDGET ===== */
+    .cta-section { padding: 80px 48px; display: flex; justify-content: center; }
+    .cta-card { max-width: 800px; width: 100%; padding: 48px; background: rgba(29, 41, 70, 0.5); border: 1px solid rgba(255, 203, 138, 0.2); border-radius: 24px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+    .cta-icon { font-size: 36px; color: var(--gold2); }
+    .cta-title { font-family: var(--font-montserrat); font-size: 28px; font-weight: 700; color: #fff; }
+    .cta-subtitle { font-size: 16px; line-height: 26px; color: var(--warm-text); margin-bottom: 10px; }
+    .btn-whatsapp { display: inline-flex; align-items: center; gap: 12px; background: var(--whatsapp-green); color: #fff; font-family: var(--font-montserrat); font-weight: 700; font-size: 16px; padding: 16px 36px; border-radius: 9999px; text-decoration: none; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+
+    /* ===== FOOTER ===== */
+    footer { background: var(--navy); padding: 40px 48px; }
+    .footer-inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .footer-brand { font-family: var(--font-montserrat); font-weight: 700; font-size: 16px; color: var(--gold); margin-bottom: 6px; }
+    .footer-copy { font-size: 12px; color: var(--warm-text); line-height: 1.6; }
+    .footer-links { display: flex; gap: 28px; }
+    .footer-links a { font-size: 13px; color: var(--warm-text); text-decoration: none; }
+
+    /* FLOATING WA */
+    .fab-whatsapp { position: fixed; bottom: 32px; right: 32px; width: 60px; height: 60px; background-color: var(--whatsapp-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 999; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">DUTA Auto Garage</div>
+    <ul class="nav-links">
+      <li><a href="landing-page.html">Beranda</a></li>
+      <li><a href="layanan.html">Layanan</a></li>
+      <li><a href="tentang-kami.html">Tentang Kami</a></li>
+    </ul>
+    <a href="#" class="btn-gold">Booking Sekarang</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1 class="hero-title">Cara Reservasi <span>Servis</span></h1>
+      <p class="hero-subtitle">Nikmati kemudahan pemeliharaan kendaraan Anda. Proses reservasi yang cepat, transparan, dan aman.</p>
+      <a href="#langkah" class="btn-primary">Mulai Reservasi Sekarang &darr;</a>
+    </div>
+    <div class="hero-img">
+      <img src="../images/image-4.png" alt="Engine Bay" />
+    </div>
+  </section>
+
+  <!-- KEUNGGULAN -->
+  <section class="keunggulan-section">
+    <div class="section-label">KEUNGGULAN KAMI</div>
+    <h2 class="section-title">Mengapa Memilih DUTA Auto Garage?</h2>
+    <div class="cards-row">
+      <div class="card">
+        <div class="card-icon-wrap">👨‍🔧</div>
+        <h3 class="card-title">Teknisi Berpengalaman</h3>
+        <p class="card-desc">Dikerjakan oleh teknisi bersertifikasi yang ahli dalam menangani berbagai brand kendaraan premium.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon-wrap">🛡️</div>
+        <h3 class="card-title">Suku Cadang Asli</h3>
+        <p class="card-desc">Kami hanya menggunakan suku cadang original dengan garansi resmi untuk menjamin performa maksimal.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon-wrap">📄</div>
+        <h3 class="card-title">Harga Transparan</h3>
+        <p class="card-desc">Estimasi biaya diberikan secara rinci di awal tanpa biaya tersembunyi. Kepercayaan Anda adalah prioritas kami.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LANGKAH -->
+  <section id="langkah" class="langkah-section">
+    <div class="langkah-inner">
+      <h2 class="langkah-title">Langkah Mudah Reservasi</h2>
+      <p class="langkah-subtitle">Tiga langkah sederhana untuk mengembalikan performa terbaik kendaraan Anda.</p>
+      <div class="steps-row">
+        <div class="step">
+          <div class="step-num-wrap"><div class="step-number">1</div><div class="step-line"></div></div>
+          <h3 class="step-title">Pilih Layanan</h3>
+          <p class="step-desc">Telusuri berbagai paket servis kami, mulai dari perawatan rutin hingga diagnosa teknis mendalam sesuai kebutuhan kendaraan.</p>
+        </div>
+        <div class="step">
+          <div class="step-num-wrap"><div class="step-number">2</div><div class="step-line"></div></div>
+          <h3 class="step-title">Konsultasi via WhatsApp</h3>
+          <p class="step-desc">Klik tombol reservasi untuk terhubung dengan Service Advisor kami yang siap menjawab segala pertanyaan teknis Anda.</p>
+        </div>
+        <div class="step">
+          <div class="step-num-wrap"><div class="step-number">3</div></div>
+          <h3 class="step-title">Atur Jadwal &amp; Konfirmasi</h3>
+          <p class="step-desc">Pilih waktu kedatangan yang paling nyaman bagi Anda. Kami akan mengirimkan konfirmasi instan setelah jadwal disepakati.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-card">
+      <div class="cta-icon">📅</div>
+      <h2 class="cta-title">Siap Memberikan yang Terbaik untuk Kendaraan Anda?</h2>
+      <p class="cta-subtitle">Tim kami stand-by 24/7 untuk membantu Anda mengatur jadwal servis paling efisien.</p>
+      <a href="https://wa.me/6285713004631" class="btn-whatsapp">
+        <svg viewBox="0 0 24 24" fill="white" width="24" height="24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Booking via WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">DUTA Auto Garage</div>
+        <p class="footer-copy">© 2026 DUTA Auto Garage.<br>Bengkel Tepercaya, Layanan Prima</p>
+      </div>
+      <div class="footer-links">
+        <a href="#">Ketentuan Layanan</a>
+        <a href="#">Kebijakan Privasi</a>
+        <a href="#">Emergency</a>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/6285713004631" class="fab-whatsapp" title="Hubungi Admin">
+    <svg viewBox="0 0 24 24" fill="white" width="32" height="32"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+</body>
+</html>
