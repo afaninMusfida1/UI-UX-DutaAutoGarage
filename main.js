@@ -57,6 +57,18 @@ function showModal(title, message, onConfirm, confirmText = 'Konfirmasi', cancel
   overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
 }
 
+// Escape sederhana supaya data dari localStorage (diisi lewat admin) aman
+// dipasang lewat innerHTML di halaman publik.
+function escapeHtml(str) {
+  if (str === null || str === undefined) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 // ===================== LANDING PAGE =====================
 function initLandingPage() {
   const navLinks = document.querySelectorAll('.nav-63 .link-67, .nav-63 .link-69, .nav-63 .link-71');
@@ -105,66 +117,6 @@ function initLandingPage() {
       link.onclick = () => window.open('https://wa.me/6285713004631', '_blank');
     }
   });
-}
-
-// ===================== LAYANAN PAGE =====================
-function initLayananPage() {
-  const nav3 = document.querySelector('.nav-3');
-  if (nav3) {
-    const links = nav3.querySelectorAll('.link-7, .link-9, .link-11');
-    const pages = ['landing-page.html', 'layanan.html', 'tentang-kami.html'];
-    links.forEach((link, i) => {
-      link.style.cursor = 'pointer';
-      link.onclick = () => navigateTo(pages[i]);
-    });
-  }
-  document.querySelectorAll('.property-1-default').forEach(btn => {
-    btn.style.cursor = 'pointer';
-    btn.onclick = () => {
-      showToast('Mengarahkan ke WhatsApp untuk reservasi...', 'success');
-      setTimeout(() => window.open('https://wa.me/6285713004631?text=Halo%2C%20saya%20ingin%20reservasi%20layanan', '_blank'), 1000);
-    };
-  });
-  const waLink = document.querySelector('.link-383');
-  if (waLink) {
-    waLink.style.cursor = 'pointer';
-    waLink.onclick = () => window.open('https://wa.me/6285713004631?text=Halo%2C%20saya%20ingin%20konsultasi%20teknis', '_blank');
-  }
-  const lihatLayanan = document.querySelector('.link-387');
-  if (lihatLayanan) {
-    lihatLayanan.style.cursor = 'pointer';
-    lihatLayanan.onclick = () => navigateTo('layanan.html');
-  }
-}
-
-// ===================== TENTANG KAMI PAGE =====================
-function initTentangKamiPage() {
-  const nav3 = document.querySelector('.nav-3');
-  if (nav3) {
-    const links = nav3.querySelectorAll('.link-7, .link-9, .link-11');
-    const pages = ['landing-page.html', 'layanan.html', 'tentang-kami.html'];
-    links.forEach((link, i) => {
-      link.style.cursor = 'pointer';
-      link.onclick = () => navigateTo(pages[i]);
-    });
-  }
-  document.querySelectorAll('.property-1-default').forEach(btn => {
-    btn.style.cursor = 'pointer';
-    btn.onclick = () => {
-      showToast('Mengarahkan ke WhatsApp untuk booking...', 'success');
-      setTimeout(() => window.open('https://wa.me/6285713004631', '_blank'), 1000);
-    };
-  });
-  const waLink = document.querySelector('.link-163');
-  if (waLink) {
-    waLink.style.cursor = 'pointer';
-    waLink.onclick = () => window.open('https://wa.me/6285713004631', '_blank');
-  }
-  const lihatLayanan = document.querySelector('.link-167');
-  if (lihatLayanan) {
-    lihatLayanan.style.cursor = 'pointer';
-    lihatLayanan.onclick = () => navigateTo('layanan.html');
-  }
 }
 
 // ============================================================
@@ -291,6 +243,137 @@ function populateCategoryFilterOptions(selectEl, selectedValue) {
   selectEl.innerHTML = '<option value="">Semua Kategori</option>' +
     categories.map(c => `<option value="${c}">${c}</option>`).join('');
   selectEl.value = selectedValue || '';
+}
+
+// ============================================================
+// RENDER PUBLIK (company profile) — dibaca dari localStorage
+// yang sama dengan yang dikelola admin di list-service.html /
+// list-promo.html. Ini titik penghubung admin <-> company profile.
+// ============================================================
+
+// Kartu layanan aktif untuk halaman layanan.html (#publicServicesGrid)
+function renderPublicServices() {
+  const container = document.getElementById('publicServicesGrid');
+  if (!container) return;
+
+  const services = getServices().filter(s => s.status === 'ACTIVE');
+
+  if (!services.length) {
+    container.innerHTML = `<div class="services-empty">Belum ada layanan aktif saat ini. Silakan cek kembali nanti.</div>`;
+    return;
+  }
+
+  container.innerHTML = services.map(s => `
+    <div class="svc-card">
+      <div class="svc-card-header">
+        <div>
+          <div class="svc-tag">${escapeHtml(s.category || 'Layanan')}</div>
+          <h3>${escapeHtml(s.name)}</h3>
+        </div>
+        <div class="price-badge">${escapeHtml(formatRupiah(s.price))}+</div>
+      </div>
+      <p class="svc-desc">${escapeHtml(s.desc || '')}</p>
+    </div>
+  `).join('');
+}
+
+// Kartu promo aktif untuk halaman layanan.html (#publicPromoGrid)
+function renderPublicPromos() {
+  const container = document.getElementById('publicPromoGrid');
+  if (!container) return;
+
+  const promos = getPromos().filter(p => p.active);
+
+  if (!promos.length) {
+    container.innerHTML = `<div class="promo-empty">Belum ada promo aktif saat ini. Silakan cek kembali nanti.</div>`;
+    return;
+  }
+
+  container.innerHTML = promos.map(p => {
+    const benefits = (p.benefits && p.benefits.length)
+      ? p.benefits
+      : ['Konsultasi teknis gratis', 'Pengerjaan oleh teknisi berpengalaman'];
+
+    return `
+      <div class="pricing-card ${p.featured ? 'featured' : ''}">
+        ${p.featured ? '<div class="most-popular-badge">MOST POPULAR</div>' : ''}
+        <div class="pricing-tier">${escapeHtml(tierLabel(p.tier))}</div>
+        <div class="pricing-tagline">${escapeHtml(p.desc || '')}</div>
+        <div class="pricing-price">
+          <span class="amount">${escapeHtml(formatRupiah(p.price))}</span>
+          <span class="per">/service</span>
+        </div>
+        <ul class="pricing-list">
+          ${benefits.map(b => `<li>${escapeHtml(b)}</li>`).join('')}
+        </ul>
+        <a href="reservasi.html" class="btn-reserve ${p.featured ? 'featured' : ''}">Reservasi Sekarang</a>
+      </div>`;
+  }).join('');
+}
+
+// ===================== LAYANAN PAGE =====================
+function initLayananPage() {
+  const nav3 = document.querySelector('.nav-3');
+  if (nav3) {
+    const links = nav3.querySelectorAll('.link-7, .link-9, .link-11');
+    const pages = ['landing-page.html', 'layanan.html', 'tentang-kami.html'];
+    links.forEach((link, i) => {
+      link.style.cursor = 'pointer';
+      link.onclick = () => navigateTo(pages[i]);
+    });
+  }
+
+  // Hubungkan data admin (services & promos di localStorage) ke company profile
+  renderPublicServices();
+  renderPublicPromos();
+
+  document.querySelectorAll('.property-1-default').forEach(btn => {
+    btn.style.cursor = 'pointer';
+    btn.onclick = () => {
+      showToast('Mengarahkan ke WhatsApp untuk reservasi...', 'success');
+      setTimeout(() => window.open('https://wa.me/6285713004631?text=Halo%2C%20saya%20ingin%20reservasi%20layanan', '_blank'), 1000);
+    };
+  });
+  const waLink = document.querySelector('.link-383');
+  if (waLink) {
+    waLink.style.cursor = 'pointer';
+    waLink.onclick = () => window.open('https://wa.me/6285713004631?text=Halo%2C%20saya%20ingin%20konsultasi%20teknis', '_blank');
+  }
+  const lihatLayanan = document.querySelector('.link-387');
+  if (lihatLayanan) {
+    lihatLayanan.style.cursor = 'pointer';
+    lihatLayanan.onclick = () => navigateTo('layanan.html');
+  }
+}
+
+// ===================== TENTANG KAMI PAGE =====================
+function initTentangKamiPage() {
+  const nav3 = document.querySelector('.nav-3');
+  if (nav3) {
+    const links = nav3.querySelectorAll('.link-7, .link-9, .link-11');
+    const pages = ['landing-page.html', 'layanan.html', 'tentang-kami.html'];
+    links.forEach((link, i) => {
+      link.style.cursor = 'pointer';
+      link.onclick = () => navigateTo(pages[i]);
+    });
+  }
+  document.querySelectorAll('.property-1-default').forEach(btn => {
+    btn.style.cursor = 'pointer';
+    btn.onclick = () => {
+      showToast('Mengarahkan ke WhatsApp untuk booking...', 'success');
+      setTimeout(() => window.open('https://wa.me/6285713004631', '_blank'), 1000);
+    };
+  });
+  const waLink = document.querySelector('.link-163');
+  if (waLink) {
+    waLink.style.cursor = 'pointer';
+    waLink.onclick = () => window.open('https://wa.me/6285713004631', '_blank');
+  }
+  const lihatLayanan = document.querySelector('.link-167');
+  if (lihatLayanan) {
+    lihatLayanan.style.cursor = 'pointer';
+    lihatLayanan.onclick = () => navigateTo('layanan.html');
+  }
 }
 
 function renderServiceCards(filterText, categoryFilter) {

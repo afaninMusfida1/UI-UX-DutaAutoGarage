@@ -46,6 +46,11 @@
 
     /* ===== SERVICE CARDS ===== */
     .services-section { padding: 0 48px 80px; max-width: 1280px; margin: 0 auto; }
+
+    /* Grid dinamis untuk kartu layanan hasil render dari localStorage */
+    .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; align-items: stretch; }
+    @media (max-width: 760px) { .services-grid { grid-template-columns: 1fr; } }
+
     .row-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; align-items: stretch; }
     .col-stack { display: flex; flex-direction: column; gap: 20px; height: 100%; }
     .col-stack .svc-card:last-child { flex: 1; }
@@ -65,6 +70,11 @@
     .svc-list li::before { content: '•'; font-size: 14px; color: var(--gold-text); }
     .svc-list.cross li::before { content: '✕'; font-size: 10px; color: var(--gold-text); }
     .svc-footer { border-top: 1px solid var(--navy-border); padding-top: 14px; margin-top: auto; font-size: 12px; color: var(--blue-muted); opacity: 0.7; }
+
+    /* Status pill kecil pada kartu layanan dinamis (opsional, dari data admin) */
+    .svc-status-pill { font-size: 10px; font-weight: 700; letter-spacing: 0.6px; padding: 3px 10px; border-radius: 999px; background: rgba(74,222,128,0.12); color: #4ade80; border: 1px solid rgba(74,222,128,0.3); white-space: nowrap; }
+
+    .services-empty, .promo-empty { grid-column: 1 / -1; text-align: center; padding: 48px 24px; color: var(--blue-muted); font-size: 14px; background: var(--navy-card); border: 1px dashed var(--navy-border); border-radius: 12px; }
 
     .ac-price-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid var(--navy-border); }
     .ac-price-row .label { font-size: 13px; color: var(--blue-muted); }
@@ -92,8 +102,11 @@
     .promo-header h2 { font-family: var(--font-heading); font-weight: 800; font-size: 36px; margin-bottom: 12px; }
     .promo-header h2 span.gold { color: var(--gold); }
     .promo-header p { font-size: 15px; color: var(--blue-muted); max-width: 600px; line-height: 24px; }
-    .pricing-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; align-items: stretch; }
-    .pricing-card { background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 16px; padding: 32px; display: flex; flex-direction: column; transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease; }
+
+    /* Grid dinamis untuk kartu promo — auto-fit supaya rapi walau jumlah promo berubah-ubah */
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; align-items: stretch; }
+
+    .pricing-card { background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 16px; padding: 32px; display: flex; flex-direction: column; transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease; position: relative; }
     .pricing-card:hover { transform: translateY(-6px); border-color: rgba(255, 200, 135, 0.5); box-shadow: 0 16px 34px rgba(0, 0, 0, 0.4); }
     .pricing-card.featured { background: var(--navy-card2); border-color: var(--gold); position: relative; }
     .pricing-card.featured:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 20px 40px rgba(255, 200, 135, 0.18); }
@@ -183,195 +196,22 @@
     <p>Pilih paket perawatan yang paling sesuai dengan kebutuhan mobil Anda. Kami siap memberikan pelayanan terbaik demi kenyamanan dan keamanan berkendara sehari-hari.</p>
   </div>
 
-  <!-- SERVICES -->
+  <!-- SERVICES (dirender secara dinamis dari localStorage oleh main.js) -->
   <div class="services-section">
-    <!-- Row 1 -->
-    <div class="row-2col">
-      <div class="svc-card">
-        <div class="svc-card-header">
-          <div>
-            <div class="svc-tag">Perawatan Rutin</div>
-            <h3>Servis Berkala</h3>
-          </div>
-          <div class="price-badge">Rp 750k+</div>
-        </div>
-        <p class="svc-desc">Pemeliharaan menyeluruh untuk menjaga keawetan komponen mobil Anda. Meliputi pemeriksaan lengkap pada sistem mesin dan penggerak.</p>
-        <div class="svc-section-label">Prosedur Teknis:</div>
-        <ul class="svc-list">
-          <li>Multi-point Digital Inspection</li>
-          <li>Kalibrasi sistem elektronik &amp; sensor</li>
-          <li>Pembersihan intake system &amp; throttle body</li>
-        </ul>
-        <div class="svc-footer">Peralatan: Launch X431 Pro V, Autel MaxiSYS.</div>
-      </div>
-
-      <div class="svc-card">
-        <div class="svc-card-header">
-          <div>
-            <div class="svc-tag">Sistem Keamanan</div>
-            <h3>Servis Rem</h3>
-          </div>
-          <div class="price-badge">Rp 450k+</div>
-        </div>
-        <p class="svc-desc">Pengembalian performa rem mobil Anda agar kembali pakem dan responsif. Fokus pada pemeriksaan ketebalan komponen penunjang.</p>
-        <div class="svc-section-label">Prosedur Teknis:</div>
-        <ul class="svc-list">
-          <li>Pengukuran ketebalan kampas rem &amp; rotor</li>
-          <li>Pengurasan minyak rem dengan bantuan vakum</li>
-          <li>Pelumasan &amp; servis slider kaliper</li>
-        </ul>
-        <div class="svc-footer">Peralatan: Mesin Bubut Rem, Mikrometer Digital.</div>
-      </div>
-    </div>
-
-    <!-- Row 2 -->
-    <div class="row-2col">
-      <div class="col-stack">
-        <div class="svc-card">
-          <div class="svc-card-header">
-            <div>
-              <div class="svc-tag">Performa Utama</div>
-              <h3>Mesin</h3>
-            </div>
-            <div class="price-badge">Rp 1.500K+</div>
-          </div>
-          <p class="svc-desc">Pemeriksaan mendalam dan perbaikan pada komponen mesin utama. Menangani segala keluhan hingga overhaul (turun mesin).</p>
-          <div class="svc-section-label">Fokus Utama:</div>
-          <ul class="svc-list cross">
-            <li>Pemesinan dan perataan permukaan kepala silinder</li>
-            <li>Penggantian ring piston &amp; bantalan</li>
-            <li>Sinkronisasi rantai/sabuk timing</li>
-          </ul>
-        </div>
-        <div class="svc-card">
-          <div class="svc-card-header">
-            <div>
-              <div class="svc-tag">Kenyamanan Kabin</div>
-              <h3>Ganti AC</h3>
-            </div>
-          </div>
-          <p class="svc-desc">Restorasi sistem pendinginan kabin dengan pengisian freon presisi dan sterilisasi bakteri.</p>
-          <div class="ac-price-row">
-            <span class="label">Starting from</span>
-            <span class="price">Rp 600k+</span>
-          </div>
-          <ul class="svc-list">
-            <li>Penggantian oli kompresor</li>
-            <li>Pembersihan evaporator dengan busa</li>
-            <li>Uji deteksi kebocoran dengan sinar UV</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="col-stack">
-        <div class="svc-card">
-          <div class="svc-card-header">
-            <div>
-              <div class="svc-tag">Optimalisasi</div>
-              <h3>Remap Performa Mesin</h3>
-            </div>
-            <div class="price-badge custom">Custom</div>
-          </div>
-          <p class="svc-desc">Pengaturan ulang program komputer (ECU) mobil Anda untuk meningkatkan efisiensi bahan bakar dan tenaga mesin.</p>
-          <div class="svc-section-label">Metode Teknis:</div>
-          <div class="stages-row">
-            <div class="stage-box"><div class="stage-label">Tahap 1</div><div class="stage-desc">Optimalisasi standar.</div></div>
-            <div class="stage-box"><div class="stage-label">Tahap 2</div><div class="stage-desc">Penyesuaian komponen & sistem.</div></div>
-          </div>
-        </div>
-        <div class="svc-card">
-          <div class="svc-card-header">
-            <div>
-              <div class="svc-tag">Dinamika Fluida</div>
-              <h3>Servis Oli Eksklusif</h3>
-            </div>
-            <div class="price-badge">Rp 500k+</div>
-          </div>
-          <p class="svc-desc">Kami hanya menggunakan pilihan pelumas sintetis penuh (full synthetic) berkualitas tinggi yang dipadukan dengan filter oli OEM.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Row 3 -->
-    <div class="row-2col">
-      <div class="svc-card">
-        <div class="svc-card-header">
-          <div>
-            <div class="svc-tag">Integritas Digital</div>
-            <h3>Sistem Kelistrikan</h3>
-          </div>
-          <div class="price-badge">Rp 350k+</div>
-        </div>
-        <p class="svc-desc">Analisis dan perbaikan jaringan kelistrikan modern (CAN-BUS), sensor, dan modul kontrol elektronik (ECU/ECM).</p>
-        <ul class="svc-list-2col">
-          <li>Pindai &amp; Reset Diagnostik</li>
-          <li>Pengujian Aki &amp; Alternator</li>
-          <li>Perbaikan Rangkaian Kabel</li>
-          <li>Kalibrasi Sensor</li>
-        </ul>
-      </div>
-      <div class="svc-card">
-        <div class="svc-card-header">
-          <div>
-            <div class="svc-tag">Performa Tinggi</div>
-            <h3>Performa Rem</h3>
-          </div>
-        </div>
-        <p class="svc-desc">Instalasi Big Brake Kits (BBK), selang rem braided, dan kampas rem high-friction untuk kebutuhan track day atau berkendara agresif.</p>
-        <div class="tags-row">
-          <span class="tag">Pemasangan Brembo</span>
-          <span class="tag">Pengaturan AP Racing</span>
-        </div>
-      </div>
+    <div class="services-grid" id="publicServicesGrid">
+      <!-- Kartu layanan aktif akan muncul di sini -->
     </div>
   </div>
 
-  <!-- PROMO SECTION -->
+  <!-- PROMO SECTION (dirender secara dinamis dari localStorage oleh main.js) -->
   <section class="promo-section">
     <div class="promo-inner">
       <div class="promo-header">
         <h2><span class="gold">PROMO</span> LAYANAN</h2>
         <p>Perawatan yang disesuaikan untuk setiap tingkat performa. Pilih paket yang sesuai dengan kebutuhan kendaraan dan gaya berkendara Anda.</p>
       </div>
-      <div class="pricing-grid">
-        <div class="pricing-card">
-          <div class="pricing-tier">STANDAR</div>
-          <div class="pricing-tagline">Perawatan esensial untuk pengguna harian.</div>
-          <div class="pricing-price"><span class="amount">Rp 750k</span><span class="per">/service</span></div>
-          <ul class="pricing-list">
-            <li>Ganti Oli Standar</li>
-            <li>Inspeksi 15 Titik</li>
-            <li>Pengisian Cairan (top-off)</li>
-          </ul>
-          <a href="reservasi.html" class="btn-reserve">Reservasi sekarang</a>
-        </div>
-
-        <div class="pricing-card featured">
-          <div class="most-popular-badge">MOST POPULAR</div>
-          <div class="pricing-tier">PREMIUM</div>
-          <div class="pricing-tagline">Penyetelan yang dioptimalkan</div>
-          <div class="pricing-price"><span class="amount">Rp 1.850k</span><span class="per">/service</span></div>
-          <ul class="pricing-list">
-            <li>Oli Sepenuhnya Sintetis</li>
-            <li>Siram Sistem Rem</li>
-            <li>Pemindaian Diagnostik ECU</li>
-            <li>Peningkatan Filter Udara</li>
-          </ul>
-          <a href="reservasi.html" class="btn-reserve featured">Reservasi Sekarang</a>
-        </div>
-
-        <div class="pricing-card">
-          <div class="pricing-tier">LUXURY</div>
-          <div class="pricing-tagline">Layanan setingkat concierge untuk kendaraan premium.</div>
-          <div class="pricing-price"><span class="amount">Rp 4.200k</span><span class="per">/service</span></div>
-          <ul class="pricing-list">
-            <li>Lapisan Keramik Premium</li>
-            <li>Detil Komprehensif</li>
-            <li>Akses Teluk Prioritas</li>
-            <li>Layanan Antar Jemput Valet</li>
-          </ul>
-          <a href="reservasi.html" class="btn-reserve">Reservasi sekarang</a>
-        </div>
+      <div class="pricing-grid" id="publicPromoGrid">
+        <!-- Kartu promo aktif akan muncul di sini -->
       </div>
     </div>
   </section>
