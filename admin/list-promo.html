@@ -414,7 +414,7 @@ img {
   flex-direction: column;
 }
 
-.row-78, .row-104, .row-133 {
+.row-78 {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr 100px;
   align-items: center;
@@ -422,20 +422,15 @@ img {
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
-.row-104 {
-  background: rgba(255, 200, 128, 0.05);
-  border-left: 4px solid rgba(255,255,255,0.05);
-}
-
 /* Detail Promo Column */
-.data-79, .data-105, .data-134 {
+.data-79 {
   display: flex;
   align-items: center;
   gap: 16px;
   padding: 0 24px;
 }
 
-.overlay-80, .overlay-106, .overlay-135 {
+.overlay-80 {
   width: 40px;
   height: 40px;
   display: flex;
@@ -446,27 +441,17 @@ img {
   flex-shrink: 0;
 }
 
-.overlay-106 {
-  background: rgba(255, 200, 128, 0.2);
-}
-
-.container-83, .container-109, .container-138 {
+.container-83 {
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
 
-.text-85, .text-112, .text-140 {
+.text-85 {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-weight: 700;
   font-size: 15px;
   color: #e2e2e2;
-}
-
-.container-110 {
-  display: flex;
-  align-items: center;
-  gap: 8px;
 }
 
 .background-113 {
@@ -484,33 +469,26 @@ img {
   color: #452b00;
 }
 
-.text-87, .text-116, .text-142 {
+.text-87 {
   font-family: 'Inter', sans-serif;
   font-size: 13px;
   color: #d9c3ad;
 }
 
 /* Tingkat Column */
-.data-88, .data-117, .data-143 {
+.data-88 {
   display: flex;
   justify-content: center;
   padding: 0;
 }
 
-.background-89, .background-144 {
+.background-89 {
   padding: 4px 14px;
   background: #333535;
   border-radius: 20px;
 }
 
-.overlay-border-118 {
-  padding: 4px 14px;
-  background: rgba(255, 200, 128, 0.1);
-  border: 1px solid rgba(255, 200, 128, 0.2);
-  border-radius: 20px;
-}
-
-.text-90, .text-145 {
+.text-90 {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-weight: 700;
   font-size: 11px;
@@ -519,21 +497,12 @@ img {
   color: #d7c3ae;
 }
 
-.text-119 {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-weight: 700;
-  font-size: 11px;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  color: #ffc880;
-}
-
 /* Harga Column */
-.data-91, .data-120, .data-146 {
+.data-91 {
   padding: 0 24px;
 }
 
-.text-92, .text-121, .text-147 {
+.text-92 {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-weight: 700;
   font-size: 15px;
@@ -541,13 +510,13 @@ img {
 }
 
 /* Status Column */
-.data-93, .data-122, .data-148 {
+.data-93 {
   display: flex;
   justify-content: center;
   padding: 0;
 }
 
-.overlay-94, .overlay-123, .overlay-149 {
+.overlay-94 {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -556,14 +525,14 @@ img {
   border-radius: 20px;
 }
 
-.background-95, .background-124, .background-150 {
+.background-95 {
   width: 8px;
   height: 8px;
   background: #4ade80;
   border-radius: 50%;
 }
 
-.text-96, .text-125, .text-151 {
+.text-96 {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-weight: 500;
   font-size: 12px;
@@ -571,7 +540,7 @@ img {
 }
 
 /* Aksi Column */
-.data-97, .data-126, .data-152 {
+.data-97 {
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -579,7 +548,7 @@ img {
   padding: 0 24px;
 }
 
-.button-98, .button-101, .button-127, .button-130, .button-153, .button-156 {
+.button-98, .button-101 {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -591,7 +560,7 @@ img {
   transition: background 0.15s;
 }
 
-.button-98:hover, .button-101:hover, .button-127:hover, .button-130:hover, .button-153:hover, .button-156:hover {
+.button-98:hover, .button-101:hover {
   background: rgba(255,255,255,0.1);
 }
 
@@ -611,16 +580,12 @@ img {
   }
 
   .header-row-66,
-  .row-78,
-  .row-104,
-  .row-133 {
+  .row-78 {
     grid-template-columns: 2fr 1fr 1fr;
   }
 
   .cell-75,
-  .data-97,
-  .data-126,
-  .data-152 {
+  .data-97 {
     display: none;
   }
 }
@@ -666,7 +631,7 @@ img {
           <p class="text-15"><span class="text-rgb-215-195-174">Ubah paket layanan, harga, dan diskon aktif untuk portal bengkel yang dapat diakses klien.</span></p>
         </div>
       </div>
-      <div class="button-16">
+      <div class="button-16" id="btnTambahPromo">
         <div class="button-shadow-17"></div>
         <div class="container-18">
           <img src="images/icon-19.svg" class="icon-19" alt="icon" />
@@ -681,7 +646,7 @@ img {
           <img src="images/icon-25.svg" class="icon-25" alt="icon" />
         </div>
         <div class="container-26">
-          <p class="text-27"><span class="text-rgb-226-226-226">3</span></p>
+          <p class="text-27"><span id="statActivePromo" class="text-rgb-226-226-226">0</span></p>
         </div>
         <div class="container-28">
           <img src="images/icon-29.svg" class="icon-29" alt="icon" />
@@ -693,7 +658,7 @@ img {
           <img src="images/icon-33.svg" class="icon-33" alt="icon" />
         </div>
         <div class="container-34">
-          <p class="text-35"><span class="text-rgb-226-226-226">Rp 5.4Jt</span></p>
+          <p class="text-35"><span id="statRevenue" class="text-rgb-226-226-226">Rp 0</span></p>
         </div>
         <div class="container-36">
           <img src="images/icon-37.svg" class="icon-37" alt="icon" />
@@ -715,11 +680,7 @@ img {
     <div class="management-workspace-46">
       <div class="search-filter-47">
         <div class="container-48">
-          <div class="input-49">
-            <div class="container-50">
-              <p class="text-51"><span class="text-rgb-107-114-128">Cari berdasarkan nama, kategori, atau status...</span></p>
-            </div>
-          </div>
+          <input type="text" id="promoSearchInput" class="input-49" placeholder="Cari berdasarkan nama, kategori, atau status..." />
           <div class="container-52">
             <img src="images/icon-53.svg" class="icon-53" alt="icon" />
           </div>
@@ -761,142 +722,8 @@ img {
               <p class="text-76"><span class="text-rgb-215-195-174">Aksi</span></p>
             </div>
           </div>
-          <div class="body-77">
-            <div class="row-78">
-              <div class="data-79">
-                <div class="overlay-80">
-                  <div class="container-81">
-                    <img src="images/icon-82.svg" class="icon-82" alt="icon" />
-                  </div>
-                </div>
-                <div class="container-83">
-                  <div class="container-84">
-                    <p class="text-85"><span class="text-rgb-226-226-226">Standar </span></p>
-                  </div>
-                  <div class="container-86">
-                    <p class="text-87"><span class="text-rgb-217-195-173">Perawatan esensial untuk pengguna harian.</span></p>
-                  </div>
-                </div>
-              </div>
-              <div class="data-88">
-                <div class="background-89">
-                  <p class="text-90"><span class="text-rgb-215-195-174">STANDAR</span></p>
-                </div>
-              </div>
-              <div class="data-91">
-                <p class="text-92"><span class="text-white">Rp 750k</span></p>
-              </div>
-              <div class="data-93">
-                <div class="overlay-94">
-                  <div class="background-95"></div>
-                  <p class="text-96"><span class="text-rgb-74-222-128">Active</span></p>
-                </div>
-              </div>
-              <div class="data-97">
-                <div class="button-98">
-                  <div class="container-99">
-                    <img src="images/icon-100.svg" class="icon-100" alt="icon" />
-                  </div>
-                </div>
-                <div class="button-101">
-                  <div class="container-102">
-                    <img src="images/icon-103.svg" class="icon-103" alt="icon" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row-104">
-              <div class="data-105">
-                <div class="overlay-106">
-                  <div class="container-107">
-                    <img src="images/icon-108.svg" class="icon-108" alt="icon" />
-                  </div>
-                </div>
-                <div class="container-109">
-                  <div class="container-110">
-                    <div class="container-111">
-                      <p class="text-112"><span class="text-rgb-226-226-226">Premium </span></p>
-                    </div>
-                    <div class="background-113">
-                      <p class="text-114"><span class="text-rgb-69-43-0">POPULAR</span></p>
-                    </div>
-                  </div>
-                  <div class="container-115">
-                    <p class="text-116"><span class="text-rgb-217-195-173">Penyetelan yang dioptimalkan</span></p>
-                  </div>
-                </div>
-              </div>
-              <div class="data-117">
-                <div class="overlay-border-118">
-                  <p class="text-119"><span class="text-rgb-255-200-128">PREMIUM</span></p>
-                </div>
-              </div>
-              <div class="data-120">
-                <p class="text-121"><span class="text-white">Rp 1.850k</span></p>
-              </div>
-              <div class="data-122">
-                <div class="overlay-123">
-                  <div class="background-124"></div>
-                  <p class="text-125"><span class="text-rgb-74-222-128">Active</span></p>
-                </div>
-              </div>
-              <div class="data-126">
-                <div class="button-127">
-                  <div class="container-128">
-                    <img src="images/icon-129.svg" class="icon-129" alt="icon" />
-                  </div>
-                </div>
-                <div class="button-130">
-                  <div class="container-131">
-                    <img src="images/icon-132.svg" class="icon-132" alt="icon" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row-133">
-              <div class="data-134">
-                <div class="overlay-135">
-                  <div class="container-136">
-                    <img src="images/icon-137.svg" class="icon-137" alt="icon" />
-                  </div>
-                </div>
-                <div class="container-138">
-                  <div class="container-139">
-                    <p class="text-140"><span class="text-rgb-226-226-226">Luxury</span></p>
-                  </div>
-                  <div class="container-141">
-                    <p class="text-142"><span class="text-rgb-217-195-173">Layanan setingkat concierge untuk kendaraan premium.</span></p>
-                  </div>
-                </div>
-              </div>
-              <div class="data-143">
-                <div class="background-144">
-                  <p class="text-145"><span class="text-rgb-215-195-174">STANDAR</span></p>
-                </div>
-              </div>
-              <div class="data-146">
-                <p class="text-147"><span class="text-white">Rp 4.200k</span></p>
-              </div>
-              <div class="data-148">
-                <div class="overlay-149">
-                  <div class="background-150"></div>
-                  <p class="text-151"><span class="text-rgb-74-222-128">Active</span></p>
-                </div>
-              </div>
-              <div class="data-152">
-                <div class="button-153">
-                  <div class="container-154">
-                    <img src="images/icon-155.svg" class="icon-155" alt="icon" />
-                  </div>
-                </div>
-                <div class="button-156">
-                  <div class="container-157">
-                    <img src="images/icon-158.svg" class="icon-158" alt="icon" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <!-- Baris promo dirender secara dinamis dari localStorage oleh main.js -->
+          <div class="body-77" id="promoTableBody"></div>
         </div>
       </div>
     </div>
@@ -920,11 +747,11 @@ img {
           <div class="container-169"></div>
         </div>
       </div>
-      
+
       <!-- Navigasi Sidebar - Sesuai list-service.html -->
       <div class="node-170">
-        <!-- Link Kelola Layanan (Tidak Aktif) -->
-        <a href="#" class="link-171">
+        <!-- Link Kelola Layanan -->
+        <a href="#" class="link-171" id="navKelolaLayanan">
           <div class="container-172">
             <img src="images/icon-173.svg" class="icon-173" alt="icon" />
           </div>
@@ -932,11 +759,11 @@ img {
             <p class="text-175"><span class="text-rgb-215-195-174">Kelola Layanan</span></p>
           </div>
         </a>
-        
+
         <div class="margin-176">
           <div class="horizontalborder-177"></div>
         </div>
-        
+
         <!-- Link Kelola Promo (Aktif) -->
         <a href="#" class="link-178">
           <div class="node-179">
@@ -949,7 +776,7 @@ img {
       </div>
 
       <div class="container-183">
-        <div class="node-184">
+        <div class="node-184" id="btnLogout">
           <div class="container-185">
             <div class="node-186">
               <img src="images/vector-187.svg" class="vector-187" alt="vector" />
@@ -965,5 +792,6 @@ img {
     </div>
   </div>
 </div>
+<script src="../main.js"></script>
 </body>
 </html>

@@ -168,7 +168,7 @@ function initTentangKamiPage() {
 }
 
 // ============================================================
-// "DATABASE" LOKAL PAKAI localStorage
+// "DATABASE" LOKAL PAKAI localStorage - SERVICES
 // ============================================================
 const SERVICES_KEY = 'duta_garage_services';
 
@@ -192,7 +192,14 @@ function saveServices(services) {
 }
 
 function formatRupiah(num) {
-  return 'Rp ' + Number(num).toLocaleString('id-ID');
+  return 'Rp ' + Number(num || 0).toLocaleString('id-ID');
+}
+
+function formatRupiahShort(num) {
+  num = Number(num || 0);
+  if (num >= 1000000) return 'Rp ' + (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'Jt';
+  if (num >= 1000) return 'Rp ' + Math.round(num / 1000) + 'rb';
+  return 'Rp ' + num;
 }
 
 function addService(service) {
@@ -219,6 +226,59 @@ function deleteServiceById(id) {
 
 function getServiceById(id) {
   return getServices().find(s => s.id === Number(id));
+}
+
+// ============================================================
+// "DATABASE" LOKAL PAKAI localStorage - PROMOS
+// ============================================================
+const PROMOS_KEY = 'duta_garage_promos';
+
+function getPromos() {
+  const data = localStorage.getItem(PROMOS_KEY);
+  if (data) return JSON.parse(data);
+  const seed = [
+    { id: 1, name: 'Standar', tier: 'STANDARD', price: 750000, desc: 'Perawatan esensial untuk pengguna harian.', benefits: [], active: true, featured: false, expiry: '' },
+    { id: 2, name: 'Premium', tier: 'PREMIUM', price: 1850000, desc: 'Penyetelan yang dioptimalkan.', benefits: [], active: true, featured: true, expiry: '2026-12-31' },
+    { id: 3, name: 'Luxury', tier: 'LUXURY', price: 4200000, desc: 'Layanan setingkat concierge untuk kendaraan premium.', benefits: [], active: true, featured: false, expiry: '' }
+  ];
+  localStorage.setItem(PROMOS_KEY, JSON.stringify(seed));
+  return seed;
+}
+
+function savePromos(promos) {
+  localStorage.setItem(PROMOS_KEY, JSON.stringify(promos));
+}
+
+function addPromo(promo) {
+  const promos = getPromos();
+  const newId = promos.length ? Math.max(...promos.map(p => p.id)) + 1 : 1;
+  promo.id = newId;
+  promos.push(promo);
+  savePromos(promos);
+  return promo;
+}
+
+function updatePromo(id, updated) {
+  const promos = getPromos();
+  const idx = promos.findIndex(p => p.id === Number(id));
+  if (idx !== -1) {
+    promos[idx] = { ...promos[idx], ...updated };
+    savePromos(promos);
+  }
+}
+
+function deletePromoById(id) {
+  const promos = getPromos().filter(p => p.id !== Number(id));
+  savePromos(promos);
+}
+
+function getPromoById(id) {
+  return getPromos().find(p => p.id === Number(id));
+}
+
+function tierLabel(tier) {
+  const map = { STANDARD: 'STANDAR', PREMIUM: 'PREMIUM', LUXURY: 'LUXURY' };
+  return map[tier] || tier;
 }
 
 function renderServiceCards() {
@@ -332,183 +392,220 @@ function initTambahServicePage() {
   if (batalBtn) batalBtn.onclick = () => navigateTo('list-service.html');
 }
 
+// ===================== LIST PROMO PAGE =====================
+function renderPromoRows(filterText) {
+  const container = document.getElementById('promoTableBody');
+  if (!container) return;
+  const all = getPromos();
+  let promos = all;
+  if (filterText) {
+    const f = filterText.toLowerCase();
+    promos = all.filter(p =>
+      p.name.toLowerCase().includes(f) ||
+      (p.tier || '').toLowerCase().includes(f) ||
+      (p.active ? 'active' : 'inactive').includes(f)
+    );
+  }
+
+  const statActive = document.getElementById('statActivePromo');
+  if (statActive) statActive.textContent = all.filter(p => p.active).length;
+  const statRevenue = document.getElementById('statRevenue');
+  if (statRevenue) statRevenue.textContent = formatRupiahShort(all.reduce((sum, p) => sum + (p.active ? p.price : 0), 0));
+
+  if (!promos.length) {
+    container.innerHTML = `<div style="padding:48px 24px;text-align:center;color:#6b7280;font-size:14px;">Belum ada promosi yang cocok.</div>`;
+    return;
+  }
+
+  container.innerHTML = promos.map(p => `
+    <div class="row-78" data-id="${p.id}">
+      <div class="data-79">
+        <div class="overlay-80"><div class="container-81" style="font-size:18px;">🏷️</div></div>
+        <div class="container-83">
+          <div class="container-84" style="display:flex;align-items:center;gap:8px;">
+            <p class="text-85" style="margin:0;"><span>${p.name}</span></p>
+            ${p.featured ? '<span class="background-113"><span class="text-114">POPULAR</span></span>' : ''}
+          </div>
+          <div class="container-86"><p class="text-87"><span>${p.desc || ''}</span></p></div>
+        </div>
+      </div>
+      <div class="data-88"><div class="background-89"><p class="text-90"><span>${tierLabel(p.tier)}</span></p></div></div>
+      <div class="data-91"><p class="text-92"><span>${formatRupiah(p.price)}</span></p></div>
+      <div class="data-93">
+        <div class="overlay-94" style="background:${p.active ? 'rgba(34,197,94,0.1)' : 'rgba(239,99,99,0.1)'};">
+          <div class="background-95" style="background:${p.active ? '#4ade80' : '#ef6363'};"></div>
+          <p class="text-96" style="color:${p.active ? '#4ade80' : '#ef6363'};"><span>${p.active ? 'Active' : 'Inactive'}</span></p>
+        </div>
+      </div>
+      <div class="data-97">
+        <div class="button-98 promo-edit-btn" data-id="${p.id}" title="Edit"><span>✏️</span></div>
+        <div class="button-101 promo-delete-btn" data-id="${p.id}" title="Hapus"><span>🗑️</span></div>
+      </div>
+    </div>
+  `).join('');
+
+  container.querySelectorAll('.promo-edit-btn').forEach(btn => {
+    btn.style.cursor = 'pointer';
+    btn.onclick = () => navigateTo('edit-promo.html?id=' + btn.dataset.id);
+  });
+  container.querySelectorAll('.promo-delete-btn').forEach(btn => {
+    btn.style.cursor = 'pointer';
+    btn.onclick = () => {
+      const id = btn.dataset.id;
+      showModal('Hapus Promo', 'Apakah Anda yakin ingin menghapus promo ini? Tindakan ini tidak dapat dibatalkan.',
+        () => {
+          deletePromoById(id);
+          renderPromoRows(document.getElementById('promoSearchInput') ? document.getElementById('promoSearchInput').value : '');
+          showToast('Promo berhasil dihapus.', 'success');
+        },
+        'Hapus', 'Batal');
+    };
+  });
+}
+
+function initListPromoPage() {
+  renderPromoRows('');
+  const tambahBtn = document.getElementById('btnTambahPromo');
+  if (tambahBtn) { tambahBtn.style.cursor = 'pointer'; tambahBtn.onclick = () => navigateTo('tambah-promo.html'); }
+  const searchInput = document.getElementById('promoSearchInput');
+  if (searchInput) { searchInput.addEventListener('input', () => renderPromoRows(searchInput.value)); }
+  const kelolaLayananLink = document.getElementById('navKelolaLayanan');
+  if (kelolaLayananLink) { kelolaLayananLink.style.cursor = 'pointer'; kelolaLayananLink.onclick = () => navigateTo('list-service.html'); }
+  const logoutBtn = document.getElementById('btnLogout');
+  if (logoutBtn) { logoutBtn.style.cursor = 'pointer'; logoutBtn.onclick = () => showModal('Logout', 'Apakah Anda yakin ingin keluar?', () => navigateTo('login.html'), 'Logout', 'Batal'); }
+}
+
 // ===================== TAMBAH PROMO PAGE =====================
+function wireBenefitRemoval(row) {
+  const removeBtn = row.querySelector('.icon-btn');
+  if (removeBtn) {
+    removeBtn.onclick = () => {
+      const container = document.getElementById('benefitsContainer');
+      if (container && container.children.length <= 1) {
+        row.querySelector('.benefit-input').value = '';
+        return;
+      }
+      row.remove();
+    };
+  }
+}
+
 function initTambahPromoPage() {
-  const addFeatureBtn = document.querySelector('.button-75');
+  document.querySelectorAll('#benefitsContainer .benefit-row').forEach(wireBenefitRemoval);
+
+  const addFeatureBtn = document.getElementById('btnAddFeature');
   if (addFeatureBtn) {
     addFeatureBtn.style.cursor = 'pointer';
     addFeatureBtn.onclick = () => {
-      const container = document.querySelector('.container-60');
+      const container = document.getElementById('benefitsContainer');
       if (!container) return;
-      const newFeature = document.createElement('div');
-      newFeature.style.cssText = 'display:flex;align-items:center;gap:8px;margin-top:8px;';
-      newFeature.innerHTML = `
-        <div style="flex:1;padding:10px 14px;background:rgba(255,255,255,0.05);
-          border:1px solid rgba(255,255,255,0.1);border-radius:6px;cursor:text;">
-          <p style="color:#6b7280;font-size:14px;">Add a key benefit point...</p>
-        </div>
-        <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;
-          background:rgba(239,68,68,0.15);border-radius:6px;cursor:pointer;"
-          onclick="this.parentElement.remove();showToast('Fitur dihapus.','info')">
-          <span style="color:#ef4444;font-size:18px;">×</span>
-        </div>
-      `;
-      container.appendChild(newFeature);
-      showToast('Field fitur baru ditambahkan.', 'success');
+      const row = document.createElement('div');
+      row.className = 'benefit-row';
+      row.innerHTML = `
+        <input type="text" class="benefit-input" placeholder="Add a key benefit point...">
+        <div class="icon-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+        </div>`;
+      container.appendChild(row);
+      wireBenefitRemoval(row);
     };
   }
-  const bannerUpload = document.querySelector('.background-border-85');
+
+  const bannerUpload = document.getElementById('promoBannerDropzone');
   if (bannerUpload) {
     bannerUpload.style.cursor = 'pointer';
-    bannerUpload.onclick = () => showToast('Pilih file gambar banner (PNG/JPG, 1200x600px).', 'info');
+    bannerUpload.onclick = () => showToast('Catatan: banner gambar belum didukung di penyimpanan lokal (localStorage).', 'info');
   }
-  const toggleActive = document.querySelector('.label-107');
+
+  const toggleActive = document.getElementById('toggleActive');
   if (toggleActive) {
     toggleActive.style.cursor = 'pointer';
-    let activeOn = false;
-    toggleActive.onclick = () => {
-      activeOn = !activeOn;
-      const bg = toggleActive.querySelector('.background-108');
-      if (bg) bg.style.background = activeOn ? '#10b981' : '';
-      showToast(activeOn ? 'Status aktif: Visible to all users.' : 'Status dinonaktifkan.', 'info');
-    };
+    toggleActive.onclick = () => toggleActive.classList.toggle('on');
   }
-  const toggleFeatured = document.querySelector('.label-116');
+  const toggleFeatured = document.getElementById('toggleFeatured');
   if (toggleFeatured) {
     toggleFeatured.style.cursor = 'pointer';
-    let featuredOn = false;
-    toggleFeatured.onclick = () => {
-      featuredOn = !featuredOn;
-      const bg = toggleFeatured.querySelector('.background-117');
-      if (bg) bg.style.background = featuredOn ? '#ffc880' : '';
-      showToast(featuredOn ? 'Promo ditandai sebagai Featured.' : 'Featured promo dinonaktifkan.', 'info');
-    };
+    toggleFeatured.onclick = () => toggleFeatured.classList.toggle('on');
   }
-  const batalBtn = document.querySelector('.button-138');
+
+  const batalBtn = document.getElementById('btnBatalPromo');
   if (batalBtn) {
-    batalBtn.style.cursor = 'pointer';
     batalBtn.onclick = () => {
-      showModal('Batalkan', 'Semua data yang diisi akan direset. Lanjutkan?',
-        () => { showToast('Form direset.', 'info'); }, 'Ya, Reset', 'Kembali');
+      showModal('Batalkan', 'Semua data yang diisi akan hilang. Lanjutkan?',
+        () => navigateTo('list-promo.html'), 'Ya, Batalkan', 'Kembali');
     };
   }
-  const simpanBtn = document.querySelector('.button-140');
+
+  const simpanBtn = document.getElementById('btnSimpanPromo');
   if (simpanBtn) {
-    simpanBtn.style.cursor = 'pointer';
     simpanBtn.onclick = () => {
+      const name = document.getElementById('promoName').value.trim();
+      const tier = document.getElementById('promoTier').value;
+      const priceRaw = document.getElementById('promoPrice').value.replace(/[^0-9]/g, '');
+      const desc = document.getElementById('promoDesc') ? document.getElementById('promoDesc').value.trim() : '';
+      const benefits = [...document.querySelectorAll('#benefitsContainer .benefit-input')]
+        .map(i => i.value.trim()).filter(Boolean);
+      const active = toggleActive ? toggleActive.classList.contains('on') : true;
+      const featured = toggleFeatured ? toggleFeatured.classList.contains('on') : false;
+      const expiry = document.getElementById('promoExpiry') ? document.getElementById('promoExpiry').value : '';
+
+      if (!name || !priceRaw) {
+        showToast('Nama promo dan harga wajib diisi.', 'error');
+        return;
+      }
+
+      addPromo({ name, tier, price: Number(priceRaw), desc, benefits, active, featured, expiry });
       showToast('Promosi berhasil disimpan!', 'success');
-      setTimeout(() => navigateTo('list-service.html'), 1500);
-    };
-  }
-  const kelolaLayananLink = document.querySelector('.link-153');
-  if (kelolaLayananLink) {
-    kelolaLayananLink.style.cursor = 'pointer';
-    kelolaLayananLink.onclick = () => navigateTo('list-service.html');
-  }
-  const kelolaPromoLink = document.querySelector('.link-160');
-  if (kelolaPromoLink) {
-    kelolaPromoLink.style.cursor = 'pointer';
-    kelolaPromoLink.onclick = () => navigateTo('list-promo.html');
-  }
-  const logoutBtn = document.querySelector('.node-166');
-  if (logoutBtn) {
-    logoutBtn.style.cursor = 'pointer';
-    logoutBtn.onclick = () => {
-      showModal('Logout', 'Apakah Anda yakin ingin keluar?', () => navigateTo('login.html'), 'Logout', 'Batal');
+      setTimeout(() => navigateTo('list-promo.html'), 1200);
     };
   }
 }
 
 // ===================== EDIT PROMO PAGE =====================
 function initEditPromoPage() {
-  const addFeatureBtn = document.querySelector('.button-75');
-  if (addFeatureBtn) {
-    addFeatureBtn.style.cursor = 'pointer';
-    addFeatureBtn.onclick = () => {
-      const container = document.querySelector('.container-60');
-      if (!container) return;
-      const newFeature = document.createElement('div');
-      newFeature.style.cssText = 'display:flex;align-items:center;gap:8px;margin-top:8px;';
-      newFeature.innerHTML = `
-        <div style="flex:1;padding:10px 14px;background:rgba(255,255,255,0.05);
-          border:1px solid rgba(255,255,255,0.1);border-radius:6px;cursor:text;">
-          <p style="color:#6b7280;font-size:14px;">Add a key benefit point...</p>
-        </div>
-        <div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;
-          background:rgba(239,68,68,0.15);border-radius:6px;cursor:pointer;"
-          onclick="this.parentElement.remove();showToast('Fitur dihapus.','info')">
-          <span style="color:#ef4444;font-size:18px;">×</span>
-        </div>
-      `;
-      container.appendChild(newFeature);
-      showToast('Field fitur baru ditambahkan.', 'success');
-    };
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
+  const promo = id ? getPromoById(id) : null;
+
+  if (!promo) {
+    showToast('Promo tidak ditemukan.', 'error');
+  } else {
+    document.getElementById('promoName').value = promo.name;
+    document.getElementById('promoPrice').value = formatRupiah(promo.price);
+    document.getElementById('promoTier').value = promo.tier;
+    if (document.getElementById('promoDesc')) document.getElementById('promoDesc').value = promo.desc || '';
+    const activeToggle = document.getElementById('activeToggle');
+    if (activeToggle) activeToggle.checked = !!promo.active;
+    if (document.getElementById('promoExpiry')) document.getElementById('promoExpiry').value = promo.expiry || '';
   }
-  document.querySelectorAll('.button-65, .button-72').forEach(btn => {
-    btn.style.cursor = 'pointer';
-    btn.onclick = () => {
-      const parent = btn.closest('.container-61, .container-68');
-      if (parent) { parent.remove(); showToast('Fitur dihapus.', 'info'); }
-    };
-  });
-  const bannerUpload = document.querySelector('.background-border-85');
-  if (bannerUpload) {
-    bannerUpload.style.cursor = 'pointer';
-    bannerUpload.onclick = () => showToast('Pilih file gambar banner (PNG/JPG, 1200x600px).', 'info');
+
+  const form = document.getElementById('editPromoForm');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('promoName').value.trim();
+      const tier = document.getElementById('promoTier').value;
+      const priceRaw = document.getElementById('promoPrice').value.replace(/[^0-9]/g, '');
+      const desc = document.getElementById('promoDesc') ? document.getElementById('promoDesc').value.trim() : '';
+      const active = document.getElementById('activeToggle') ? document.getElementById('activeToggle').checked : true;
+      const expiry = document.getElementById('promoExpiry') ? document.getElementById('promoExpiry').value : '';
+
+      if (!name || !priceRaw) {
+        showToast('Nama promo dan harga wajib diisi.', 'error');
+        return;
+      }
+
+      updatePromo(id, { name, tier, price: Number(priceRaw), desc, active, expiry });
+      showToast('Perubahan promosi berhasil disimpan!', 'success');
+      setTimeout(() => navigateTo('list-promo.html'), 1200);
+    });
   }
-  const toggleActive = document.querySelector('.label-107');
-  if (toggleActive) {
-    toggleActive.style.cursor = 'pointer';
-    let activeOn = true;
-    toggleActive.onclick = () => {
-      activeOn = !activeOn;
-      const bg = toggleActive.querySelector('.background-108');
-      if (bg) bg.style.background = activeOn ? '#10b981' : '';
-      showToast(activeOn ? 'Status aktif diaktifkan.' : 'Status dinonaktifkan.', 'info');
-    };
-  }
-  const toggleFeatured = document.querySelector('.label-116');
-  if (toggleFeatured) {
-    toggleFeatured.style.cursor = 'pointer';
-    let featuredOn = false;
-    toggleFeatured.onclick = () => {
-      featuredOn = !featuredOn;
-      const bg = toggleFeatured.querySelector('.background-117');
-      if (bg) bg.style.background = featuredOn ? '#ffc880' : '';
-      showToast(featuredOn ? 'Promo ditandai sebagai Featured.' : 'Featured promo dinonaktifkan.', 'info');
-    };
-  }
-  const batalBtn = document.querySelector('.button-138');
+
+  const batalBtn = document.getElementById('btnBatalEditPromo');
   if (batalBtn) {
-    batalBtn.style.cursor = 'pointer';
     batalBtn.onclick = () => {
       showModal('Batalkan Perubahan', 'Perubahan yang belum disimpan akan hilang. Lanjutkan?',
-        () => navigateTo('list-service.html'), 'Ya, Batalkan', 'Kembali');
-    };
-  }
-  const simpanBtn = document.querySelector('.button-140');
-  if (simpanBtn) {
-    simpanBtn.style.cursor = 'pointer';
-    simpanBtn.onclick = () => {
-      showToast('Perubahan promosi berhasil disimpan!', 'success');
-      setTimeout(() => navigateTo('list-service.html'), 1500);
-    };
-  }
-  const kelolaLayananLink = document.querySelector('.link-153');
-  if (kelolaLayananLink) {
-    kelolaLayananLink.style.cursor = 'pointer';
-    kelolaLayananLink.onclick = () => navigateTo('list-service.html');
-  }
-  const kelolaPromoLink = document.querySelector('.link-160');
-  if (kelolaPromoLink) {
-    kelolaPromoLink.style.cursor = 'pointer';
-    kelolaPromoLink.onclick = () => navigateTo('list-promo.html');
-  }
-  const logoutBtn = document.querySelector('.node-166');
-  if (logoutBtn) {
-    logoutBtn.style.cursor = 'pointer';
-    logoutBtn.onclick = () => {
-      showModal('Logout', 'Apakah Anda yakin ingin keluar?', () => navigateTo('login.html'), 'Logout', 'Batal');
+        () => navigateTo('list-promo.html'), 'Ya, Batalkan', 'Kembali');
     };
   }
 }
@@ -582,14 +679,13 @@ function initRegisterPage() {
   }
 }
 
-// ===================== RESET PASSWORD PAGE (diperbaiki) =====================
+// ===================== RESET PASSWORD PAGE =====================
 function initResetPasswordPage() {
-  // PERBAIKAN: selector .button-26 diubah menjadi #resetBtn
   const kirimBtn = document.querySelector('#resetBtn');
   if (kirimBtn) {
     kirimBtn.style.cursor = 'pointer';
     kirimBtn.onclick = () => {
-      const email = document.getElementById('email')?.value || '';
+      const email = document.getElementById('email') ? document.getElementById('email').value : '';
       showToast(`Tautan reset password telah dikirim ke ${email || 'email Anda'}.`, 'success');
       setTimeout(() => navigateTo('login.html'), 2000);
     };
@@ -618,6 +714,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initEditServicePage();
   } else if (page === 'tambah-service.html') {
     initTambahServicePage();
+  } else if (page === 'list-promo.html') {
+    initListPromoPage();
   } else if (page === 'tambah-promo.html') {
     initTambahPromoPage();
   } else if (page === 'edit-promo.html') {
