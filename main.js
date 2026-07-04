@@ -281,13 +281,55 @@ function tierLabel(tier) {
   return map[tier] || tier;
 }
 
-function renderServiceCards() {
+function getServiceCategories() {
+  return [...new Set(getServices().map(s => s.category).filter(Boolean))].sort();
+}
+
+function populateCategoryFilterOptions(selectEl, selectedValue) {
+  if (!selectEl) return;
+  const categories = getServiceCategories();
+  selectEl.innerHTML = '<option value="">Semua Kategori</option>' +
+    categories.map(c => `<option value="${c}">${c}</option>`).join('');
+  selectEl.value = selectedValue || '';
+}
+
+function renderServiceCards(filterText, categoryFilter) {
   const container = document.getElementById('serviceCardsContainer');
   if (!container) return;
-  const services = getServices();
+  const all = getServices();
+  let services = all;
+
+  if (categoryFilter) {
+    services = services.filter(s => s.category === categoryFilter);
+  }
+  if (filterText) {
+    const f = filterText.toLowerCase();
+    services = services.filter(s =>
+      (s.name || '').toLowerCase().includes(f) ||
+      (s.category || '').toLowerCase().includes(f) ||
+      (s.status || '').toLowerCase().includes(f)
+    );
+  }
+
+  // Statistik selalu dihitung dari SELURUH data, bukan hasil filter
+  const statTotal = document.getElementById('statTotalLayanan');
+  if (statTotal) statTotal.textContent = all.length;
+  const statHarga = document.getElementById('statHargaRata');
+  if (statHarga) {
+    const avg = all.length ? all.reduce((sum, s) => sum + Number(s.price || 0), 0) / all.length : 0;
+    statHarga.textContent = formatRupiahShort(avg);
+  }
+  const statKategori = document.getElementById('statTotalKategori');
+  if (statKategori) statKategori.textContent = getServiceCategories().length;
+
   const wrenchIcon = "data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTE0LjcgNi4zYTQgNCAwIDAwLTUuNCA0LjlMNCAxNi41VjIwaDMuNWw1LjMtNS4zYTQgNCAwIDAwNC45LTUuNGwtMi42IDIuNi0yLTIgMi42LTIuNnoiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+Cg==";
   const editIcon = "data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAgMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEzLjUgMy41bDMgM0w3IDE2SDR2LTNsOS41LTkuNXoiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+Cg==";
   const deleteIcon = "data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAgMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTQgNmgxMk04IDZWNC41QTEuNSAxLjUgMCAwMTkuNSAzaDFBMS41IDEuNSAwIDAxMTIgNC41VjZNNiA2bC43IDkuNEExLjUgMS41IDAgMDA4LjIgMTdoMy42YTEuNSAxLjUgMCAwMDEuNS0xLjZMMTQgNiIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L3N2Zz4K";
+
+  if (!services.length) {
+    container.innerHTML = `<div style="grid-column:1/-1;padding:48px 24px;text-align:center;color:#6b7280;font-size:14px;">Tidak ada layanan yang cocok dengan pencarian/filter.</div>`;
+    return;
+  }
 
   container.innerHTML = services.map(s => {
     const isActive = s.status === 'ACTIVE';
@@ -330,7 +372,33 @@ function renderServiceCards() {
 
 // ===================== LIST SERVICE PAGE =====================
 function initListServicePage() {
-  renderServiceCards();
+  const searchInput = document.getElementById('serviceSearchInput');
+  const categorySelect = document.getElementById('serviceCategoryFilter');
+
+  populateCategoryFilterOptions(categorySelect, '');
+  renderServiceCards('', '');
+
+  const runFilter = () => {
+    renderServiceCards(
+      searchInput ? searchInput.value : '',
+      categorySelect ? categorySelect.value : ''
+    );
+  };
+
+  if (searchInput) searchInput.addEventListener('input', runFilter);
+  if (categorySelect) categorySelect.addEventListener('change', runFilter);
+
+  const resetBtn = document.getElementById('btnResetFilter');
+  if (resetBtn) {
+    resetBtn.style.cursor = 'pointer';
+    resetBtn.onclick = () => {
+      if (searchInput) searchInput.value = '';
+      if (categorySelect) categorySelect.value = '';
+      renderServiceCards('', '');
+      showToast('Filter direset.', 'info');
+    };
+  }
+
   const tambahBtn = document.querySelector('.button-17');
   if (tambahBtn) { tambahBtn.style.cursor = 'pointer'; tambahBtn.onclick = () => navigateTo('tambah-service.html'); }
   const loadMoreBtn = document.querySelector('.button-216');
